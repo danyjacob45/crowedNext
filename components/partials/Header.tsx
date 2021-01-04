@@ -60,7 +60,10 @@ const Header = ({ authLogout }: Props) => {
         className="collapse navbar-collapse  justify-content-end d-flex"
         id="navbar-mobile"
       >
-        <ul className="navbar-nav d-flex">
+        <ul
+          style={{ flexDrection: "row" }}
+          className="navbar-nav d-flex flex-row"
+        >
           <li className="nav-item dropdown  mr-2 mr-md-4">
             <a
               href="#"
@@ -133,7 +136,7 @@ const Header = ({ authLogout }: Props) => {
               <div className="dropdown-content-body dropdown-scrollable">
                 <ul
                   style={{ overflowY: "scroll", maxHeight: "400px" }}
-                  className="media-list py-4 pr-4"
+                  className="media-list py-4 pr-4 "
                 >
                   <li className="media pb-3">
                     <div className="media-body">
