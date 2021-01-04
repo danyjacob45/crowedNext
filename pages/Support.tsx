@@ -55,7 +55,7 @@ const Dashboard = () => {
     {
       title: "When will I receive my first profit share?",
       text: (
-        <div class="card-body">
+        <div className="card-body">
           <p></p>
           <p>
             Profits are distributed every Friday 1 pm GMT. If you have invested
@@ -117,7 +117,7 @@ const Dashboard = () => {
                                 {Faq.map((el, i) => {
                                   return (
                                     <div
-                                      kay={i}
+                                      key={i}
                                       onClick={() => {
                                         setOpenFaq(i);
                                       }}
