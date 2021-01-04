@@ -61,7 +61,7 @@ const Header = ({ authLogout }: Props) => {
         id="navbar-mobile"
       >
         <ul
-          style={{ flexDrection: "row" }}
+          style={{ flexDirection: "row" }}
           className="navbar-nav d-flex flex-row"
         >
           <li className="nav-item dropdown  mr-2 mr-md-4">
