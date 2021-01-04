@@ -1,0 +1,30 @@
+{
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        // "editor.formatOnSave": false,
+        "editor.defaultFormatter": "svipas.prettier-plus"
+        // "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "svipas.prettier-plus"
+      },
+      "[typescriptreact]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "svipas.prettier-plus"
+      },
+      "[scss]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "svipas.prettier-plus"
+      },
+      "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/.next": true,
+      },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescriptreact.updateImportsOnFileMove.enabled": "always",
+
+}
