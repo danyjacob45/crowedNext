@@ -1,0 +1,35 @@
+.cl-silver {
+  color: #8c8e8d;
+}
+.cl-blue {
+  color: $blue;
+}
+.cl-green {
+  color: $green;
+}
+.cl-red {
+  color: $red;
+}
+
+.bg-light {
+  background: #fafafa;
+}
+.bg-white {
+  background: #fff;
+}
+
+.link-delete {
+  &:hover {
+    color: #e64a2f;
+  }
+}
+
+.cp {
+  cursor: pointer;
+}
+
+@media screen and(min-width: 768px) {
+  .min-h-md-full {
+    min-height: 100vh;
+  }
+}
