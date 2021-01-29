@@ -1,0 +1,15 @@
+.info-item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eef0ef;
+  font-size: 16px;
+  letter-spacing: -0.03em;
+  &:first-child {
+    border-top: 1px solid #eef0ef;
+  }
+}

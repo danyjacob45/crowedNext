@@ -1,0 +1,37 @@
+$phone: 480px;
+$small: 767px;
+$medium: 992px;
+$large: 1200px;
+
+@function translate-media-condition($c) {
+  $condMap: (
+    "screen": "only screen",
+    "print": "only print",
+    "retina":
+      "(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 120dpi)",
+    ">large": "(min-width: #{$large + 1})",
+    "<large": "(max-width: #{$large})",
+    ">medium": "(min-width: #{$medium + 1})",
+    "<medium": "(max-width: #{$medium})",
+    ">small": "(min-width: #{$small + 1})",
+    "<small": "(max-width: #{$small})",
+    ">phone": "(min-width: #{$phone + 1})",
+    "<phone": "(max-width: #{$phone})",
+  );
+  @return map-get($condMap, $c);
+}
+
+// The mdia mixin
+@mixin media($args...) {
+  $query: "";
+  @each $arg in $args {
+    $op: "";
+    @if ($query != "") {
+      $op: " and ";
+    }
+    $query: $query + $op + translate-media-condition($arg);
+  }
+  @media #{$query} {
+    @content;
+  }
+}
