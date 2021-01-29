@@ -30,7 +30,7 @@ const Layout: React.FC<Props> = ({ title = "Next app", children, user }) => {
   }, []);
 
   console.log(user);
-  if (!pageLoading) return " loafingg...";
+  if (!pageLoading) return <div> loafingg... </div>;
   return (
     <>
       <div className="adminWrapper">
