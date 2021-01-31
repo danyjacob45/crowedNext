@@ -6,14 +6,14 @@ body {
 
 .home {
   font-family: "Montserrat", sans-serif;
-  background: linear-gradient(-90deg, #044929 0%, #a3cc39 100%) !important;
-  background-color: #5e8f3b !important;
+  // background: linear-gradient(-90deg, #044929 0%, #a3cc39 100%) !important;
+  // background-color: #5e8f3b !important;
 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
-  background-attachment: fixed;
+  // background-attachment: fixed;
 }
 
 @font-face {
@@ -222,7 +222,7 @@ p {
   // background: url("../public/assets/imgs/newImgs/web-vorlagenb-01.png");
   background-size: cover;
   background: #ebebeb;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   .number {
     font-size: 50px;
     color: #2ea031;
@@ -271,7 +271,7 @@ p {
   background: url("../public/assets/imgs/market.png");
   background-color: #ebebec;
   background-size: cover;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   background-position: center;
   .container {
     padding-bottom: 140px;
@@ -322,7 +322,7 @@ p {
   padding-top: 100px;
   background: url("../public/assets/imgs/Busines.png");
   background-size: cover;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   // background-position: -10px;
   font-weight: 500;
   font-size: 13px;
@@ -371,7 +371,7 @@ p {
   color: #004426;
   padding-top: 100px;
   background: url("../public/assets/imgs//newImgs/web-vorlagen2-07.png");
-  background-attachment: fixed;
+  // background-attachment: fixed;
   background-size: cover;
   background-color: #ebebec;
   .investTypes {
@@ -607,7 +607,7 @@ p {
   padding-top: 100px;
   // margin-top: 30px;
   background: url("../public/assets/imgs/locations1.png");
-  background-attachment: fixed;
+  // background-attachment: fixed;
   background-size: cover;
   &.Seo {
     background: url("../public/assets/imgs/Asset23.png");
@@ -616,7 +616,7 @@ p {
     margin-bottom: 0;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    // background-attachment: fixed;
     p {
       text-align: justify;
     }
@@ -740,7 +740,7 @@ p {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   padding-bottom: 30px;
   h2 {
     color: #2ea031;
@@ -1096,7 +1096,7 @@ p {
   overflow: hidden;
 
   background-size: cover;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   .controllers {
     position: relative;
     z-index: 4;
