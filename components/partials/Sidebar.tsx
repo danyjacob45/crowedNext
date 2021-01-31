@@ -36,8 +36,11 @@ const Sidebar = () => {
 
   useEffect(() => {
     console.log(window.innerWidth);
+
     if (window.innerWidth < 800) {
-      dispatch(toggleSidebar(false));
+      if (!sideBarCollapse) {
+        dispatch(toggleSidebar(false));
+      }
     }
   }, []);
   const { sideBarCollapse } = useSelector((store: any) => {
@@ -207,7 +210,9 @@ const Sidebar = () => {
                     // }
                     return (
                       <li
-                        onClick={() => dispatch(toggleSidebar(true))}
+                        onClick={(e: any) => {
+                          e.stopPropagation();
+                        }}
                         key={item.title}
                         className="nav-item"
                       >
@@ -220,8 +225,11 @@ const Sidebar = () => {
                                 : false
                             }
                             className="nav-link nav-link-dashboard"
-                            onClick={() => {
+                            onClick={(e: any) => {
+                              e.stopPropagation();
                               if (item.subMenus) {
+                                dispatch(toggleSidebar(true));
+
                                 if (subMenuName !== item.title) {
                                   setSubMenuName(item.title);
                                 } else {

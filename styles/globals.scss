@@ -555,6 +555,7 @@ body {
 }
 
 .sidenav .nav-item .collapse {
+  // transition: all 0s ease;
   transition: all 0.15s ease;
 }
 
@@ -1098,12 +1099,6 @@ body {
   }
 
   @media only screen and (max-width: 600px) {
-    .sidenav {
-      transition: 0s;
-    }
-    .sidenav.collapse {
-      transition: 0s;
-    }
     .timerPay {
       position: absolute;
       left: 50%;
@@ -1246,6 +1241,15 @@ body {
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sidenav {
+    transition: none !important;
+  }
+  main {
+    transition: none !important;
   }
 }
 

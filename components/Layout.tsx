@@ -29,8 +29,6 @@ const Layout: React.FC<Props> = ({ title = "Next app", children, user }) => {
     console.log("loading");
   }, []);
 
-  console.log(user);
-  if (!pageLoading) return <div> loafingg... </div>;
   return (
     <>
       <div className="adminWrapper">
