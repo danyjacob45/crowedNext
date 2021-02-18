@@ -2075,19 +2075,23 @@ p {
   border-color: #ccc;
   padding: 20px;
   border-radius: 10px;
+  label {
+    color: #000 !important;
+  }
 }
 .panel-login > .panel-heading {
   color: #00415d;
-  background-color: #fff;
+  // background-color: #fff;
   border-color: #fff;
   text-align: center;
-  background: #0000001c;
+  // background: #0000001c;
   line-height: 41px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
   .row {
     width: 100%;
+    margin: auto;
   }
 }
 .panel-login > .panel-heading a {
@@ -2095,12 +2099,16 @@ p {
   color: #666;
   font-weight: bold;
   font-size: 15px;
+  display: block;
   -webkit-transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
   transition: all 0.1s linear;
+  background-color: #838383;
+  color: #fff;
 }
 .panel-login > .panel-heading a.active {
-  color: #029f5b;
+  color: #fff;
+  background-color: #2ea031;
   font-size: 18px;
 }
 .panel-login > .panel-heading hr {
@@ -2153,7 +2161,7 @@ p {
   border-color: #ccc;
 }
 .btn-login {
-  background-color: #5e8f3b;
+  background-color: #2ea031;
   outline: none;
   color: #fff;
   font-size: 14px;
@@ -2166,12 +2174,13 @@ p {
 .btn-login:hover,
 .btn-login:focus {
   color: #fff;
-  background-color: #507932;
-  border-color: #568336;
+  background-color: #21a325;
+  border-color: #21a325;
 }
 .forgot-password {
   text-decoration: underline;
-  color: #888;
+  color: #2ea031;
+  font-size: 14px;
 }
 .forgot-password:hover,
 .forgot-password:focus {
@@ -2180,7 +2189,7 @@ p {
 }
 
 .btn-register {
-  background-color: #5e8f3b;
+  background-color: #2ea031;
   outline: none;
   color: #fff;
   font-size: 14px;
@@ -2192,8 +2201,8 @@ p {
 .btn-register:hover,
 .btn-register:focus {
   color: #fff;
-  background-color: #507932;
-  border-color: #568336;
+  background-color: #21a325;
+  border-color: #21a325;
 }
 
 .registerContainer {
@@ -2203,9 +2212,15 @@ p {
     color: #fff;
     font-size: 14px;
     margin-bottom: 0;
+    font-weight: 500;
   }
   input {
     height: 35px !important;
+    border-radius: 0 !important;
+    font-size: 15px !important;
+  }
+  a {
+    color: #2ea031;
   }
   #register-submit {
     height: 45px !important;
@@ -2229,9 +2244,10 @@ p {
   align-items: center;
   justify-content: center;
   > .row {
-    max-width: 500px;
+    // max-width: 500px;
+    max-width: 558px;
     width: 100%;
-    background: #8bc34a;
+    background-color: #dbdbdb;
     border-radius: 10px;
     box-shadow: 0 0 14px 2px #0000005c;
     max-height: 100vh;
@@ -2279,6 +2295,7 @@ p {
     margin: auto;
   }
 }
+
 @media screen and (max-width: 576px) {
   .hostingAndPlans {
     padding-left: 15px;

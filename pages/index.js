@@ -7,6 +7,9 @@ import {
   scrollSpy,
   scroller,
 } from "react-scroll";
+
+import { useForm } from "react-hook-form";
+
 // import {useH} from 'next/router'
 import { useRouter } from "next/router";
 import classnames from "classnames";
@@ -16,12 +19,29 @@ import ScrollAnimation from "react-animate-on-scroll";
 import { Carousel } from "react-responsive-carousel";
 
 // import Logo from "/assets/imgs/pic-19.png";
+import ResetPassword from "../components/resetPassword";
+import Registration from "../components/register";
 
 const home = () => {
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setError,
+    clearError,
+    getValues,
+  } = useForm();
+  const [registerSuccessModal, setRegisterSuccessModal] = React.useState(false);
+
   const [burgerMenu, setBurgerMenu] = useState(false);
   const [headerScroll, setHeaderScroll] = useState(0);
   const [roadPosition, setRoadPosition] = useState(1);
   const [isMobil, setIsMobil] = useState(false);
+  const [regAuthModal, setRegAuthModal] = React.useState(null);
+  const [serverError, setServerError] = React.useState(null);
+  const [referralValue, setReferralValue] = React.useState(null);
+
+  // const [regAuthModal, setRegAuthModal] = React.useState(null);
 
   const history = useRouter();
 
@@ -66,6 +86,50 @@ const home = () => {
       if (roadPosition === 5) return 2024;
       return 2024;
     }
+  };
+
+  const onSubmitLogin = (data) => {
+    axios
+      .post("/api/login", data)
+      .then((res) => {
+        if (res.data.access_token) {
+          // localStorage.setItem("token", res.data.access_token )
+          // console.log(res.data, "rrress")
+          // setToken(res.data.access_token)
+          if (res.data.user.fa_status == 1) {
+            // window.location.href = "http://crowd-growing.com/2fa";
+          } else {
+            // window.location.href = "http://crowd-growing.com/user/dashboard";
+            // window.location.href = 'http://crowd-growing.conm/user/dashboard';
+          }
+
+          // setRegAuthModal(null);
+        } else {
+          // setServerError("incorrect user or password");
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.data) {
+          setServerError(err.response.data && err.response.data.message);
+        } else {
+          setServerError("server error :/");
+        }
+      });
+    // setLoadaing(true);
+    // login({ email: data.userName, password: data.password })
+    //   .then((res) => {
+    //     setLoadaing(false);
+    //     dispatch(setCurrentUser(res.data.success));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setServerError("wrong user or password");
+    //     setLoadaing(false);
+    //   });
+  };
+
+  const onInputChange = () => {
+    setServerError(null);
   };
   return (
     <>
@@ -256,8 +320,8 @@ const home = () => {
                 <li>
                   <a
                     onClick={(e) => {
-                      //   e.preventDefault();
-                      //   setRegAuthModal("register");
+                      e.preventDefault();
+                      setRegAuthModal("register");
                     }}
                     className="navBtn"
                     href=""
@@ -272,7 +336,186 @@ const home = () => {
       </div>
 
       <div className="home">
-        {" "}
+        {regAuthModal && (
+          <div
+            onClick={() => setRegAuthModal(false)}
+            className="container registerContainer"
+          >
+            <div onClick={(e) => e.stopPropagation()} className="row">
+              <div className="col-md-12 col-md-offset-3">
+                <div className="panel panel-login">
+                  <div className="panel-heading">
+                    <div className="row">
+                      <div className="col-6">
+                        <a
+                          onClick={() => {
+                            setRegAuthModal("login");
+                          }}
+                          href="#"
+                          className={regAuthModal === "login" ? "active" : ""}
+                          id="login-form-link"
+                        >
+                          Login
+                        </a>
+                      </div>
+                      <div className="col-6">
+                        <a
+                          onClick={() => {
+                            setRegAuthModal("register");
+                          }}
+                          href="#"
+                          className={
+                            regAuthModal === "register" ? "active" : ""
+                          }
+                          id="register-form-link"
+                        >
+                          Register
+                        </a>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                  <div className="panel-body">
+                    {/* <div className="LoginHeader">
+                    <img src={Logo} />
+                    <h5>Crowd Growing </h5>
+                  </div> */}
+
+                    <div className="row">
+                      <div className="col-lg-12">
+                        {regAuthModal === "login" ? (
+                          <form
+                            onSubmit={handleSubmit(onSubmitLogin)}
+                            id="login-form"
+                            action="https://phpoll.com/login/process"
+                            method="post"
+                            role="form"
+                          >
+                            {serverError && (
+                              <div
+                                className="text-center"
+                                style={{ color: "red" }}
+                              >
+                                {serverError}
+                              </div>
+                            )}
+
+                            <div className="form-group is-invalid">
+                              <label>Email</label>
+                              <input
+                                type="text"
+                                name="email"
+                                id="username"
+                                tabindex="1"
+                                placeholder="Email"
+                                className={classnames("form-control", {
+                                  "is-invalid": errors.email,
+                                })}
+                                ref={register({
+                                  required: true,
+                                })}
+                                onChange={onInputChange}
+                              />
+                              <div className="invalid-feedback">
+                                username is or email is required
+                              </div>
+                            </div>
+                            <div className="form-group">
+                              <label>Password</label>
+
+                              <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                tabindex="2"
+                                className={classnames("form-control", {
+                                  "is-invalid": errors.password,
+                                })}
+                                placeholder="Password"
+                                ref={register({
+                                  required: true,
+                                })}
+                                onChange={onInputChange}
+                              />
+                              <div className="invalid-feedback">
+                                password is required
+                              </div>
+                            </div>
+                            <div className="form-group">
+                              <div className="row">
+                                <div className="col-lg-12">
+                                  <div className="text-center text-right">
+                                    <a
+                                      href="#"
+                                      onClick={() => {
+                                        setRegAuthModal("resetPassword");
+                                      }}
+                                      tabindex="5"
+                                      className="forgot-password d-block text-right mr-1"
+                                    >
+                                      Forgot Password?
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="form-group">
+                              <div className="row">
+                                <div className="col-sm-12 col-sm-offset-3">
+                                  <button className="w-100 mt-4 form-control btn btn-login">
+                                    {" "}
+                                    Log In
+                                  </button>
+                                  {/* <input
+                                type="submit"
+                                name="login-submit"
+                                id="login-submit"
+                                tabindex="4"
+                                className="form-control btn btn-login"
+                                value="Log InLog In"
+                              /> */}
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        ) : regAuthModal === "resetPassword" ? (
+                          <ResetPassword
+                            setRegisterSuccessModal={(d) =>
+                              setRegisterSuccessModal(d)
+                            }
+                            setRegAuthModal={(d) => setRegAuthModal(d)}
+                            setRegisterSuccessModal={(d) =>
+                              setRegisterSuccessModal(d)
+                            }
+                          />
+                        ) : regAuthModal === "changePassword" ? (
+                          <ChangePassword token={resetToken} />
+                        ) : (
+                          <Registration
+                            defaultValue={referralValue}
+                            regAuthModal={regAuthModal}
+                            setRegAuthModal={(d) => setRegAuthModal(d)}
+                            setRegisterSuccessModal={(d) =>
+                              setRegisterSuccessModal(d)
+                            }
+                          />
+                        )}
+                      </div>
+                      <a
+                        href="https://t.me/crowdgrowing"
+                        target="_blank"
+                        className="btn-floating mx-auto  mt-4 btn  telegramLink btn-tw mx-1 waves-effect waves-light"
+                      >
+                        <i class="fab fa-telegram" /> Join channel
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}{" "}
         <div className="section1">
           {/* <video loop muted autoPlay className=" d-lg-block" id="myVideo">
              <source src={VideoSrc} type="video/mp4" /> 
@@ -296,7 +539,7 @@ const home = () => {
                 <a
                   onClick={(e) => {
                     e.preventDefault();
-                    ppp.openRegAuthModal("register");
+                    setRegAuthModal("register");
                   }}
                   className="navBtnInMain"
                   href=""

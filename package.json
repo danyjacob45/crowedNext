@@ -41,7 +41,7 @@
     "react-animate-on-scroll": "^2.1.5",
     "react-bootstrap": "^1.4.0",
     "react-dom": "16.13.1",
-    "react-hook-form": "^6.9.5",
+    "react-hook-form": "^6.15.1",
     "react-paginate": "^6.5.0",
     "react-redux": "^7.2.1",
     "react-responsive-carousel": "^3.2.11",
