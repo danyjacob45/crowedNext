@@ -125,7 +125,10 @@ const profile = () => {
                         name="image"
                         accept="image/*"
                       />
-                      <label className="custom-file-label" for="customFileLang">
+                      <label
+                        className="custom-file-label"
+                        htmlFor="customFileLang"
+                      >
                         Select photo
                       </label>
                     </div>
