@@ -1,15 +1,30 @@
 import Layout from "../components/Layout";
 import { Card, Nav } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../components/common/forms/button";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import Deposit from "../components/dashboard/deposit";
 import Withdrawal from "../components/dashboard/withdrawal";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const Dashboard = () => {
+  const { user } = useSelector((store: any) => store.auth);
   useCheckAuth();
   const route = useRouter();
+  const [origin, setOrigin] = useState("");
+  const [copyReferer, setCopyReferer] = useState(false);
+  const [copyReferer2, setCopyReferer2] = useState(false);
+
+  useEffect(() => {
+    if (window) {
+      const hostname = window.location.origin;
+      setOrigin(hostname);
+      // console.log(hostname, "window.location");
+    }
+  }, []);
+
   const [openDepositModal, setOpenDepositModals] = useState(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
 
@@ -190,17 +205,95 @@ const Dashboard = () => {
                   <div className="card-body align-self-left Referral">
                     <h3>Referral Link: </h3>
                     <p>
-                      <span id="p1"> http://local.mlm/?referral=residual </span>
-                      <button className="btn btn-icon fa fa-copy copyBtn">
-                        <span id="copyP1"> copied </span>
-                      </button>
+                      <span id="p1">
+                        {" "}
+                        {`${origin}/?referral=${user?.realUsername}`}{" "}
+                      </span>
+
+                      <CopyToClipboard
+                        text={`${origin}/?referral=${user?.realUsername}`}
+                        onCopy={() => {
+                          setCopyReferer(true);
+                          setTimeout(() => {
+                            setCopyReferer(false);
+                          }, 1500);
+                        }}
+                      >
+                        <button
+                          className="btn btn-icon fa fa-copy copyBtn"
+                          // onclick="copyToClipboard('#p1', '#copyP1' )"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="far"
+                            data-icon="copy"
+                            width="20"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                            className="svg-inline--fa fa-copy fa-w-14 fa-2x"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"
+                              className=""
+                            ></path>
+                          </svg>
+                          <span
+                            id="copyP1"
+                            className={copyReferer ? "animate" : ""}
+                          >
+                            {" "}
+                            copied{" "}
+                          </span>
+                        </button>
+                      </CopyToClipboard>
                     </p>
                     <h3>Anonymous Referral Link: </h3>
                     <p>
-                      <span id="p2"> http://local.mlm/?referral=Re1LUi </span>
-                      <button className="btn btn-icon fa fa-copy copyBtn">
-                        <span id="copyP2"> copied </span>
-                      </button>
+                      <span id="p2">
+                        {`${origin}/?referral=${user?.referralLink}`}
+                      </span>
+                      <CopyToClipboard
+                        text={`${origin}/?referral=${user?.referralLink}`}
+                        onCopy={() => {
+                          setCopyReferer2(true);
+                          setTimeout(() => {
+                            setCopyReferer2(false);
+                          }, 1500);
+                        }}
+                      >
+                        <button
+                          className="btn btn-icon fa fa-copy copyBtn"
+                          // onclick="copyToClipboard('#p1', '#copyP1' )"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="far"
+                            data-icon="copy"
+                            width="20"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                            className="svg-inline--fa fa-copy fa-w-14 fa-2x"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"
+                              className=""
+                            ></path>
+                          </svg>
+                          <span
+                            id="copyP1"
+                            className={copyReferer2 ? "animate" : ""}
+                          >
+                            {" "}
+                            copied{" "}
+                          </span>
+                        </button>
+                      </CopyToClipboard>
                     </p>
                   </div>
                 </div>
