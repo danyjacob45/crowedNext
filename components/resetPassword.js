@@ -4,6 +4,7 @@ import classnames from "classnames";
 import axios from "axios";
 import { isEmail } from "./utils";
 // import { useHistory } from 'react-router';
+import { AuthService } from "../services/auth/auth.http";
 
 const ResetPassword = ({
   regAuthModal,
@@ -24,11 +25,10 @@ const ResetPassword = ({
 
   const onSubmitRegister = (data) => {
     setLoading(true);
-    axios
-      .post("api/password/create", data)
+    AuthService.recover(data)
       .then((res) => {
         //   window.location.href = "http://local.mlm/user/dashboard"
-        console.log(data);
+        console.log(data, res);
         setRegisterSuccessModal("resetPass");
         setRegAuthModal(null);
         setLoading(false);
@@ -76,12 +76,11 @@ const ResetPassword = ({
           src="https://cdn.dribbble.com/users/1028334/screenshots/2874977/canalol.gif"
         />
       )}
-      <lable style={{ color: "#fff" }}>Enter email address</lable>
+      <label style={{ color: "#fff" }}>Enter email address</label>
       <div class="form-group">
         <input
           type="email"
           name="email"
-          tabindex="1"
           className={classnames("form-control", {
             "is-invalid": errors.email || serverError.email,
           })}

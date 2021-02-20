@@ -18,6 +18,10 @@ class _AuthService {
     return axios.post(storeBackEndRoutes.auth.login(), data);
   };
 
+  recover = (data: { email: string }) => {
+    return axios.post(storeBackEndRoutes.auth.recover(), data);
+  };
+
   register = (data: IRegister) => {
     return axios.post(storeBackEndRoutes.auth.register(), {
       ...data,

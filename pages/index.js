@@ -365,6 +365,42 @@ const home = () => {
       </div>
 
       <div className="home">
+        {registerSuccessModal && (
+          <div className="rt-container">
+            <div className="col-rt-12">
+              <div className="Scriptcontent">
+                <div id="card" className="animated fadeIn">
+                  <div id="upper-side">
+                    {/* <h3 id="status">Success</h3> */}
+                  </div>
+                  <div id="lower-side">
+                    {registerSuccessModal === "resetPass" ? (
+                      <p id="message">
+                        password reset link send on you email address
+                      </p>
+                    ) : registerSuccessModal === "changePassword" ? (
+                      <p>Password changed successfully </p>
+                    ) : (
+                      ""
+                    )}
+
+                    <a
+                      href="#"
+                      onClick={() => {
+                        setRegisterSuccessModal(false);
+                        // setRegAuthModal("login");
+                        history.push("/");
+                      }}
+                      id="contBtn"
+                    >
+                      close
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         {regAuthModal && (
           <div
             onClick={() => setRegAuthModal(false)}
