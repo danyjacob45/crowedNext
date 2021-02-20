@@ -21,7 +21,7 @@ type Props = {
 const Header = ({ sideBarCollapse }: Props) => {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
-  const [activeNotification, setActiveNotification] = useState(false);
+  const [activeNotification, setActiveNotification] = useState("");
 
   useEffect(() => {
     const closeMenu = () => setShowMenu(false);
@@ -87,7 +87,7 @@ const Header = ({ sideBarCollapse }: Props) => {
                 <div
                   onClick={() => setActiveNotification("Notifications")}
                   className="notification bell show-count notify"
-                  data-count="1"
+                  data-count="0"
                 ></div>
               )}
             />
