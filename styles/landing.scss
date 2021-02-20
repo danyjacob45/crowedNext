@@ -13,6 +13,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 
+  p {
+    font-size: 17px;
+  }
+
+  h2 {
+    font-size: 50px !important;
+    color: #fff;
+  }
   // background-attachment: fixed;
 }
 
@@ -29,13 +37,9 @@ a:hover {
   text-decoration: none;
 }
 
-h2 {
-  font-size: 50px !important;
-  color: #fff;
-}
-p {
-  font-size: 17px;
-}
+// p {
+//   font-size: 17px;
+// }
 .app {
   background: #5e8f3b;
 }
@@ -1450,7 +1454,9 @@ p {
     font-size: 14px;
   }
 }
-
+.registerContainer .checkBoxWrapper input {
+  -webkit-appearance: auto !important;
+}
 ///////////////////////////////////////////////
 
 /////////////////////////////////////////////
@@ -2331,4 +2337,14 @@ p {
   color: #5e8f3b;
   border-radius: 20px;
   margin-top: 20px;
+}
+.modalWrapper {
+  z-index: 5494590;
+  background: #0000006b;
+  .card-body {
+    background: #fff;
+  }
+  .card {
+    box-shadow: 0 0 2rem 0 #8898aa26;
+  }
 }

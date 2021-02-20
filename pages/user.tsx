@@ -1,11 +1,28 @@
 import Layout from "../components/Layout";
 import { Card, Nav } from "react-bootstrap";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../components/common/forms/button";
+import { useCheckAuth } from "../hooks/useCheckAuth";
+import Deposit from "../components/dashboard/deposit";
+import Withdrawal from "../components/dashboard/withdrawal";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
+  useCheckAuth();
+  const route = useRouter();
+  const [openDepositModal, setOpenDepositModals] = useState(false);
+  const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
+
   return (
     <Layout title="Dashboard">
+      <Deposit
+        openDepositModal={openDepositModal}
+        setOpenDepositModals={(val: boolean) => setOpenDepositModals(val)}
+      />
+      <Withdrawal
+        openWithdrawalModal={openWithdrawalModal}
+        setOpenWithdrawalModals={(val: boolean) => setOpenWithdrawalModals(val)}
+      />
       <div className="main-content main-content-Dashboard">
         <div className="content-wrapper">
           <div className="container-fluid mt--6">
@@ -25,6 +42,10 @@ const Dashboard = () => {
                       href=""
                       id="Wi"
                       className="btn btn-sm btn-neutral greenColor"
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        setOpenDepositModals(true);
+                      }}
                     >
                       <i className="fa fa-arrow-right"></i>Deposit
                     </a>
@@ -33,6 +54,10 @@ const Dashboard = () => {
                       href=""
                       data-toggle="modal"
                       data-target="#modal-formx"
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        setOpenWithdrawalModals(true);
+                      }}
                       className="btn btn-sm btn-neutral greenColor right "
                     >
                       <i className="fa fa-arrow-right"></i> Withdrawal{" "}
@@ -58,7 +83,14 @@ const Dashboard = () => {
                 <span>&nbsp;</span>
                 <div className="card bg-white investNowCard border-0">
                   <div className="card-body align-self-center">
-                    <a className="greenColor" href="/">
+                    <a
+                      className="greenColor"
+                      href="/"
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        route.push("/invest");
+                      }}
+                    >
                       INVEST NOW
                     </a>
                   </div>

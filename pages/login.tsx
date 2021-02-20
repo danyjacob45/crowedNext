@@ -44,7 +44,6 @@ const LoginPage = ({}: Props) => {
         setCurrentUser({
           user: res.data.user,
           token: res.data.token,
-          store: res.data.store,
         });
         setShowSuccess(true);
       })

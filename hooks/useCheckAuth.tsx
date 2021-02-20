@@ -13,27 +13,25 @@ export const useCheckAuth = () => {
     if (localStorage.getItem("token")) {
       if (!(window as any).hasCheckedAuth) {
         setAuthorizationToken(localStorage.getItem("token")!);
+        (window as any).hasCheckedAuth = true;
+
         AuthService.getUser()
           .then((res) => {
             (window as any).hasCheckedAuth = true;
             dispatch(
               setCurrentUser({
-                store: res.data.store,
                 user: res.data.user,
                 token: localStorage.getItem("token")!,
               })
             );
-            if (!res.data.store) {
-              router.push(routes.registerStepTo().href);
-            }
           })
           .catch((err) => {
-            router.push("/login");
+            router.push("/");
             console.log(err);
           });
       }
     } else {
-      router.push("/login");
+      router.push("/");
     }
   }, []);
 };

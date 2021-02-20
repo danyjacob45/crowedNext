@@ -11,7 +11,6 @@ import { Dispatch } from "redux";
 import { setAuthorizationToken } from "../../services/axios-with-token";
 
 export const setCurrentUser = ({
-  store,
   user,
   token,
 }: SetCurrentUserAction["payload"]): SetCurrentUserAction => {
@@ -19,7 +18,7 @@ export const setCurrentUser = ({
   setAuthorizationToken(token);
   return {
     type: authActionTypes.SET_CURRENT_USER,
-    payload: { user, token, store },
+    payload: { user, token },
   };
 };
 

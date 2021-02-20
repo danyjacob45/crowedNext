@@ -1,11 +1,54 @@
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import { Card, Nav } from "react-bootstrap";
-import React from "react";
 import { Button } from "../components/common/forms/button";
+import classnames from "classnames";
+import ModalContainer from "../components/common/modal/modalContainer";
+const investTypes = {
+  FOUNDER: "FOUNDER",
+  PROFESSIONAL: "PROFESSIONAL",
+  ADVANCED: "ADVANCED",
+  BEGINNER: "BEGINNER",
+};
 
 const investment = () => {
+  const [activeInvest, setActiveInvest] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [modal, SetModal] = useState(false);
+
   return (
     <Layout title="investment">
+      <ModalContainer showModal={modal} closeModal={() => SetModal(false)}>
+        <>
+          <div className="modal-body">
+            <h4
+              style={{ color: "#000" }}
+              className="text-center invetModalText"
+            >
+              You are going to invest 123 $
+            </h4>
+          </div>
+          <div
+            className="modal-footer justify-content-center "
+            style={{ alignSelf: "center" }}
+          >
+            <button
+              type="button"
+              className="btn btn-primary confirmInvest  d-block"
+              data-dismiss="modal"
+            >
+              Confirm
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger infoModalClose ml-4 cancelInvestment d-block"
+              data-dismiss="modal"
+            >
+              cancel
+            </button>
+          </div>
+        </>
+      </ModalContainer>
       <div className="main-content">
         <div className="content-wrapper">
           <div className="container-fluid mt--6">
@@ -38,7 +81,11 @@ const investment = () => {
             </div>
 
             <div className="row">
-              <div className="col-md-3  Starter investTypes">
+              <div
+                className={classnames("col-md-3  Starter investTypes ", {
+                  active: activeInvest === investTypes.BEGINNER,
+                })}
+              >
                 <div className="pricing card-group flex-column flex-md-row mb-3">
                   <div className="card card-pricing border-0 bg-white text-center mb-4">
                     <div className="card-body px-lg-12">
@@ -69,7 +116,7 @@ const investment = () => {
                         </div>
                       </div>
                       <br />
-                      <div className="text-sm text-white mb-0 text-left">
+                      <div className="text-sm text-white font-13 mb-0 text-left">
                         <p>
                           Monthly profit 8% – 10%
                           <br />
@@ -82,7 +129,11 @@ const investment = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-3  Advanced investTypes">
+              <div
+                className={classnames("col-md-3  Advanced investTypes ", {
+                  active: activeInvest === investTypes.ADVANCED,
+                })}
+              >
                 <div className="pricing card-group flex-column flex-md-row mb-3">
                   <div className="card card-pricing border-0 bg-white text-center mb-4">
                     <div className="card-body px-lg-12">
@@ -113,7 +164,7 @@ const investment = () => {
                         </div>
                       </div>
                       <br />
-                      <div className="text-sm text-white mb-0 text-left">
+                      <div className="text-sm text-white font-13 mb-0 text-left">
                         <p>
                           Monthly profit 8% – 10%
                           <br />
@@ -126,7 +177,11 @@ const investment = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-3  Pro investTypes">
+              <div
+                className={classnames("col-md-3  Pro investTypes ", {
+                  active: activeInvest === investTypes.PROFESSIONAL,
+                })}
+              >
                 <div className="pricing card-group flex-column flex-md-row mb-3">
                   <div className="card card-pricing border-0 bg-white text-center mb-4">
                     <div className="card-body px-lg-12">
@@ -157,7 +212,7 @@ const investment = () => {
                         </div>
                       </div>
                       <br />
-                      <div className="text-sm text-white mb-0 text-left">
+                      <div className="text-sm text-white font-13 mb-0 text-left">
                         <p>
                           Monthly profit 8% – 10%
                           <br />
@@ -170,7 +225,11 @@ const investment = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-3  Founder investTypes">
+              <div
+                className={classnames("col-md-3  Founder investTypes ", {
+                  active: activeInvest === investTypes.FOUNDER,
+                })}
+              >
                 <div className="pricing card-group flex-column flex-md-row mb-3">
                   <div className="card card-pricing border-0 bg-white text-center mb-4">
                     <div className="card-body px-lg-12">
@@ -201,7 +260,7 @@ const investment = () => {
                         </div>
                       </div>
                       <br />
-                      <div className="text-sm text-white mb-0 text-left">
+                      <div className="text-sm text-white font-13 mb-0 text-left">
                         <p>
                           Monthly profit 8% – 10%
                           <br />
@@ -216,6 +275,39 @@ const investment = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="investForm">
+              <form className="text-center">
+                <input
+                  type="number"
+                  name="amount"
+                  id="investInput"
+                  min="100"
+                  placeholder="Invest value"
+                  className="form-control amount"
+                  onChange={(e: any) => {
+                    setAmount(e.target.value);
+                    if (e.target.value >= 10000) {
+                      setActiveInvest(investTypes.FOUNDER);
+                    } else if (e.target.value >= 2500) {
+                      setActiveInvest(investTypes.PROFESSIONAL);
+                    } else if (e.target.value >= 1000) {
+                      setActiveInvest(investTypes.ADVANCED);
+                    } else if (e.target.value >= 100) {
+                      setActiveInvest(investTypes.BEGINNER);
+                    }
+                  }}
+                />
+                <button
+                  type="button"
+                  id="investInputTarget"
+                  className="btn btn-sm  planSubmit text-white"
+                  style={{ backgroundColor: "#38973C" }}
+                >
+                  Invest Now
+                </button>
+              </form>
             </div>
           </div>
         </div>

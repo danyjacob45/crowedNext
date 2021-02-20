@@ -21,6 +21,9 @@ import { Carousel } from "react-responsive-carousel";
 // import Logo from "/assets/imgs/pic-19.png";
 import ResetPassword from "../components/resetPassword";
 import Registration from "../components/register";
+import { AuthService } from "../services/auth/auth.http";
+import { setCurrentUser, setCurrentStore } from "../store/auth/authActions";
+import { useDispatch } from "react-redux";
 
 const home = () => {
   const {
@@ -31,6 +34,8 @@ const home = () => {
     clearError,
     getValues,
   } = useForm();
+  const dispatch = useDispatch();
+
   const [registerSuccessModal, setRegisterSuccessModal] = React.useState(false);
 
   const [burgerMenu, setBurgerMenu] = useState(false);
@@ -48,6 +53,20 @@ const home = () => {
   console.log(history);
 
   useEffect(() => {
+    if (localStorage.getItem("token")) {
+      AuthService.getUser()
+        .then((res) => {
+          window.hasCheckedAuth = true;
+          dispatch(
+            setCurrentUser({
+              user: res.data.user,
+              token: localStorage.getItem("token"),
+            })
+          );
+          history.push("/user");
+        })
+        .catch((err) => {});
+    }
     window.addEventListener("scroll", (e) => {
       console.log(window.scrollY);
       if (window.scrollY > 0) {
@@ -89,26 +108,36 @@ const home = () => {
   };
 
   const onSubmitLogin = (data) => {
-    axios
-      .post("/api/login", data)
+    AuthService.login(data)
       .then((res) => {
-        if (res.data.access_token) {
-          // localStorage.setItem("token", res.data.access_token )
+        debugger;
+        if (res.data.token) {
+          // localStorage.setItem("token", res.data.token);
           // console.log(res.data, "rrress")
-          // setToken(res.data.access_token)
-          if (res.data.user.fa_status == 1) {
+          // setToken(res.data.token);
+          if (res.data.fa_status == 1) {
             // window.location.href = "http://crowd-growing.com/2fa";
           } else {
+            dispatch(
+              setCurrentUser({
+                user: res.data.user,
+                token: res.data.token,
+              })
+            );
+
+            history.push("/user");
+
             // window.location.href = "http://crowd-growing.com/user/dashboard";
             // window.location.href = 'http://crowd-growing.conm/user/dashboard';
           }
 
           // setRegAuthModal(null);
         } else {
-          // setServerError("incorrect user or password");
+          setServerError("incorrect user or password");
         }
       })
       .catch((err) => {
+        setServerError("incorrect user or password");
         if (err.response && err.response.data) {
           setServerError(err.response.data && err.response.data.message);
         } else {
@@ -404,12 +433,12 @@ const home = () => {
                               <label>Email</label>
                               <input
                                 type="text"
-                                name="email"
+                                name="username"
                                 id="username"
                                 tabindex="1"
-                                placeholder="Email"
+                                placeholder="username"
                                 className={classnames("form-control", {
-                                  "is-invalid": errors.email,
+                                  "is-invalid": errors.username,
                                 })}
                                 ref={register({
                                   required: true,

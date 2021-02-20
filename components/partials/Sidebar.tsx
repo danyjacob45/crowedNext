@@ -34,6 +34,10 @@ const Sidebar = () => {
   const [subMenuName, setSubMenuName] = useState("");
   const dispatch = useDispatch();
 
+  const { auth } = useSelector((store: any) => {
+    return store;
+  });
+
   useEffect(() => {
     console.log(window.innerWidth);
 
@@ -49,7 +53,7 @@ const Sidebar = () => {
   const sidebarMenu = [
     {
       icon: () => <img width="16" src="/assets/svges/dashboardMenu.svg" />,
-      href: "/",
+      href: "/user",
       title: "Dashboard",
     },
 
@@ -169,7 +173,9 @@ const Sidebar = () => {
                     display: "inline-block",
                   }}
                 >
-                  residual
+                  {/* residual */}
+
+                  {auth?.user?.firstName}
                 </span>
               </a>
               <div className="ml-auto">

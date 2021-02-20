@@ -39,7 +39,7 @@ export const authReducer = (
     case authActionTypes.SET_CURRENT_STORE:
       return {
         ...state,
-        store: action.payload.store,
+        // store: action.payload.store,
       };
     case authActionTypes.SET_CURRENT_USER:
       return {
@@ -48,7 +48,7 @@ export const authReducer = (
         loading: false,
         user: action.payload.user,
         token: action.payload.token,
-        store: action.payload.store,
+        // store: action.payload.store,
       };
     case authActionTypes.LOGOUT_USER:
       return {

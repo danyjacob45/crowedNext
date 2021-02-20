@@ -28,7 +28,6 @@ export interface SetCurrentUserAction {
   payload: {
     user: IUser;
     token: string;
-    store: IStore;
   };
   type: authActionTypes.SET_CURRENT_USER;
 }

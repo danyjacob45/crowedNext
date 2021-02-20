@@ -5,6 +5,8 @@ import axios from "axios";
 import { isEmail } from "./utils";
 // import { useHistory } from "react-router";
 // import { Link } from "next/link";
+import Link from "next/link";
+import { AuthService } from "../services/auth/auth.http";
 
 const Registration = ({
   regAuthModal,
@@ -26,22 +28,24 @@ const Registration = ({
 
   const onSubmitRegister = (data) => {
     setLoading(true);
-    axios
-      .post("/api/register", data)
-      .then((res) => {
-        window.location.href = "http://crowd-growing.com/user/dashboard";
 
+    AuthService.register(data)
+      .then((res) => {
+        // window.location.href = "http://crowd-growing.com/user/dashboard";
+        // "proxy": "http://51.255.211.219:8080",
         // setRegisterSuccessModal(true)
         setRegAuthModal(null);
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
+
+        debugger;
         if (err.response && err.response.data) {
           if (err.response.data.message) {
             setServerError({ referral_link: err.response.data.message });
           } else {
-            setServerError(err.response.data);
+            setServerError(err.response.data.errors);
           }
         }
       });
@@ -102,12 +106,12 @@ const Registration = ({
         <label>Full Name</label>
         <input
           type="text"
-          name="name"
+          name="firstname"
           tabindex="1"
           class="form-control"
           placeholder="Full Name"
           className={classnames("form-control", {
-            "is-invalid": errors.name || serverError.name,
+            "is-invalid": errors.firstname || serverError.firstname,
           })}
           ref={register({
             required: true,
@@ -234,11 +238,11 @@ const Registration = ({
         <label>Re-Password</label>
         <input
           type="password"
-          name="confirmPassword"
+          name="rePassword"
           id="password"
           tabindex="2"
           className={classnames("form-control", {
-            "is-invalid": errors.confirmPassword,
+            "is-invalid": errors.rePassword,
           })}
           placeholder="Re-Password"
           ref={register({
@@ -251,11 +255,11 @@ const Registration = ({
           onChange={onInputChange}
         />
 
-        {errors.confirmPassword && (
+        {errors.rePassword && (
           <div className="invalid-feedback">
-            {errors.confirmPassword.type === "minLength"
+            {errors.rePassword.type === "minLength"
               ? "enter minimum 8"
-              : errors.confirmPassword.type === "confirm"
+              : errors.rePassword.type === "confirm"
               ? "Passwords do not match"
               : "Password is required"}
           </div>
@@ -273,9 +277,9 @@ const Registration = ({
               required: true,
             })}
           />
-          {/* <Link target="_blank" to="/terms">
+          <a target="_blank" href="/terms">
             I agree with the T&C{" "}
-          </Link> */}
+          </a>
         </label>
         <br />
         <label>
@@ -289,9 +293,9 @@ const Registration = ({
               required: true,
             })}
           />
-          {/* <Link target="_blank" to="/police">
+          <a target="_blank" href="/police">
             I agree with the Privacy policy{" "}
-          </Link> */}
+          </a>
         </label>
 
         <label>

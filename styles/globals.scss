@@ -1264,14 +1264,14 @@ body {
   border-radius: 0px !important;
 }
 
-.card-body {
-  padding: 2rem 1.5rem !important;
-}
+// .card-body {
+//   padding: 2rem 1.5rem !important;
+// }
 
 .main-content-Dashboard .greenColor {
   color: #fff;
   &:hover {
-    color: #aaa;
+    color: #fff;
   }
 }
 .card.bg-white.investNowCard {
@@ -1343,4 +1343,14 @@ body {
   &:hover {
     color: #aaa !important;
   }
+}
+
+.font-13 {
+  p {
+    font-size: 13px;
+  }
+}
+
+.colorBlack {
+  color: #000 !important;
 }

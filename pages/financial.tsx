@@ -1,11 +1,25 @@
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import { Card, Nav } from "react-bootstrap";
-import React from "react";
 import { Button } from "../components/common/forms/button";
+import Deposit from "../components/dashboard/deposit";
+import Withdrawal from "../components/dashboard/withdrawal";
 
 const financial = () => {
+  const [openDepositModal, setOpenDepositModals] = useState(false);
+  const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
+
   return (
     <Layout title="financial">
+      <Deposit
+        openDepositModal={openDepositModal}
+        setOpenDepositModals={(val: boolean) => setOpenDepositModals(val)}
+      />
+
+      <Withdrawal
+        openWithdrawalModal={openWithdrawalModal}
+        setOpenWithdrawalModals={(val: boolean) => setOpenWithdrawalModals(val)}
+      />
       <div className="main-content">
         <div className="content-wrapper">
           <div className="container-fluid mt--6">
@@ -45,6 +59,10 @@ const financial = () => {
                               href=""
                               id="Wi"
                               className="btn btn-sm btn-neutral"
+                              onClick={(e: any) => {
+                                e.preventDefault();
+                                setOpenDepositModals(true);
+                              }}
                             >
                               Deposit
                             </a>
@@ -91,6 +109,10 @@ const financial = () => {
                               href=""
                               id="Wi"
                               className="btn btn-sm btn-neutral"
+                              onClick={(e: any) => {
+                                e.preventDefault();
+                                setOpenWithdrawalModals(true);
+                              }}
                             >
                               Withdrawal
                             </a>
