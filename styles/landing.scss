@@ -24,6 +24,11 @@ body {
   // background-attachment: fixed;
 }
 
+.landingPagesWrapper {
+  background-color: #5e8f3b !important;
+  background: linear-gradient(-90deg, #044929, #a3cc39) !important;
+}
+
 @font-face {
   font-family: "Conv_MYRIADPRO-REGULAR";
   src: url("../public/assets/fonts/Sanchez-Regular.ttf");
@@ -2346,5 +2351,28 @@ a:hover {
   }
   .card {
     box-shadow: 0 0 2rem 0 #8898aa26;
+  }
+}
+
+.pageContainer.faq {
+  .bg-light {
+    background: #fff !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    color: #343a40 !important;
+  }
+  .text-secondary {
+    color: #343a40 !important;
   }
 }
