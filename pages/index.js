@@ -51,9 +51,13 @@ const home = () => {
 
   const history = useRouter();
 
-  console.log(history);
-
   useEffect(() => {
+    if (history.asPath.split("=")[0] === "/?referral") {
+      setRegAuthModal("register");
+      setReferralValue(history.asPath.split("=")[1]);
+    }
+    console.log(history);
+
     if (localStorage.getItem("token")) {
       AuthService.getUser()
         .then((res) => {
@@ -138,9 +142,12 @@ const home = () => {
         }
       })
       .catch((err) => {
-        setServerError("incorrect user or password");
+        // debugger;
+        // setServerError("incorrect user or password");
         if (err.response && err.response.data) {
-          setServerError(err.response.data && err.response.data.message);
+          setServerError("incorrect user or password");
+
+          // setServerError(err.response.data && err.response.data.message);
         } else {
           setServerError("server error :/");
         }

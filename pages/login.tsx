@@ -39,6 +39,8 @@ const LoginPage = ({}: Props) => {
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
+
+    debugger;
     AuthService.login(form as any)
       .then((res: any) => {
         setCurrentUser({
@@ -48,11 +50,13 @@ const LoginPage = ({}: Props) => {
         setShowSuccess(true);
       })
       .catch((err: any) => {
-        if (err.response?.data?.message) {
-          setErrors({
-            email: err.response.data.message,
-          });
-        }
+        console.log("gggg");
+        debugger;
+        // if (err.response?.data?.message) {
+        //   setErrors({
+        //     email: err.response.data.message,
+        //   });
+        // }
       });
   };
 
