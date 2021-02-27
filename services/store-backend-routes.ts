@@ -10,4 +10,9 @@ export const storeBackEndRoutes = {
 
     register: () => `${BASE_URL}/open/auth/sign-up`,
   },
+
+  user: {
+    uploadImage: () => `${BASE_URL}/private/user/picture/update`,
+    updateProfile: () => `${BASE_URL}/private/user/update`,
+  },
 };

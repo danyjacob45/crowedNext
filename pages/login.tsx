@@ -50,8 +50,8 @@ const LoginPage = ({}: Props) => {
         setShowSuccess(true);
       })
       .catch((err: any) => {
-        console.log("gggg");
-        debugger;
+        console.log(err, "gggg");
+
         // if (err.response?.data?.message) {
         //   setErrors({
         //     email: err.response.data.message,

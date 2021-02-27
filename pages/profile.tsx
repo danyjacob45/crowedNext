@@ -1,25 +1,152 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
+import { AuthService } from "../services/user/user.http";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import ModalContainer from "../components/common/modal/modalContainer";
+
 // import { Card, Nav } from "react-bootstrap";
 // import { Button } from "../components/common/forms/button";
 // import Deposit from "../components/dashboard/deposit";
 // import Withdrawal from "../components/dashboard/withdrawal";
 
 const profile = () => {
+  const [image, setImage] = useState<any>();
+  const [showModal, setShowModal] = useState<any>("");
+
+  // @ts-ignore: Unreachable code error
+
+  const store = useSelector(({ auth }) => auth.user);
+
+  const [profileInfo, setProfileInfo] = useState<any>({});
+  //  {
+  //   // debugger;
+
+  //   return { firstName:?.user?.firstName };
+  // });
+
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   errors,
+  //   setError,
+  //   setValue,
+  //   getValues,
+  //   reset,
+  // } = useForm<any>({
+  //   defaultValues: store,
+  // });
+
+  React.useEffect(() => {
+    if (store?.firstName) {
+      // debugger;
+      setProfileInfo({
+        firstName: store?.firstName,
+        phoneNumber: store?.address.phoneNumber,
+        country: store?.address.country,
+        city: store?.address.city,
+        zipCode: store?.address.zipCode,
+        address: store?.address.address,
+      });
+    }
+  }, [store]);
+
+  const imageUploadHandler = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("file", image);
+    AuthService.uploadImg(data)
+      .then(() => {
+        setShowModal("image");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const changeProfileField = (e) => {
+    setProfileInfo({ ...profileInfo, [e.target.name]: e.target.value });
+    // debugger;
+  };
+
+  const profileUpdateHandler = (e) => {
+    e.preventDefault();
+    const data = {};
+
+    AuthService.updateProfile(profileInfo)
+      .then(() => {
+        setShowModal("profile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Layout title="financial">
+      <ModalContainer
+        showModal={!!showModal}
+        closeModal={(val: any) => setShowModal(val)}
+      >
+        <div
+          className="sweet-alert  showSweetAlert visible"
+          data-custom-className=""
+          data-has-cancel-button="false"
+          data-has-confirm-button="true"
+          data-allow-outside-click="false"
+          data-has-done-function="false"
+          data-animation="pop"
+          data-timer="null"
+          style={{ display: "inline-block" }}
+        >
+          {/* <div className="sa-icon sa-warning" style="display: none;">
+      <span className="sa-body"></span>
+      <span className="sa-dot"></span>
+    </div> */}
+          {/* <div className="sa-icon sa-info" style="display: none;">
+      </div> */}
+          <div className="sa-icon sa-success animate">
+            <span className="sa-line sa-tip animateSuccessTip"></span>
+            <span className="sa-line sa-long animateSuccessLong"></span>
+
+            <div className="sa-fix"></div>
+            <div className="sa-placeholder"></div>
+            {/* </div><div className="sa-icon sa-custom" style="display: none;"></div> */}
+          </div>
+          <h2 style={{ color: "#000" }}>Success!</h2>
+          <p className="lead text-muted ">
+            {showModal === "profile" ? "Profile" : "Photo"} Updated
+            Successfully.
+          </p>
+
+          <div className="sa-button-container">
+            <div className="sa-confirm-button-container">
+              <button
+                onClick={() => setShowModal(false)}
+                className="confirm btn btn-lg btn-primary"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </ModalContainer>
       <div className="main-content">
         <div className="content-wrapper mt-4 row px-3">
           <div className="col-md-8">
             <div className="card account_information" id="edit">
               <div className="card-header header-elements-inline">
-                <h3 className="mb-0">Update account information</h3>
+                <h3
+                  onClick={() => {
+                    // console.log(getValues(), store);
+                    // debugger;
+                  }}
+                  className="mb-0"
+                >
+                  Update account information
+                </h3>
               </div>
               <div className="card-body">
-                <form
-                  action="https://crowd-growing.com/user/account"
-                  method="post"
-                >
+                <form method="post" onSubmit={profileUpdateHandler}>
                   <input
                     type="hidden"
                     name="_token"
@@ -30,9 +157,11 @@ const profile = () => {
                     <div className="col-lg-10">
                       <input
                         type="text"
-                        name="name"
                         className="form-control"
-                        value="sadsa"
+                        name="firstName"
+                        value={profileInfo.firstName}
+                        onChange={changeProfileField}
+                        // ref={register}
                       />
                     </div>
                   </div>
@@ -41,9 +170,10 @@ const profile = () => {
                     <div className="col-lg-10">
                       <input
                         type="text"
-                        name="phone"
+                        name="phoneNumber"
                         className="form-control"
-                        value="00"
+                        value={profileInfo.phoneNumber}
+                        onChange={changeProfileField}
                       />
                     </div>
                   </div>
@@ -54,7 +184,8 @@ const profile = () => {
                         type="text"
                         name="country"
                         className="form-control"
-                        value=""
+                        value={profileInfo.country}
+                        onChange={changeProfileField}
                       />
                     </div>
                   </div>
@@ -65,7 +196,8 @@ const profile = () => {
                         type="text"
                         name="city"
                         className="form-control"
-                        value=""
+                        value={profileInfo.city}
+                        onChange={changeProfileField}
                       />
                     </div>
                   </div>
@@ -74,9 +206,10 @@ const profile = () => {
                     <div className="col-lg-10">
                       <input
                         type="text"
-                        name="zip_code"
+                        name="zipCode"
                         className="form-control"
-                        value=""
+                        value={profileInfo.zipCode}
+                        onChange={changeProfileField}
                       />
                     </div>
                   </div>
@@ -87,7 +220,8 @@ const profile = () => {
                         type="text"
                         name="address"
                         className="form-control"
-                        value=""
+                        value={profileInfo.address}
+                        onChange={changeProfileField}
                       />
                     </div>
                   </div>
@@ -107,11 +241,13 @@ const profile = () => {
               </div>
               <div className="card-body">
                 <form
-                  action="https://crowd-growing.com/user/avatar"
+                  onSubmit={(e) => imageUploadHandler(e)}
                   //   enctype="multipart/form-data"
                   method="post"
                 >
                   <input
+                    // ref={this.fileInput}
+
                     type="hidden"
                     name="_token"
                     value="lBgqLaH6PQVFfQRMhD8fSgVu8766raCJnHt8jRJF"
@@ -124,12 +260,16 @@ const profile = () => {
                         id="customFileLang"
                         name="image"
                         accept="image/*"
+                        onChange={(e: any) => {
+                          setImage(e.target.files[0]);
+                          debugger;
+                        }}
                       />
                       <label
                         className="custom-file-label"
                         htmlFor="customFileLang"
                       >
-                        Select photo
+                        {image ? image.name : "Select photo"}
                       </label>
                     </div>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
