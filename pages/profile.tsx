@@ -42,11 +42,11 @@ const profile = () => {
       // debugger;
       setProfileInfo({
         firstName: store?.firstName,
-        phoneNumber: store?.address.phoneNumber,
-        country: store?.address.country,
-        city: store?.address.city,
-        zipCode: store?.address.zipCode,
-        address: store?.address.address,
+        phoneNumber: store?.address?.phoneNumber,
+        country: store?.address?.country,
+        city: store?.address?.city,
+        zipCode: store?.address?.zipCode,
+        address: store?.address?.address,
       });
     }
   }, [store]);
@@ -246,8 +246,6 @@ const profile = () => {
                   method="post"
                 >
                   <input
-                    // ref={this.fileInput}
-
                     type="hidden"
                     name="_token"
                     value="lBgqLaH6PQVFfQRMhD8fSgVu8766raCJnHt8jRJF"
