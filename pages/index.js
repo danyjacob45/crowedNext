@@ -209,7 +209,7 @@ const home = () => {
               }
             >
               <ul className="list-unstyled list-inline">
-                {history.pathname === "/home" ||
+                {history.pathname === "/" ||
                 history.pathname.includes("/api/password/find/") ||
                 history.pathname === "/mlm-landing" ? (
                   <React.Fragment>
@@ -226,7 +226,7 @@ const home = () => {
                         About Us
                       </Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link
                         activeClass="active"
                         to="OurGoals"
@@ -238,7 +238,7 @@ const home = () => {
                       >
                         Market
                       </Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link
                         activeClass="active"
@@ -267,21 +267,6 @@ const home = () => {
                       </Link>
                     </li>
 
-                    <li>
-                      <Link
-                        activeClass="active"
-                        to="profits"
-                        spy={true}
-                        smooth={true}
-                        duration={500}
-                        onClick={() => setBurgerMenu(false)}
-                        // onSetActive={this.handleSetActive}
-                      >
-                        {/* How to make Profits */}
-                        Locations
-                      </Link>
-                    </li>
-
                     {/* <li>
                      
                       <Link
@@ -305,11 +290,25 @@ const home = () => {
                         duration={500}
                         onClick={() => setBurgerMenu(false)}
                       >
-                        Our Team
+                        Team
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        activeClass="active"
+                        to="profits"
+                        spy={true}
+                        smooth={true}
+                        duration={500}
+                        onClick={() => setBurgerMenu(false)}
+                        // onSetActive={this.handleSetActive}
+                      >
+                        {/* How to make Profits */}
+                        Locations
                       </Link>
                     </li>
 
-                    <li>
+                    {/* <li>
                       <Link
                         activeClass="active"
                         to="RoadMap"
@@ -321,16 +320,16 @@ const home = () => {
                       >
                         Roadmap
                       </Link>
-                    </li>
+                    </li> */}
                   </React.Fragment>
                 ) : (
                   <ul class="list-unstyled list-inline">
                     <li>
-                      <a href="/">About Us</a>
+                      <a href="/">About Us </a>
                     </li>
-                    <li>
+                    {/* <li>
                       <a href="/">Goals and Vision</a>
-                    </li>
+                    </li> */}
                     <li>
                       <a href="/">Business Model</a>
                     </li>
@@ -635,9 +634,7 @@ const home = () => {
           <div className="container">
             <ScrollAnimation animateOnce={true} animateIn="animate__fadeInUp">
               <div className="left">
-                <h2>
-                  About us <br /> & Vision
-                </h2>
+                <h2>About us & Vision</h2>
                 <p>
                   Crowd Growing is a cannabis ecosystem based on years of
                   research, development and experience. Together with experts in
@@ -719,8 +716,8 @@ const home = () => {
                   </p>
                 </div>
               </ScrollAnimation>
-              <div className="row">
-                <div className="col-md-6">
+              <div className="d-flex flex-column">
+                <div style={{ maxWidth: "600px" }} className="m-auto">
                   <ScrollAnimation
                     animateOnce={true}
                     animateIn="animate__zoomInDown"
@@ -733,7 +730,7 @@ const home = () => {
                   </ScrollAnimation>
                 </div>
 
-                <div className="col-md-6 textCol">
+                <div style={{ maxWidth: "600px" }} className="m-auto  textCol">
                   <ScrollAnimation
                     animateOnce={true}
                     delay={500}

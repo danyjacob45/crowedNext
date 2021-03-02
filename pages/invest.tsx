@@ -4,6 +4,7 @@ import { Card, Nav } from "react-bootstrap";
 import { Button } from "../components/common/forms/button";
 import classnames from "classnames";
 import ModalContainer from "../components/common/modal/modalContainer";
+import { AuthService } from "../services/user/user.http";
 const investTypes = {
   FOUNDER: "FOUNDER",
   PROFESSIONAL: "PROFESSIONAL",
@@ -15,39 +16,135 @@ const investment = () => {
   const [activeInvest, setActiveInvest] = useState("");
   const [amount, setAmount] = useState(0);
   const [modal, SetModal] = useState(false);
+  const [profit, setProfit] = useState<any>(null);
+  const [success, setSuccess] = useState<any>(null);
+
+  const calculateInvestment = (amount) => {
+    AuthService.calcInvestment({ amount })
+      .then((res) => {
+        setProfit(res.data);
+        // debugger;
+      })
+      .catch((err) => {
+        // debugger;
+        if (err.response?.data?.errors) {
+          // debugger;
+          setProfit(err.response?.data?.errors?.PLANS);
+        } else {
+          setProfit("something went wrong");
+        }
+      });
+  };
+
+  const investHandler = () => {
+    AuthService.investment({ amount })
+      .then((res) => {
+        // debugger;
+        console.log(res);
+        setSuccess(true);
+      })
+      .catch((err) => {
+        // setSuccess(true);
+
+        // return;
+        SetModal(false);
+
+        if (err.response?.data?.errors) {
+          // debugger;
+          setProfit(err.response?.data?.errors?.PLANS);
+        } else {
+          setProfit("something went wrong");
+        }
+      });
+  };
+
+  const closeModal = () => {
+    setSuccess(false);
+    SetModal(false);
+  };
+
+  const successModal = () => {
+    return (
+      <div
+        className="sweet-alert  showSweetAlert visible"
+        data-custom-className=""
+        data-has-cancel-button="false"
+        data-has-confirm-button="true"
+        data-allow-outside-click="false"
+        data-has-done-function="false"
+        data-animation="pop"
+        data-timer="null"
+        style={{ display: "inline-block" }}
+      >
+        {/* <div className="sa-icon sa-warning" style="display: none;">
+<span className="sa-body"></span>
+<span className="sa-dot"></span>
+</div> */}
+        {/* <div className="sa-icon sa-info" style="display: none;">
+</div> */}
+        <div className="sa-icon sa-success animate">
+          <span className="sa-line sa-tip animateSuccessTip"></span>
+          <span className="sa-line sa-long animateSuccessLong"></span>
+
+          <div className="sa-fix"></div>
+          <div className="sa-placeholder"></div>
+          {/* </div><div className="sa-icon sa-custom" style="display: none;"></div> */}
+        </div>
+        <h2 style={{ color: "#000" }}>Success Investment!</h2>
+
+        <div className="sa-button-container">
+          <div className="sa-confirm-button-container">
+            <button
+              onClick={() => closeModal()}
+              className="confirm btn btn-lg btn-primary"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Layout title="investment">
       <ModalContainer showModal={modal} closeModal={() => SetModal(false)}>
-        <>
-          <div className="modal-body">
-            <h4
-              style={{ color: "#000" }}
-              className="text-center invetModalText"
+        {success ? (
+          successModal()
+        ) : (
+          <>
+            <div className="modal-body">
+              <h4
+                style={{ color: "#000" }}
+                className="text-center invetModalText"
+              >
+                You are going to invest {amount} $
+              </h4>
+            </div>
+            <div
+              className="modal-footer justify-content-center "
+              style={{ alignSelf: "center" }}
             >
-              You are going to invest 123 $
-            </h4>
-          </div>
-          <div
-            className="modal-footer justify-content-center "
-            style={{ alignSelf: "center" }}
-          >
-            <button
-              type="button"
-              className="btn btn-primary confirmInvest  d-block"
-              data-dismiss="modal"
-            >
-              Confirm
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger infoModalClose ml-4 cancelInvestment d-block"
-              data-dismiss="modal"
-            >
-              cancel
-            </button>
-          </div>
-        </>
+              <button
+                type="button"
+                className="btn btn-primary confirmInvest  d-block"
+                data-dismiss="modal"
+                onClick={investHandler}
+              >
+                Confirm
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger infoModalClose ml-4 cancelInvestment d-block"
+                onClick={() => {
+                  SetModal(false);
+                }}
+              >
+                cancel
+              </button>
+            </div>
+          </>
+        )}
       </ModalContainer>
       <div className="main-content">
         <div className="content-wrapper">
@@ -278,7 +375,13 @@ const investment = () => {
             </div>
 
             <div className="investForm">
-              <form className="text-center">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  SetModal(true);
+                }}
+                className="text-center"
+              >
                 <input
                   type="number"
                   name="amount"
@@ -287,6 +390,7 @@ const investment = () => {
                   placeholder="Invest value"
                   className="form-control amount"
                   onChange={(e: any) => {
+                    closeModal();
                     setAmount(e.target.value);
                     if (e.target.value >= 10000) {
                       setActiveInvest(investTypes.FOUNDER);
@@ -297,10 +401,11 @@ const investment = () => {
                     } else if (e.target.value >= 100) {
                       setActiveInvest(investTypes.BEGINNER);
                     }
+                    calculateInvestment(e.target.value);
                   }}
                 />
                 <button
-                  type="button"
+                  type="submit"
                   id="investInputTarget"
                   className="btn btn-sm  planSubmit text-white"
                   style={{ backgroundColor: "#38973C" }}
@@ -309,6 +414,55 @@ const investment = () => {
                 </button>
               </form>
             </div>
+
+            {!profit ? (
+              ""
+            ) : typeof profit === "string" ? (
+              <div
+                style={{ maxWidth: "800px", background: "rgb(56, 151, 60)" }}
+                id="ttestdiv"
+                className="card mx-auto mb-5 Starter text-center  "
+              >
+                <p className="text-danger mt-3 text-center">{profit}</p>
+              </div>
+            ) : (
+              <div
+                style={{
+                  maxWidth: "800px",
+                  background:
+                    activeInvest === investTypes.BEGINNER
+                      ? "rgb(56, 151, 60) !important"
+                      : activeInvest === investTypes.ADVANCED
+                      ? "rgb(0, 119, 165)"
+                      : activeInvest === investTypes.ADVANCED
+                      ? "rgb(167, 40, 114)"
+                      : activeInvest === investTypes.ADVANCED
+                      ? "rgb(0, 70, 39)"
+                      : "rgb(56, 151, 60) !important",
+                }}
+                id="ttestdiv"
+                className="p-2 mx-auto mb-5 Starter text-center  "
+              >
+                <h4>Profit Calculator </h4>
+                <p>
+                  Estimated earnings from current <b> hosting plan </b>
+                </p>
+                <ul className=" text-center">
+                  <li className="">
+                    <span className="title">week </span>{" "}
+                    <span> {profit?.week} $</span>
+                  </li>
+                  <li className="">
+                    <span className="title">month </span>{" "}
+                    <span> {profit?.month} $</span>
+                  </li>
+                  <li className="">
+                    <span className="title">year </span>{" "}
+                    <span> {profit?.year} $</span>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>

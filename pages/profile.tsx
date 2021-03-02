@@ -41,7 +41,7 @@ const profile = () => {
     if (store?.firstName) {
       // debugger;
       setProfileInfo({
-        firstName: store?.firstName,
+        firstname: store?.firstName,
         phoneNumber: store?.address?.phoneNumber,
         country: store?.address?.country,
         city: store?.address?.city,
@@ -158,8 +158,8 @@ const profile = () => {
                       <input
                         type="text"
                         className="form-control"
-                        name="firstName"
-                        value={profileInfo.firstName}
+                        name="firstname"
+                        value={profileInfo.firstname}
                         onChange={changeProfileField}
                         // ref={register}
                       />

@@ -16,6 +16,24 @@ class _UserService {
     });
   };
 
+  calcInvestment = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.calcInvestment(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
+  investment = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.investment(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
+  getEthAddress = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.getEthAddress(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),

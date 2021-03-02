@@ -159,11 +159,12 @@ const Sidebar = () => {
             // }}
           >
             <div className="sidenav-header d-flex align-items-center">
-              <a
-                className="navbar-brand pr-1 d-flex"
-                href="http://local.mlm/user/profile"
-              >
-                <img height="31" src="/assets/images/logo.png" alt="logo" />
+              <a className="navbar-brand pr-1 d-flex" href="/profile">
+                <img
+                  height="31"
+                  src={auth?.user?.picture || "/assets/images/logo.png"}
+                  alt="avatar"
+                />
 
                 <span
                   style={{
