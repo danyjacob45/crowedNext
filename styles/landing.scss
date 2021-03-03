@@ -17,12 +17,31 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 
+  .socialFixed {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 12344;
+    @media all and (max-width: 1137px) {
+      display: none;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      a {
+        margin: 15px 0;
+      }
+    }
+  }
+
   p {
     font-size: 17px;
   }
 
   h2 {
-    font-size: 50px !important;
+    font-size: 70px !important;
     color: #fff;
   }
   // background-attachment: fixed;

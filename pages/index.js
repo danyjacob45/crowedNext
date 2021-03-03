@@ -372,6 +372,55 @@ const home = () => {
       </div>
 
       <div className="home">
+        <div className="socialFixed">
+          <div className="col-md-4 mt-4 mt-md-0   col-6 text-center d-flex align-items-center justify-content-center">
+            <a
+              className="px-2 d-inline-bock"
+              href="https://www.facebook.com/groups/340100750743245"
+              target="_blank"
+            >
+              <svg
+                width="23"
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fab"
+                data-icon="facebook"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                class="svg-inline--fa fa-facebook fa-w-16 fa-2x"
+              >
+                <path
+                  fill="#6b6b6b"
+                  d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"
+                  class=""
+                ></path>
+              </svg>
+            </a>
+
+            {/* <a
+                className="px-2 d-inline-bock "
+                href="https://t.me/crowdgrowing"
+                target="_blank"
+              >
+                <img width="23" src="/assets/svges/inst.svg" />
+              </a> */}
+            <a
+              className="px-2 d-inline-bock"
+              href="https://t.me/crowdgrowing"
+              target="_blank"
+            >
+              <img width="23" src="/assets/svges/twt.svg" />
+            </a>
+            <a
+              className="px-2 d-inline-bock"
+              href="https://www.youtube.com/channel/UCFXf8dvgTlnrfE23eTblBkQ?"
+              target="_blank"
+            >
+              <img width="23" src="/assets/svges/yout.svg" />
+            </a>
+          </div>
+        </div>
         {registerSuccessModal && (
           <div className="rt-container">
             <div className="col-rt-12">
@@ -890,17 +939,22 @@ const home = () => {
 
             <div className="row mt-5 pt-5">
               <div className="col-12 col-md-6">
-                The problem that many investors face in this market:
+                Problems of investors in this market:
                 <br />
                 <div style={{ color: " #ef476f" }} className="mt-3">
-                  High investment to start (Facilities, products, equipment,
-                  etc.)
+                  The main problems investors face when entering the cannabis
+                  market are, in a nutshell, the following:
                 </div>
                 <div style={{ color: " #ef476f" }} className="mt-3">
-                  Lack of Know-How
+                  A large investment is needed to get started, as facilities,
+                  products, equipment, etc. need to be financed to launch the
+                  business. Furthermore, many people lack the specific expertise
+                  in the cannabis market to be able to implement something
+                  profitable and functional.
                 </div>
                 <div style={{ color: " #ef476f" }} className="mt-3">
-                  Difficult regulations in many countries
+                  Also difficult and varying regulations in different countries
+                  make it even more challenging to enter the cannabis business.
                 </div>
               </div>
               <div className="col-12 col-md-6 pt-4 pt-md-0">

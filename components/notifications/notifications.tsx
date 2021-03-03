@@ -48,8 +48,18 @@ const notifications: React.FC<Props> = ({ Icons, title, active }) => {
           }
         )}
       >
-        <div className="dropdown-content-header head text-light bg-dark p-2 pl-5 show">
-          <span className="font-weight-semibold">{title}</span>
+        <div
+          style={{ backgroundColor: "#afafb1", color: "#000" }}
+          className="dropdown-content-header head   p-2 pl-2 show"
+        >
+          <span className="font-weight-semibold">
+            {/* {title} */}
+            {title === "Message" ? (
+              <img width="20" src="./assets/svg/envelope.svg" />
+            ) : (
+              <img width="20" src="./assets/svg/bell.svg" />
+            )}
+          </span>
           <a href="#" className="text-default">
             <i className="icon-compose"></i>
           </a>
@@ -87,18 +97,24 @@ const notifications: React.FC<Props> = ({ Icons, title, active }) => {
         </div>
 
         <div
-          style={{ justifyContent: "center" }}
-          className=" dropdown-content-footer bg-light p-3 pl-5 text-center d-flex"
+          style={{
+            justifyContent: "center",
+            background: "#fff",
+            borderTop: "1px solid #afafb166",
+          }}
+          className=" dropdown-content-footer   p-3 pl-5 text-center d-flex"
         >
           <a
             href="http://local.mlm/user/not-delete-all"
-            className="btn btn-danger btn-sm ml-1 mr-0"
+            style={{ backgroundColor: "transparent", color: "#afafb1" }}
+            className="btn btn-sm ml-1 mr-0"
           >
             <i className="fas fa-trash-alt"></i> Delete All
           </a>
           <a
             href="http://local.mlm/user/markAsRead"
-            className="btn btn-default btn-sm ml-1 mr-0"
+            style={{ backgroundColor: "transparent", color: "#afafb1" }}
+            className="btn  btn-sm ml-1 mr-0"
           >
             Mark As Read
           </a>

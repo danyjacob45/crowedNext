@@ -49,7 +49,7 @@ const Dashboard = () => {
                     className="card-body dashboard-balance dashboard-balance-withBg"
                     style={{ position: "relative" }}
                   >
-                    0.00 $
+                    {user?.balance?.spendable} $
                     <a
                       data-toggle="modal"
                       // onclick="openInvoice()"

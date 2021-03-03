@@ -194,7 +194,7 @@ const Withdrawal: React.FC<Props> = ({
   }, []);
   return (
     <ModalContainer
-      maxWidth={800}
+      maxWidth={600}
       showModal={openWithdrawalModal}
       closeModal={() => setOpenWithdrawalModals(false)}
     >
@@ -202,6 +202,9 @@ const Withdrawal: React.FC<Props> = ({
         className="p-5"
         // action="https://crowd-growing.com/user/withdraw"
         // method="post"
+        style={{
+          background: "#C8C8C8",
+        }}
       >
         <input
           type="hidden"
@@ -215,9 +218,25 @@ const Withdrawal: React.FC<Props> = ({
             </div>
           </div>
         </div>
+        <div className="text-center w-100 mb-3">
+          <div className="mb-3" style={{ color: "#000" }}>
+            Method
+          </div>
+          <div>
+            <span>
+              <img width="40" src="./assets/svges/btc.svg" />
+              <img width="40" className="mx-4" src="./assets/svges/eth.svg" />
+              <img width="40" src="./assets/svges/usdt.svg" />
+            </span>
+          </div>
+        </div>
         <div className="form-group row">
-          <label className="col-form-label col-lg-2 colorBlack">Amount</label>
-          <div className="col-lg-10">
+          <div className="col-lg-12">
+            <label className="col-form-label colorBlack pb-1 d-flex justify-content-between ">
+              <span>Method </span>
+              <span>* a withdrawal fee of 3% will be deducted</span>
+            </label>
+
             <div className="input-group input-group-merge">
               <div className="input-group-prepend">
                 <span className="input-group-text">$</span>
@@ -233,14 +252,12 @@ const Withdrawal: React.FC<Props> = ({
                 // required=""
               />
             </div>
-            <span className="text-gray font-size-sm">
-              * a withdrawal fee of 3% will be deducted
-            </span>
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-form-label col-lg-2 colorBlack">Method</label>
-          <div className="col-lg-10">
+          <div className="col-lg-12">
+            <label className="col-form-label  colorBlack">Method</label>
+
             <select
               className="form-control select"
               name="coin"
@@ -253,8 +270,9 @@ const Withdrawal: React.FC<Props> = ({
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-form-label col-lg-2 colorBlack">Address</label>
-          <div className="col-lg-10">
+          <div className="col-lg-12">
+            <label className="col-form-label  colorBlack">Address</label>
+
             <select
               name="details"
               className="form-control select"
@@ -275,9 +293,10 @@ const Withdrawal: React.FC<Props> = ({
               window.bitpay.showInvoice("T7u4ByKibY3cYBZQ1owQaN");
             }}
             type="submit"
-            className="btn btn-primary"
+            style={{ backgroundColor: "#2EA031" }}
+            className="btn btn-primary w-50 btcSubmit"
           >
-            Submit 555
+            Submit
           </button>
         </div>
       </div>

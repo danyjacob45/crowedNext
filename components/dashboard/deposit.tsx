@@ -205,7 +205,7 @@ const Deposit: React.FC<Props> = ({
   const ethHandler = () => {
     AuthService.getEthAddress({
       amount,
-      method: "ETH",
+      method: depositType,
     })
       .then((res) => {
         console.log(res);
@@ -402,7 +402,7 @@ const Deposit: React.FC<Props> = ({
 
   return (
     <ModalContainer
-      maxWidth={openETH ? 500 : 800}
+      maxWidth={openETH ? 500 : 600}
       showModal={openDepositModal}
       closeModal={() => {
         setOpenETH(false);
@@ -416,15 +416,43 @@ const Deposit: React.FC<Props> = ({
           className="p-5"
           action="https://crowd-growing.com/user/btc-pay"
           method="post"
+          style={{
+            background: "#C8C8C8",
+          }}
         >
           <input
             type="hidden"
             name="_token"
             value="cngHFLIH95tNqyifuaTH8P3XEIRPIN8IAkbfiLvR"
-          />{" "}
+          />
+          <div
+            className="text-center mb-4"
+            style={{ fontWeight: "bold", fontSize: "19px" }}
+          >
+            Balance $0.00
+          </div>
           <div className="form-group row">
-            <label className="col-form-label colorBlack col-lg-2">Method</label>
-            <div className="col-lg-10">
+            <div className="text-center w-100 mb-3">
+              <div className="mb-3" style={{ color: "#000" }}>
+                Method
+              </div>
+              <div>
+                <span>
+                  <img width="40" src="./assets/svges/btc.svg" />
+                  <img
+                    width="40"
+                    className="mx-4"
+                    src="./assets/svges/eth.svg"
+                  />
+                  <img width="40" src="./assets/svges/usdt.svg" />
+                </span>
+              </div>
+            </div>
+            <div className="col-lg-12">
+              <label className="col-form-label colorBlack pb-1 d-flex justify-content-between ">
+                <span>Method </span>
+                <span>* a withdrawal fee of 3% will be deducted</span>
+              </label>
               <select
                 className="form-control select"
                 id="selectedCurrency"
@@ -438,15 +466,21 @@ const Deposit: React.FC<Props> = ({
               >
                 <option value="BTC">Bitcoin</option>
                 <option value="ETH">Ethereum</option>
+                <option value="usdt">usdt</option>
               </select>
             </div>
           </div>
           <div className="form-group row">
-            <label className="col-form-label colorBlack col-lg-2">Amount</label>
-            <div className="col-lg-10">
+            <div className="col-lg-12">
+              <label className="col-form-label colorBlack pb-1 ">Amount</label>
               <div className="input-group input-group-merge">
                 <div className="input-group-prepend">
-                  <span className="input-group-text">$</span>
+                  <span
+                    style={{ color: "#2EA031" }}
+                    className="input-group-text"
+                  >
+                    $
+                  </span>
                 </div>
                 <input
                   type="number"
@@ -497,6 +531,7 @@ const Deposit: React.FC<Props> = ({
               onClick={(e) => {
                 // debugger;
                 e.preventDefault();
+                // debugger;
                 if (!amount) {
                   setAmountError("amount is require");
 
@@ -509,14 +544,15 @@ const Deposit: React.FC<Props> = ({
                   // @ts-ignore: Unreachable code error
                   window.bitpay.showInvoice("T7u4ByKibY3cYBZQ1owQaN");
                 }
-                if (depositType === "ETH") {
+                if (depositType === "ETH" || depositType === "usdt") {
                   ethHandler();
                 }
               }}
               type="submit"
-              className="btn btn-primary btcSubmit"
+              style={{ backgroundColor: "#2EA031" }}
+              className="btn btn-primary w-50 btcSubmit"
             >
-              1 Submit
+              Submit
             </button>
           </div>
         </form>
