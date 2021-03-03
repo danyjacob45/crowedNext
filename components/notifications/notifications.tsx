@@ -101,6 +101,9 @@ const notifications: React.FC<Props> = ({ Icons, title, active }) => {
             justifyContent: "center",
             background: "#fff",
             borderTop: "1px solid #afafb166",
+            // @ts-ignore: Unreachable code error
+
+            justifyContent: "space-around",
           }}
           className=" dropdown-content-footer   p-3 pl-5 text-center d-flex"
         >
