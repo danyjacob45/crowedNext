@@ -43,7 +43,7 @@ const Registration = ({
         debugger;
         if (err.response && err.response.data) {
           if (err.response.data.message) {
-            setServerError({ referral_link: err.response.data.message });
+            setServerError({ referrer: err.response.data.message });
           } else {
             setServerError(err.response.data.errors);
           }
@@ -88,18 +88,18 @@ const Registration = ({
         <label>Sponsor </label>
         <input
           type="text"
-          name="referral_link"
+          name="referrer"
           value={defaultValue}
           style={{ color: "grey" }}
           tabindex="1"
           className={classnames("form-control", {
-            "is-invalid": errors.referral_link || serverError.referral_link,
+            "is-invalid": errors.referrer || serverError.referrer,
           })}
           placeholder="Sponsor Name"
           ref={register({ required: true })}
         />
         <div class="invalid-feedback">
-          {serverError.referral_link || "Sponsor Name is required"}
+          {serverError.referrer || "Sponsor Name is required"}
         </div>
       </div>
       <div class="form-group">
