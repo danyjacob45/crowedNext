@@ -10,26 +10,27 @@ export const useCheckAuth = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
+    // debugger;
     if (localStorage.getItem("token")) {
-      if (!(window as any).hasCheckedAuth) {
-        setAuthorizationToken(localStorage.getItem("token")!);
-        (window as any).hasCheckedAuth = true;
+      // if (!(window as any).hasCheckedAuth) {
+      setAuthorizationToken(localStorage.getItem("token")!);
+      (window as any).hasCheckedAuth = true;
 
-        AuthService.getUser()
-          .then((res) => {
-            (window as any).hasCheckedAuth = true;
-            dispatch(
-              setCurrentUser({
-                user: res.data.user,
-                token: localStorage.getItem("token")!,
-              })
-            );
-          })
-          .catch((err) => {
-            router.push("/");
-            console.log(err);
-          });
-      }
+      AuthService.getUser()
+        .then((res) => {
+          (window as any).hasCheckedAuth = true;
+          dispatch(
+            setCurrentUser({
+              user: res.data.user,
+              token: localStorage.getItem("token")!,
+            })
+          );
+        })
+        .catch((err) => {
+          router.push("/");
+          console.log(err);
+        });
+      // }
     } else {
       router.push("/");
     }

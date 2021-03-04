@@ -30,6 +30,14 @@ export const setCurrentStore = ({
     payload: { store },
   };
 };
+
+export const updateUser = (user: any) => {
+  return {
+    type: authActionTypes.UPDATE_USER,
+    payload: user,
+  };
+};
+
 export const authLogout = (): AuthLogoutAction => {
   return {
     type: authActionTypes.LOGOUT_USER,

@@ -4,6 +4,11 @@ import { AuthService } from "../services/user/user.http";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import ModalContainer from "../components/common/modal/modalContainer";
+import {
+  setCurrentUser,
+  setCurrentStore,
+  updateUser,
+} from "../store/auth/authActions";
 
 // import { Card, Nav } from "react-bootstrap";
 // import { Button } from "../components/common/forms/button";
@@ -11,6 +16,7 @@ import ModalContainer from "../components/common/modal/modalContainer";
 // import Withdrawal from "../components/dashboard/withdrawal";
 
 const profile = () => {
+  const dispatch = useDispatch();
   const [image, setImage] = useState<any>();
   const [showModal, setShowModal] = useState<any>("");
 
@@ -56,8 +62,14 @@ const profile = () => {
     const data = new FormData();
     data.append("file", image);
     AuthService.uploadImg(data)
-      .then(() => {
+      .then((res) => {
         setShowModal("image");
+        console.log(res);
+        // dispatch(
+        //   updateUser({
+        //     user: res.data.user,
+        //   })
+        // );
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +86,12 @@ const profile = () => {
     const data = {};
 
     AuthService.updateProfile(profileInfo)
-      .then(() => {
+      .then((res) => {
+        dispatch(
+          updateUser({
+            user: res.data.user,
+          })
+        );
         setShowModal("profile");
       })
       .catch((err) => {

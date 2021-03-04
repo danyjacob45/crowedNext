@@ -7,6 +7,7 @@ export enum authActionTypes {
   AUTH_STOP_LOAD = "AUTH_STOP_LOAD",
   AUTH_START_LOADING = "AUTH_START_LOADING",
   SET_CURRENT_STORE = "SET_CURRENT_STORE",
+  UPDATE_USER = "UPDATE_USER",
 }
 
 export interface SetCurrentStoreAction {
@@ -14,6 +15,11 @@ export interface SetCurrentStoreAction {
     store: IStore;
   };
   type: authActionTypes.SET_CURRENT_STORE;
+}
+
+export interface UpdateUer {
+  payload: any;
+  type: authActionTypes.UPDATE_USER;
 }
 
 export interface AuthStopLoadingAction {
@@ -41,4 +47,5 @@ export type IAuthActions =
   | AuthLogoutAction
   | AuthStopLoadingAction
   | AuthStartLoadingAction
-  | SetCurrentStoreAction;
+  | SetCurrentStoreAction
+  | UpdateUer;

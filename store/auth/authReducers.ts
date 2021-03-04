@@ -19,9 +19,9 @@ export interface IUser {
 export interface IAuthState {
   isAuth: boolean;
   token: string | null;
-  user: IUser | null;
+  user: any;
   loading: boolean;
-  store: IStore | null;
+  store: any;
 }
 const initState: IAuthState = {
   isAuth: false,
@@ -50,6 +50,16 @@ export const authReducer = (
         token: action.payload.token,
         // store: action.payload.store,
       };
+
+    case authActionTypes.UPDATE_USER:
+      return {
+        ...state,
+        isAuth: true,
+        loading: false,
+        user: action.payload.user,
+
+        // store: action.payload.store,
+      };
     case authActionTypes.LOGOUT_USER:
       return {
         ...state,
@@ -58,6 +68,7 @@ export const authReducer = (
         token: null,
         store: null,
       };
+
     case authActionTypes.AUTH_STOP_LOAD:
       return {
         ...state,
