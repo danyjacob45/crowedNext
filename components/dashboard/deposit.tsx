@@ -257,14 +257,24 @@ const Deposit: React.FC<Props> = ({
   };
 
   const checkPayment = (id) => {
+    if (!openDepositModal) {
+      return;
+    }
     AuthService.transactionCheck(id)
       .then((res) => {
         console.log(res);
-        setTransactionDone(true);
+        if (res.data.deposit.status === "COMPLETED") {
+          setTransactionDone(true);
+        } else {
+          // debugger;
+          setTimeout(() => {
+            checkPayment(id);
+          }, 1500);
+        }
       })
       .catch((err) => {
-        checkPayment(id);
         console.log(err);
+        checkPayment(id);
       });
   };
 

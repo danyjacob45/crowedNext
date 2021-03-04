@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { Card, Nav } from "react-bootstrap";
 import { Button } from "../components/common/forms/button";
 import classnames from "classnames";
 import ModalContainer from "../components/common/modal/modalContainer";
 import { AuthService } from "../services/user/user.http";
+import DataTable from "../components/common/dataTables";
 const investTypes = {
   FOUNDER: "FOUNDER",
   PROFESSIONAL: "PROFESSIONAL",
@@ -18,6 +19,17 @@ const investment = () => {
   const [modal, SetModal] = useState(false);
   const [profit, setProfit] = useState<any>(null);
   const [success, setSuccess] = useState<any>(null);
+  const [investments, setInvestments] = useState<any>([]);
+
+  const getInvestments = () => {
+    AuthService.profits().then((res) => {
+      setInvestments(res.data.profits);
+    });
+  };
+
+  useEffect(() => {
+    getInvestments();
+  }, []);
 
   const calculateInvestment = (amount) => {
     AuthService.calcInvestment({ amount })
@@ -42,6 +54,7 @@ const investment = () => {
         // debugger;
         console.log(res);
         setSuccess(true);
+        getInvestments();
       })
       .catch((err) => {
         // setSuccess(true);
@@ -463,6 +476,7 @@ const investment = () => {
                 </ul>
               </div>
             )}
+            <DataTable investments={investments} />
           </div>
         </div>
       </div>

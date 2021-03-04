@@ -54,6 +54,16 @@ class _UserService {
     );
   };
 
+  profits = () => {
+    return axios.post(
+      storeBackEndRoutes.user.profits(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),
