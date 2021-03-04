@@ -22,9 +22,13 @@ const investment = () => {
   const [investments, setInvestments] = useState<any>([]);
 
   const getInvestments = () => {
-    AuthService.profits().then((res) => {
-      setInvestments(res.data.profits);
-    });
+    AuthService.profits()
+      .then((res) => {
+        setInvestments(res.data.profits);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {

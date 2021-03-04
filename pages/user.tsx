@@ -8,6 +8,7 @@ import Withdrawal from "../components/dashboard/withdrawal";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Pie } from "react-chartjs-2";
 
 const Dashboard = () => {
   const { user } = useSelector((store: any) => store.auth);
@@ -322,6 +323,246 @@ const Dashboard = () => {
               </div>
             </div>
             <hr />
+            <div className="row">
+              <div className="col-lg-4">
+                <span>Founder Pool Stats</span>
+                <div
+                  style={{ minHeight: "calc(100% - 54px)" }}
+                  className="card bg-white border-0"
+                >
+                  <div className="card-body">
+                    <div>
+                      <Pie
+                        // width="100%"
+                        min-height="240px"
+                        data={{
+                          labels: ["Founder", "Payout"],
+                          datasets: [
+                            {
+                              data: [1000, 2000],
+                              backgroundColor: ["#004627", "#258d25"],
+                              borderColor: "transparent",
+                            },
+                          ],
+                        }}
+                        options={{
+                          responsive: true,
+                          legend: {
+                            display: false,
+                          },
+                          // tooltips: {
+                          //   enabled: false,
+                          // },
+                          tooltips: {
+                            callbacks: {
+                              label: function (tooltipItem, data) {
+                                var dataLabel = data.labels[tooltipItem.index];
+                                var value =
+                                  ": " +
+                                  data.datasets[tooltipItem.datasetIndex].data[
+                                    tooltipItem.index
+                                  ].toLocaleString();
+                                // @ts-ignore: Unreachable code error
+
+                                if (Chart.helpers.isArray(dataLabel)) {
+                                  dataLabel = dataLabel.slice();
+
+                                  if (tooltipItem.index === 0) {
+                                    dataLabel[0] += value;
+                                  } else {
+                                    dataLabel[0] += value + " $";
+                                  }
+                                } else {
+                                  if (tooltipItem.index === 0) {
+                                    dataLabel += value;
+                                  } else {
+                                    dataLabel += value + " $";
+                                  }
+                                }
+
+                                return dataLabel;
+                              },
+                            },
+                          },
+                        }}
+                      />
+                    </div>
+                    <h4 className="chartText ">56 / 1000 Founders</h4>
+                    <h4 className="chartText">
+                      Founders Total Profit 15,456.00 $
+                    </h4>
+
+                    <h4 className="chartText">Total Average 276.00 $</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-lg-4">
+                <span>Marketing Materials</span>
+                <div
+                  style={{ minHeight: "calc(100% - 54px)" }}
+                  className="card bg-white border-0"
+                >
+                  <div
+                    className="card-body"
+                    style={{ height: "308px", width: "100%" }}
+                  >
+                    <h4>
+                      <a
+                        href="https://www.youtube.com/watch?v=F7dcJW02fKw&amp;t=18s"
+                        target="_blank"
+                      >
+                        Welcome Video
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://www.youtube.com/watch?v=7t8hiv8GJhU"
+                        target="_blank"
+                      >
+                        Crowd Growing Teaser
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://www.youtube.com/watch?v=VPh5c1CE1vY"
+                        target="_blank"
+                      >
+                        Business Presentation Video
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://m.youtube.com/watch?v=hZxG6fAt6Yc"
+                        target="_blank"
+                      >
+                        Product Video
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_turkish.pdf"
+                        target="_blank"
+                      >
+                        Business Presentation PDF TK
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_german.pdf"
+                        target="_blank"
+                      >
+                        Business Presentation PDF GER
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_russian.pdf"
+                        target="_blank"
+                      >
+                        Business Presentation PDF RUS
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_vietnamese.pdf"
+                        target="_blank"
+                      >
+                        Business Presentation PDF VN
+                      </a>
+                    </h4>
+                    <h4>
+                      <a
+                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf"
+                        target="_blank"
+                      >
+                        Business Presentation PDF ES
+                      </a>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-lg-4">
+                <span>Transaction History</span>
+                <div
+                  style={{ minHeight: "calc(100% - 54px)" }}
+                  className="card bg-white border-0"
+                >
+                  <div
+                    className="card-body"
+                    style={{
+                      height: "308px",
+                      width: "100%",
+                      overflowX: "scroll",
+                      overflowY: "auto",
+                    }}
+                  >
+                    <table className="table table-flush">
+                      <thead>
+                        <tr>
+                          <th>Type</th>
+                          <th>Amount</th>
+                          <th>Created At</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Investment</td>
+                          <td>123.00 $</td>
+                          <td>01/03/2021 16:03</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>300.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                        <tr>
+                          <td>Investment</td>
+                          <td>100.00 $</td>
+                          <td>26/02/2021 14:02</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
