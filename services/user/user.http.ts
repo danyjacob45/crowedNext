@@ -34,6 +34,16 @@ class _UserService {
     });
   };
 
+  getTeam = () => {
+    return axios.post(
+      storeBackEndRoutes.user.getTeam(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),

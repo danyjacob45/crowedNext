@@ -1354,3 +1354,25 @@ body {
     opacity: 0;
   }
 }
+
+.bold12 {
+  font-weight: bold !important;
+  font-size: 12px !important;
+}
+
+.methodGroup {
+  .methodRadio {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    &.active {
+      background: #2ea031;
+    }
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}

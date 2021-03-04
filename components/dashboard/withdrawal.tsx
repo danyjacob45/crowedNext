@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ModalContainer from "../common/modal/modalContainer";
+import classnames from "classnames";
 
 interface Props {
   openWithdrawalModal: Boolean;
@@ -10,6 +11,8 @@ const Withdrawal: React.FC<Props> = ({
   openWithdrawalModal,
   setOpenWithdrawalModals,
 }) => {
+  const [depositType, setDepositType] = useState("BTC");
+
   useEffect(() => {
     /* jshint browser: true, strict: false, maxlen: false, maxstatements: false */
     (function () {
@@ -218,14 +221,50 @@ const Withdrawal: React.FC<Props> = ({
             </div>
           </div>
         </div>
-        <div className="text-center w-100 mb-3">
+        <div className="text-center w-100 mb-0">
           <div className="mb-3" style={{ color: "#000" }}>
             Method
           </div>
-          <div>
-            <span>
+          <div className="methodGroup">
+            <span
+              onClick={() => {
+                setDepositType("BTC");
+              }}
+              className="pointer"
+            >
+              <span
+                className={classnames("methodRadio mr-2  ", {
+                  active: depositType === "BTC",
+                })}
+              ></span>
               <img width="40" src="./assets/svges/btc.svg" />
-              <img width="40" className="mx-4" src="./assets/svges/eth.svg" />
+            </span>
+            <span
+              onClick={() => {
+                setDepositType("ETH");
+              }}
+              className="mx-4 pointer"
+            >
+              <span
+                className={classnames("methodRadio mr-1  ", {
+                  active: depositType === "ETH",
+                })}
+              ></span>
+
+              <img width="40" src="./assets/svges/eth.svg" />
+            </span>
+            <span
+              onClick={() => {
+                setDepositType("USDT");
+              }}
+              className="pointer"
+            >
+              <span
+                className={classnames("methodRadio mr-2  ", {
+                  active: depositType === "USDT",
+                })}
+              ></span>
+
               <img width="40" src="./assets/svges/usdt.svg" />
             </span>
           </div>
@@ -233,7 +272,7 @@ const Withdrawal: React.FC<Props> = ({
         <div className="form-group row">
           <div className="col-lg-12">
             <label className="col-form-label colorBlack pb-1 d-flex justify-content-between ">
-              <span>Method </span>
+              <span>Amount </span>
               <span>* a withdrawal fee of 3% will be deducted</span>
             </label>
 
@@ -254,7 +293,7 @@ const Withdrawal: React.FC<Props> = ({
             </div>
           </div>
         </div>
-        <div className="form-group row">
+        {/* <div className="form-group row">
           <div className="col-lg-12">
             <label className="col-form-label  colorBlack">Method</label>
 
@@ -268,7 +307,7 @@ const Withdrawal: React.FC<Props> = ({
               <option value="1">Bitcoin</option>
             </select>
           </div>
-        </div>
+        </div> */}
         <div className="form-group row">
           <div className="col-lg-12">
             <label className="col-form-label  colorBlack">Address</label>
@@ -296,7 +335,7 @@ const Withdrawal: React.FC<Props> = ({
             style={{ backgroundColor: "#2EA031" }}
             className="btn btn-primary w-50 btcSubmit"
           >
-            Submit
+            Submit 12
           </button>
         </div>
       </div>

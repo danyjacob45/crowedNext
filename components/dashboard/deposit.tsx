@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ModalContainer from "../common/modal/modalContainer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { AuthService } from "../../services/user/user.http";
-
+import classnames from "classnames";
 interface Props {
   openDepositModal: Boolean;
   setOpenDepositModals: any;
@@ -18,6 +18,7 @@ const Deposit: React.FC<Props> = ({
   const [openETH, setOpenETH] = useState<any>(null);
   const [amount, setAmount] = useState(false);
   const [amountError, setAmountError] = useState<any>("");
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     /* jshint browser: true, strict: false, maxlen: false, maxstatements: false */
@@ -203,17 +204,22 @@ const Deposit: React.FC<Props> = ({
   }, []);
 
   const ethHandler = () => {
+    setLoader(true);
     AuthService.getEthAddress({
       amount,
       method: depositType,
     })
       .then((res) => {
+        setLoader(false);
+
         console.log(res);
         setOpenETH(res?.data?.deposit);
         // debugger;
         // debugger;
       })
       .catch((err) => {
+        setLoader(false);
+
         console.log(err);
         alert("error");
       });
@@ -242,6 +248,12 @@ const Deposit: React.FC<Props> = ({
         </div>
 
         <div id="modal-body" className="modal-body pt-0">
+          <div
+            style={{ backgroundColor: "#81b757" }}
+            className="Awaiting_Payment mb-2 py-3 text-center"
+          >
+            Awaiting Payment...
+          </div>
           {/* <div
             style={{ color: "#000" }}
             className="Awaiting_Payment py-3 text-center"
@@ -250,13 +262,19 @@ const Deposit: React.FC<Props> = ({
           </div> */}
           <h3 style={{ color: "#000" }}>
             Please notice, the deposit will be credited to your balance once
-            your ETH transaction in confirmed.
+            your {depositType} transaction in confirmed.
           </h3>
+
           <div
             style={{ color: "#000" }}
             className="Pay_with d-flex justify-content-between betweeen py-1"
           >
-            <span> Payment method: </span> <span> Ethereum (ETH ) </span>
+            <span> Payment method: </span>{" "}
+            {depositType === "ETH" ? (
+              <span> Ethereum (ETH) </span>
+            ) : (
+              <span> Tether (USDT) </span>
+            )}
           </div>
 
           <div id="modal-body" className="modal-body p-0">
@@ -265,7 +283,9 @@ const Deposit: React.FC<Props> = ({
               <div className="copy">
                 <div className="d-flex justify-content-between mb-2">
                   <span>Amount: </span>
-                  <span id="amountAth">{openETH?.crypto} ETH </span>
+                  <span id="amountAth">
+                    {openETH?.crypto} {depositType}{" "}
+                  </span>
                 </div>
                 {/* <button className="btn p-0 btn-icon fa fa-copy copyBtn">
                   <span id="copyP1"> copied </span>
@@ -314,8 +334,8 @@ const Deposit: React.FC<Props> = ({
               </div>
               <hr className="my-3" />
               <h4 style={{ color: "#000" }} className="text-center m-0">
-                To complete your payment, please send 0.0078758016803903 ETH to
-                the address below.
+                To complete your payment, please send 0.0078758016803903{" "}
+                {depositType} to the address below.
               </h4>
               <div
                 style={{ flexDirection: "column", alignItems: "center" }}
@@ -409,46 +429,87 @@ const Deposit: React.FC<Props> = ({
         setOpenDepositModals();
       }}
     >
-      {openETH ? (
-        ethModal()
-      ) : (
-        <form
-          className="p-5"
-          action="https://crowd-growing.com/user/btc-pay"
-          method="post"
-          style={{
-            background: "#C8C8C8",
-          }}
-        >
-          <input
-            type="hidden"
-            name="_token"
-            value="cngHFLIH95tNqyifuaTH8P3XEIRPIN8IAkbfiLvR"
-          />
-          <div
-            className="text-center mb-4"
-            style={{ fontWeight: "bold", fontSize: "19px" }}
-          >
-            Balance $0.00
+      <>
+        {loader && (
+          <div className="loaderWrapper ">
+            <img
+              className="loader"
+              src="https://cdn.dribbble.com/users/1028334/screenshots/2874977/canalol.gif"
+            />
           </div>
-          <div className="form-group row">
-            <div className="text-center w-100 mb-3">
-              <div className="mb-3" style={{ color: "#000" }}>
-                Method
-              </div>
-              <div>
-                <span>
-                  <img width="40" src="./assets/svges/btc.svg" />
-                  <img
-                    width="40"
-                    className="mx-4"
-                    src="./assets/svges/eth.svg"
-                  />
-                  <img width="40" src="./assets/svges/usdt.svg" />
-                </span>
-              </div>
+        )}
+        {openETH ? (
+          ethModal()
+        ) : (
+          <form
+            className="p-5"
+            action="https://crowd-growing.com/user/btc-pay"
+            method="post"
+            style={{
+              background: "#C8C8C8",
+            }}
+          >
+            <input
+              type="hidden"
+              name="_token"
+              value="cngHFLIH95tNqyifuaTH8P3XEIRPIN8IAkbfiLvR"
+            />
+            <div
+              className="text-center mb-4"
+              style={{ fontWeight: "bold", fontSize: "19px" }}
+            >
+              Balance $0.00
             </div>
-            <div className="col-lg-12">
+            <div className="form-group row">
+              <div className="text-center w-100 mb-0">
+                <div className="mb-3" style={{ color: "#000" }}>
+                  Method
+                </div>
+                <div className="methodGroup">
+                  <span
+                    onClick={() => {
+                      setDepositType("BTC");
+                    }}
+                    className="pointer"
+                  >
+                    <span
+                      className={classnames("methodRadio mr-2  ", {
+                        active: depositType === "BTC",
+                      })}
+                    ></span>
+                    <img width="40" src="./assets/svges/btc.svg" />
+                  </span>
+                  <span
+                    onClick={() => {
+                      setDepositType("ETH");
+                    }}
+                    className="mx-4 pointer"
+                  >
+                    <span
+                      className={classnames("methodRadio mr-1  ", {
+                        active: depositType === "ETH",
+                      })}
+                    ></span>
+
+                    <img width="40" src="./assets/svges/eth.svg" />
+                  </span>
+                  <span
+                    onClick={() => {
+                      setDepositType("USDT");
+                    }}
+                    className="pointer"
+                  >
+                    <span
+                      className={classnames("methodRadio mr-2  ", {
+                        active: depositType === "USDT",
+                      })}
+                    ></span>
+
+                    <img width="40" src="./assets/svges/usdt.svg" />
+                  </span>
+                </div>
+              </div>
+              {/* <div className="col-lg-12">
               <label className="col-form-label colorBlack pb-1 d-flex justify-content-between ">
                 <span>Method </span>
                 <span>* a withdrawal fee of 3% will be deducted</span>
@@ -468,95 +529,106 @@ const Deposit: React.FC<Props> = ({
                 <option value="ETH">Ethereum</option>
                 <option value="usdt">usdt</option>
               </select>
+            </div> */}
             </div>
-          </div>
-          <div className="form-group row">
-            <div className="col-lg-12">
-              <label className="col-form-label colorBlack pb-1 ">Amount</label>
-              <div className="input-group input-group-merge">
-                <div className="input-group-prepend">
-                  <span
-                    style={{ color: "#2EA031" }}
-                    className="input-group-text"
-                  >
-                    $
-                  </span>
+            <div className="form-group row">
+              <div className="col-lg-12">
+                <label className="col-form-label colorBlack pb-1 ">
+                  Amount
+                </label>
+                <div className="input-group input-group-merge">
+                  <div className="input-group-prepend">
+                    <span
+                      style={{ color: "#2EA031" }}
+                      className="input-group-text"
+                    >
+                      $
+                    </span>
+                  </div>
+                  <input
+                    type="number"
+                    id="btcInput"
+                    step="any"
+                    name="amount"
+                    // maxlength="10"
+                    className="form-control"
+                    onChange={(e: any) => {
+                      setAmountError(null);
+                      setAmount(e.target.value);
+                    }}
+                    // required=""
+                  />
                 </div>
-                <input
-                  type="number"
-                  id="btcInput"
-                  step="any"
-                  name="amount"
-                  // maxlength="10"
-                  className="form-control"
-                  onChange={(e: any) => {
-                    setAmountError(null);
-                    setAmount(e.target.value);
-                  }}
-                  // required=""
-                />
-              </div>
-              {amountError && (
-                <span style={{ color: "red" }}>{amountError}</span>
-              )}
-            </div>
-          </div>
-          <div className="form-group row inputAddressWrapper d-none" id="show">
-            <label className="col-form-label col-lg-2">ETH Address</label>
-            <div className="col-lg-10">
-              <div className="input-group input-group-merge">
-                <input
-                  type="text"
-                  id="inputAddress"
-                  step="any"
-                  // disabled=""
-                  name="address"
-                  required
-                  // maxlength="10"
-                  className="form-control"
-                />
+                {amountError && (
+                  <span style={{ color: "red" }}>{amountError}</span>
+                )}
               </div>
             </div>
-          </div>
-          <div className="form-group row inputAddressWrapper d-none" id="show">
-            <label className="col-form-label col-lg-2"></label>
-            <div className="col-lg-10">
-              <div className="input-group input-group-merge text-center">
-                <img id="qrImg" className="m-auto" />
-              </div>
-            </div>
-          </div>
-          <div className="text-right">
-            <button
-              onClick={(e) => {
-                // debugger;
-                e.preventDefault();
-                // debugger;
-                if (!amount) {
-                  setAmountError("amount is require");
-
-                  return;
-                }
-
-                if (depositType === "BTC") {
-                  // @ts-ignore: Unreachable code error
-                  window.bitpay.setApiUrlPrefix("https://www.crowdgrowing.tk");
-                  // @ts-ignore: Unreachable code error
-                  window.bitpay.showInvoice("T7u4ByKibY3cYBZQ1owQaN");
-                }
-                if (depositType === "ETH" || depositType === "usdt") {
-                  ethHandler();
-                }
-              }}
-              type="submit"
-              style={{ backgroundColor: "#2EA031" }}
-              className="btn btn-primary w-50 btcSubmit"
+            <div
+              className="form-group row inputAddressWrapper d-none"
+              id="show"
             >
-              Submit
-            </button>
-          </div>
-        </form>
-      )}
+              <label className="col-form-label col-lg-2">ETH Address</label>
+              <div className="col-lg-10">
+                <div className="input-group input-group-merge">
+                  <input
+                    type="text"
+                    id="inputAddress"
+                    step="any"
+                    // disabled=""
+                    name="address"
+                    required
+                    // maxlength="10"
+                    className="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className="form-group row inputAddressWrapper d-none"
+              id="show"
+            >
+              <label className="col-form-label col-lg-2"></label>
+              <div className="col-lg-10">
+                <div className="input-group input-group-merge text-center">
+                  <img id="qrImg" className="m-auto" />
+                </div>
+              </div>
+            </div>
+            <div className="text-right">
+              <button
+                onClick={(e) => {
+                  // debugger;
+                  e.preventDefault();
+                  // debugger;
+                  if (!amount) {
+                    setAmountError("amount is require");
+
+                    return;
+                  }
+
+                  if (depositType === "BTC") {
+                    // @ts-ignore: Unreachable code error
+                    window.bitpay.setApiUrlPrefix(
+                      "https://www.crowdgrowing.tk"
+                    );
+                    // @ts-ignore: Unreachable code error
+                    window.bitpay.showInvoice("T7u4ByKibY3cYBZQ1owQaN");
+                  }
+                  if (depositType === "ETH" || depositType === "USDT") {
+                    ethHandler();
+                  }
+                }}
+                type="submit"
+                style={{ backgroundColor: "#2EA031" }}
+                className="btn btn-primary w-50 btcSubmit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        )}
+      </>
     </ModalContainer>
   );
 };
