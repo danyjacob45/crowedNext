@@ -18,5 +18,6 @@ export const storeBackEndRoutes = {
     investment: () => `${BASE_URL}/private/plans/buy`,
     getEthAddress: () => `${BASE_URL}/private/user/deposit`,
     getTeam: () => `${BASE_URL}/private/user/team`,
+    transactionCheck: (id: any) => `${BASE_URL}/private/user/deposit/${id}`,
   },
 };

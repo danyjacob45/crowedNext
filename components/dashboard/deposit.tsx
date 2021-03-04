@@ -19,6 +19,7 @@ const Deposit: React.FC<Props> = ({
   const [amount, setAmount] = useState(false);
   const [amountError, setAmountError] = useState<any>("");
   const [loader, setLoader] = useState(false);
+  const [transactionDone, setTransactionDone] = useState(false);
 
   useEffect(() => {
     /* jshint browser: true, strict: false, maxlen: false, maxstatements: false */
@@ -203,6 +204,70 @@ const Deposit: React.FC<Props> = ({
     })();
   }, []);
 
+  const transactionDoneModal = () => {
+    return (
+      <div
+        style={{ color: "#000", fontSize: "14px" }}
+        className="modal-content  "
+      >
+        <div
+          className="sweet-alert  showSweetAlert visible"
+          data-custom-className=""
+          data-has-cancel-button="false"
+          data-has-confirm-button="true"
+          data-allow-outside-click="false"
+          data-has-done-function="false"
+          data-animation="pop"
+          data-timer="null"
+          style={{ display: "inline-block" }}
+        >
+          {/* <div className="sa-icon sa-warning" style="display: none;">
+<span className="sa-body"></span>
+<span className="sa-dot"></span>
+</div> */}
+          {/* <div className="sa-icon sa-info" style="display: none;">
+</div> */}
+          <div className="sa-icon sa-success animate">
+            <span className="sa-line sa-tip animateSuccessTip"></span>
+            <span className="sa-line sa-long animateSuccessLong"></span>
+
+            <div className="sa-fix"></div>
+            <div className="sa-placeholder"></div>
+            {/* </div><div className="sa-icon sa-custom" style="display: none;"></div> */}
+          </div>
+          <h2 style={{ color: "#000" }}>Success!</h2>
+          <p className="lead text-muted ">
+            {/* {showModal === "profile" ? "Profile" : "Photo"} Updated */}
+            The transaction was completed successfully
+          </p>
+
+          <div className="sa-button-container">
+            <div className="sa-confirm-button-container">
+              <button
+                onClick={() => closeModal()}
+                className="confirm btn btn-lg btn-primary"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const checkPayment = (id) => {
+    AuthService.transactionCheck(id)
+      .then((res) => {
+        console.log(res);
+        setTransactionDone(true);
+      })
+      .catch((err) => {
+        checkPayment(id);
+        console.log(err);
+      });
+  };
+
   const ethHandler = () => {
     setLoader(true);
     AuthService.getEthAddress({
@@ -213,6 +278,8 @@ const Deposit: React.FC<Props> = ({
         setLoader(false);
 
         console.log(res);
+        // debugger;
+        checkPayment(res?.data?.deposit?.id);
         setOpenETH(res?.data?.deposit);
         // debugger;
         // debugger;
@@ -225,7 +292,16 @@ const Deposit: React.FC<Props> = ({
       });
   };
 
+  const closeModal = () => {
+    setTransactionDone(false);
+    setOpenDepositModals(false);
+    setOpenETH(false);
+    setAmount(false);
+  };
   const ethModal = () => {
+    if (transactionDone) {
+      return transactionDoneModal();
+    }
     return (
       <div
         style={{ color: "#000", fontSize: "14px" }}
@@ -242,7 +318,12 @@ const Deposit: React.FC<Props> = ({
               alt="logo"
             />
           </h4>
-          <button type="button" className="close" data-dismiss="modal">
+          <button
+            type="button"
+            onClick={() => closeModal()}
+            className="close"
+            data-dismiss="modal"
+          >
             ×
           </button>
         </div>
@@ -407,7 +488,7 @@ const Deposit: React.FC<Props> = ({
                   className="btn btn-secondary"
                   data-dismiss="modal"
                   onChange={() => {
-                    setOpenDepositModals(false);
+                    closeModal();
                   }}
                 >
                   Close
