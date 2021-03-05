@@ -93,6 +93,7 @@ const Sidebar = () => {
       subMenus: [
         { href: "/profile", title: "Profile" },
         { href: "/security", title: "Security" },
+        { href: "/withdrawalAddress", title: "Withdrawal Address" },
       ],
     },
 

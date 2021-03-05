@@ -9,6 +9,51 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Pie } from "react-chartjs-2";
+import { AuthService } from "../services/user/user.http";
+
+const Yes = () => {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      data-prefix="fas"
+      data-icon="check"
+      width="15"
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+      className="svg-inline--fa fa-check fa-w-16 fa-2x"
+    >
+      <path
+        fill="currentColor"
+        d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+        className=""
+      ></path>
+    </svg>
+  );
+};
+
+const No = () => {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      data-prefix="fas"
+      data-icon="times"
+      role="img"
+      width="12"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 352 512"
+      className="svg-inline--fa fa-times fa-w-11 fa-2x"
+    >
+      <path
+        fill="currentColor"
+        d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+        className=""
+      ></path>
+    </svg>
+  );
+};
 
 const Dashboard = () => {
   const { user } = useSelector((store: any) => store.auth);
@@ -17,6 +62,8 @@ const Dashboard = () => {
   const [origin, setOrigin] = useState("");
   const [copyReferer, setCopyReferer] = useState(false);
   const [copyReferer2, setCopyReferer2] = useState(false);
+  const [hasInvestment, setHasInvestment] = useState(false);
+  const [hasReferrer, setHasReferrer] = useState(false);
 
   useEffect(() => {
     if (window) {
@@ -24,6 +71,20 @@ const Dashboard = () => {
       setOrigin(hostname);
       // console.log(hostname, "window.location");
     }
+
+    AuthService.profits()
+      .then((res) => {
+        // debugger;
+        setHasInvestment(res.data.profits.length);
+        // setInvestments(res.data.profits);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    AuthService.getTeam().then((res) => {
+      setHasReferrer(res.data.referrers && res.data.referrers.length);
+    });
   }, []);
 
   const [openDepositModal, setOpenDepositModals] = useState(false);
@@ -181,18 +242,15 @@ const Dashboard = () => {
                     style={{ height: "250px", width: "100%" }}
                   >
                     <p className="steps3">
-                      Register for free{" "}
-                      <i className="fa fa-check text-success"></i>
+                      Register for free <Yes />
                     </p>
                     <p>
-                      <a className="steps3" href="/">
-                        First Investment{" "}
-                        <i className="fa fa-remove text-danger"></i>
-                      </a>
+                      <p className="steps3">
+                        First Investment {hasInvestment ? <Yes /> : <No />}
+                      </p>
                     </p>
                     <p className="steps3">
-                      Refer a friend{" "}
-                      <i className="fa fa-check text-success"></i>
+                      Refer a friend {hasReferrer ? <Yes /> : <No />}
                     </p>
                   </div>
                 </div>

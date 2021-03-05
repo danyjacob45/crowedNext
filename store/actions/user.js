@@ -2,7 +2,6 @@ import * as types from "./types";
 import axios from "axios";
 import { api } from "../api";
 import { setAuthorizationToken } from "../../services/axios-with-token";
-// import {Pie} from 'react-chartjs-2'
 
 export const isAuthorized = () => {
   return async (dispatch) => {
