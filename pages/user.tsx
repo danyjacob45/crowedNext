@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Pie, Line } from "react-chartjs-2";
 import { AuthService } from "../services/user/user.http";
+import classnames from "classnames";
 
 const Yes = () => {
   return (
@@ -65,6 +66,10 @@ const Dashboard = () => {
   const [hasInvestment, setHasInvestment] = useState(false);
   const [hasReferrer, setHasReferrer] = useState(false);
   const [transactions, setTransactions] = useState([]);
+  const [profitType, setProfitType] = useState("MONTHLY");
+  const [profitChartData, setProfitChartData] = useState([]);
+  const [profitSum, setProfitSum] = useState<any>(0);
+  const [allProfitSum, setAllProfitSum] = useState<any>(0);
 
   useEffect(() => {
     if (window) {
@@ -77,6 +82,11 @@ const Dashboard = () => {
       .then((res) => {
         // debugger;
         setHasInvestment(res.data.profits.length);
+        let sum = 0;
+        res.data.profits.map((el: any) => {
+          sum += el.profit;
+        });
+        setAllProfitSum(Number(sum).toFixed(2));
         // setInvestments(res.data.profits);
       })
       .catch((err) => {
@@ -92,6 +102,18 @@ const Dashboard = () => {
       // setHasReferrer(res.data.referrers && res.data.referrers.length);
     });
   }, []);
+
+  useEffect(() => {
+    AuthService.profitsFiltered({ type: profitType }).then((res) => {
+      setProfitChartData(res.data.profits);
+      let sum = 0;
+      res.data.profits.map((el: any) => {
+        sum += el.profit;
+      });
+      setProfitSum(Number(sum).toFixed(2));
+      // debugger;
+    });
+  }, [profitType]);
 
   const [openDepositModal, setOpenDepositModals] = useState(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
@@ -152,7 +174,7 @@ const Dashboard = () => {
               <div className="col-lg-3">
                 <span>Profit</span>
                 <div className="card bg-white profit-withBg border-0">
-                  <div className="card-body">0.00 $</div>
+                  <div className="card-body">{allProfitSum} $</div>
                 </div>
               </div>
               <div className="col-lg-3">
@@ -206,17 +228,44 @@ const Dashboard = () => {
                         style={{ position: "absolute", marginTop: "-43px" }}
                       >
                         <button
-                          className="mb-2 btn btn-sm btn-neutral greenColor active"
+                          className={classnames(
+                            "mb-2 btn btn-sm btn-neutral greenColor ",
+                            { active: profitType === "WEEKLY" }
+                          )}
                           id="weekChart"
+                          onClick={() => {
+                            setProfitType("WEEKLY");
+                          }}
                         >
                           Week
                         </button>
                         <button
-                          className="btn btn-sm btn-neutral mb-2 greenColor"
+                          // className="btn btn-sm btn-neutral mb-2 greenColor"
+                          className={classnames(
+                            "mb-2 btn btn-sm btn-neutral greenColor ",
+                            { active: profitType === "MONTHLY" }
+                          )}
                           id="monthChart"
+                          onClick={() => {
+                            setProfitType("MONTHLY");
+                          }}
                         >
                           {" "}
                           Month
+                        </button>
+                        <button
+                          // className="btn btn-sm btn-neutral mb-2 greenColor"
+                          className={classnames(
+                            "mb-2 btn btn-sm btn-neutral greenColor ",
+                            { active: profitType === "YEAR" }
+                          )}
+                          id="monthChart"
+                          onClick={() => {
+                            setProfitType("YEAR");
+                          }}
+                        >
+                          {" "}
+                          Year
                         </button>
                         <span
                           style={{
@@ -233,23 +282,23 @@ const Dashboard = () => {
                           className="   mb-2"
                         >
                           {" "}
-                          Profit 0.00 $
+                          Profit {profitSum}$
                         </span>
                       </div>
                       <Line
                         data={{
-                          labels: [
-                            "06/11/2020",
-                            "06/11/2020",
-                            "06/11/2020",
-                            "06/11/2020",
-                            "06/11/2020",
-                          ],
+                          labels: profitChartData.map((el: any) => {
+                            const time = new Date(el.createdAt);
+
+                            return `${time.getFullYear()}/${
+                              time.getMonth() + 1
+                            }/${time.getDate()}`;
+                          }),
 
                           datasets: [
                             {
                               label: "profit",
-                              data: [1, 4, 5, 2.5, 34],
+                              data: profitChartData.map((el: any) => el.profit),
                               backgroundColor: "transparent",
                               borderColor: "#3E932C",
                               color: "#fff",
@@ -264,7 +313,9 @@ const Dashboard = () => {
                           ],
                         }}
                         // @ts-ignore: Unreachable code error
-                        height="80%"
+                        // max-height={"100%"}
+                        height={"100%"}
+                        maxHeight={"250px"}
                         options={{
                           scales: {
                             xAxes: [
@@ -320,6 +371,8 @@ const Dashboard = () => {
                             display: false,
                           },
                           responsive: true,
+                          aspectRatio: 1,
+                          maintainAspectRatio: false,
                         }}
                       />
                     </div>

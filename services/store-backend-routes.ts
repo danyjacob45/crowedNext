@@ -22,5 +22,6 @@ export const storeBackEndRoutes = {
     profits: () => `${BASE_URL}/private/user/profits`,
 
     transactions: () => `${BASE_URL}/private/user/deposits`,
+    profitsFiltered: () => `${BASE_URL}/private/user/profit/filtered`,
   },
 };

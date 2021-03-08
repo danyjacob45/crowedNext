@@ -64,6 +64,12 @@ class _UserService {
     );
   };
 
+  profitsFiltered = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.profitsFiltered(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
   transactions = () => {
     return axios.post(
       storeBackEndRoutes.user.transactions(),
