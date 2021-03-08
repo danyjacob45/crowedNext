@@ -8,7 +8,7 @@ import Withdrawal from "../components/dashboard/withdrawal";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Pie } from "react-chartjs-2";
+import { Pie, Line } from "react-chartjs-2";
 import { AuthService } from "../services/user/user.http";
 
 const Yes = () => {
@@ -64,6 +64,7 @@ const Dashboard = () => {
   const [copyReferer2, setCopyReferer2] = useState(false);
   const [hasInvestment, setHasInvestment] = useState(false);
   const [hasReferrer, setHasReferrer] = useState(false);
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     if (window) {
@@ -84,6 +85,11 @@ const Dashboard = () => {
 
     AuthService.getTeam().then((res) => {
       setHasReferrer(res.data.referrers && res.data.referrers.length);
+    });
+    AuthService.transactions().then((res) => {
+      setTransactions(res.data.deposits.content);
+      // debugger;
+      // setHasReferrer(res.data.referrers && res.data.referrers.length);
     });
   }, []);
 
@@ -230,6 +236,92 @@ const Dashboard = () => {
                           Profit 0.00 $
                         </span>
                       </div>
+                      <Line
+                        data={{
+                          labels: [
+                            "06/11/2020",
+                            "06/11/2020",
+                            "06/11/2020",
+                            "06/11/2020",
+                            "06/11/2020",
+                          ],
+
+                          datasets: [
+                            {
+                              label: "profit",
+                              data: [1, 4, 5, 2.5, 34],
+                              backgroundColor: "transparent",
+                              borderColor: "#3E932C",
+                              color: "#fff",
+                              borderWidth: 2,
+                              pointBackgroundColor: "#3E932C",
+                              pointRadius: 2,
+                              fill: false,
+                              lineTension: 0,
+                              lineJoint: "round",
+                              spanGaps: true,
+                            },
+                          ],
+                        }}
+                        // @ts-ignore: Unreachable code error
+                        height="80%"
+                        options={{
+                          scales: {
+                            xAxes: [
+                              {
+                                fontColor: "#FFF",
+
+                                ticks: {
+                                  beginAtZero: true,
+                                  fontColor: "#FFF",
+                                },
+                              },
+                            ],
+
+                            yAxes: [
+                              {
+                                fontColor: "#FFF",
+                                ticks: {
+                                  callback: function (value: any) {
+                                    // return value.toFixed() + ' $'
+                                    return value + " $";
+                                  },
+
+                                  min: 0,
+                                  fontColor: "#FFF",
+
+                                  // max: 5,
+                                  // stepSize: 0.5
+                                },
+                              },
+                            ],
+                            x: {
+                              type: "time",
+                              time: {
+                                unit: "week",
+                              },
+                            },
+                          },
+                          tooltips: {
+                            mode: "label",
+
+                            // mode: 'label',
+                            callbacks: {
+                              label: function (tooltipItem, data) {
+                                return (
+                                  data["datasets"][0]["data"][
+                                    tooltipItem["index"]
+                                  ] + " $"
+                                );
+                              },
+                            },
+                          },
+                          legend: {
+                            display: false,
+                          },
+                          responsive: true,
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -366,7 +458,9 @@ const Dashboard = () => {
                   }}
                   className="withRankBg card bg-white"
                 >
-                  <div className="card-body    ">No status</div>
+                  <div className="card-body">
+                    {user?.plan ? user?.plan?.name : "No status"}
+                  </div>
                 </div>
               </div>
               <div className="col-md-3">
@@ -565,56 +659,30 @@ const Dashboard = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Investment</td>
-                          <td>123.00 $</td>
-                          <td>01/03/2021 16:03</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>300.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
-                        <tr>
-                          <td>Investment</td>
-                          <td>100.00 $</td>
-                          <td>26/02/2021 14:02</td>
-                        </tr>
+                        {transactions.map((el: any, i) => {
+                          const time = new Date(el.createdAt);
+
+                          return (
+                            <tr key={i}>
+                              <td>{el?.type}</td>
+                              <td>{el.finalAmount} $</td>
+                              <td>
+                                {/* 2020/10/24 06:22:AM */}
+                                {time.getFullYear() +
+                                  "/" +
+                                  (time.getMonth() + 1) +
+                                  "/" +
+                                  time.getDate() +
+                                  " "}
+                                {time.getHours() +
+                                  ":" +
+                                  time.getMinutes() +
+                                  ":" +
+                                  time.getSeconds()}
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
