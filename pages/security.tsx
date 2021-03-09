@@ -31,7 +31,9 @@ const security = () => {
   const set2fa = (e) => {
     e.preventDefault();
     AuthService.activateTwoFa({ code, enable: !store?.using2fa })
-      .then((res) => {})
+      .then((res) => {
+        console.log(res);
+      })
       .catch((err) => {
         console.log(err);
         setError(err.response.data);
