@@ -26,6 +26,10 @@ export const storeBackEndRoutes = {
 
     notifications: () => `${BASE_URL}/private/user/notifications`,
 
+    qrCode: () => `${BASE_URL}/private/user/mfa_captcha`,
+    activateTwoFa: () => `${BASE_URL}/private/user/mfa_state`,
+    twoFaLogin: () => `${BASE_URL}/open/auth/token/totp`,
+
     addAditWithdraw: () => `${BASE_URL}/private/user/withdraws/address`,
     getWithdraws: () => `${BASE_URL}/private/user/withdraws/address/list`,
     withdraw: () => `${BASE_URL}/private/user/withdraw`,

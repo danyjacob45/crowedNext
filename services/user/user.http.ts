@@ -121,6 +121,30 @@ class _UserService {
       }
     );
   };
+
+  qrCode = () => {
+    return axios.post(
+      storeBackEndRoutes.user.qrCode(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
+  activateTwoFa = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.activateTwoFa(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
+  twoFaLogin = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.twoFaLogin(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
+  // POST /api/v1/private/user/mfa_captcha
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),
