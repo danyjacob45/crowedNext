@@ -70,6 +70,7 @@ const Dashboard = () => {
   const [profitChartData, setProfitChartData] = useState([]);
   const [profitSum, setProfitSum] = useState<any>(0);
   const [allProfitSum, setAllProfitSum] = useState<any>(0);
+  const [investedSum, setInvestedSum] = useState<any>(0);
 
   useEffect(() => {
     if (window) {
@@ -94,25 +95,38 @@ const Dashboard = () => {
       });
 
     AuthService.getTeam().then((res) => {
-      setHasReferrer(res.data.referrers && res.data.referrers.length);
+      setHasReferrer(res.data.referrers && res.data.referrers["level-1"]);
     });
     AuthService.transactions().then((res) => {
       setTransactions(res.data.deposits.content);
       // debugger;
       // setHasReferrer(res.data.referrers && res.data.referrers.length);
     });
+
+    AuthService.profits().then((res) => {
+      let sum = 0;
+      res?.data?.profits?.map((el: any) => {
+        sum += el.amount;
+      });
+
+      setInvestedSum(sum);
+    });
   }, []);
 
   useEffect(() => {
-    AuthService.profitsFiltered({ type: profitType }).then((res) => {
-      setProfitChartData(res.data.profits);
-      let sum = 0;
-      res.data.profits.map((el: any) => {
-        sum += el.profit;
+    AuthService.profitsFiltered({ type: profitType })
+      .then((res) => {
+        setProfitChartData(res.data.profits);
+        let sum = 0;
+        res.data.profits.map((el: any) => {
+          sum += el.profit;
+        });
+        setProfitSum(Number(sum).toFixed(2));
+        // debugger;
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      setProfitSum(Number(sum).toFixed(2));
-      // debugger;
-    });
   }, [profitType]);
 
   const [openDepositModal, setOpenDepositModals] = useState(false);
@@ -170,17 +184,17 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
+              <div className="col-lg-3">
+                <span>Invested</span>
+                <div className="card bg-white border-0 invest-withBg">
+                  <div className="card-body">{investedSum} $</div>
+                </div>
+              </div>
 
               <div className="col-lg-3">
                 <span>Profit</span>
                 <div className="card bg-white profit-withBg border-0">
                   <div className="card-body">{allProfitSum} $</div>
-                </div>
-              </div>
-              <div className="col-lg-3">
-                <span>Invested</span>
-                <div className="card bg-white border-0 invest-withBg">
-                  <div className="card-body">0.00 $</div>
                 </div>
               </div>
 
@@ -289,6 +303,7 @@ const Dashboard = () => {
                         data={{
                           labels: profitChartData.map((el: any) => {
                             const time = new Date(el.createdAt);
+                            // debugger;
 
                             return `${time.getFullYear()}/${
                               time.getMonth() + 1

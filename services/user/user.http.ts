@@ -79,6 +79,32 @@ class _UserService {
       }
     );
   };
+
+  addAditWithdraw = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.addAditWithdraw(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
+  getWithdraws = () => {
+    return axios.post(
+      storeBackEndRoutes.user.getWithdraws(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
+  deleteWithdraws = (id: any) => {
+    return axios.post(
+      storeBackEndRoutes.user.deleteWithdraws(id),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),

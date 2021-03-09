@@ -23,5 +23,10 @@ export const storeBackEndRoutes = {
 
     transactions: () => `${BASE_URL}/private/user/deposits`,
     profitsFiltered: () => `${BASE_URL}/private/user/profit/filtered`,
+
+    addAditWithdraw: () => `${BASE_URL}/private/user/withdraws/address`,
+    getWithdraws: () => `${BASE_URL}/private/user/withdraws/address/list`,
+    deleteWithdraws: (id: any) =>
+      `${BASE_URL}/private/user/withdraws/address/remove/${id}`,
   },
 };
