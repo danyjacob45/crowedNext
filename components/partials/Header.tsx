@@ -3,7 +3,7 @@ import { User } from "../../interface";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { authLogout } from "../../store/auth/authActions";
-import { AuthService } from "../../services/auth/auth.http";
+import { AuthService } from "../../services/user/user.http";
 import { IUser } from "../../store/auth/authReducers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -21,10 +21,17 @@ type Props = {
 const Header = ({ sideBarCollapse }: Props) => {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
+  const [notifications, setNotifications] = useState([]);
   const [activeNotification, setActiveNotification] = useState("");
 
   useEffect(() => {
+    AuthService.notifications().then((res) => {
+      // console.log(res);
+      setNotifications(res.data.notifications);
+    });
+
     const closeMenu = () => setShowMenu(false);
+
     window.addEventListener("click", closeMenu);
     return () => {
       window.removeEventListener("click", closeMenu);
@@ -70,6 +77,7 @@ const Header = ({ sideBarCollapse }: Props) => {
             <Notification
               title="Message"
               active={activeNotification}
+              data={[]}
               Icons={() => (
                 <div
                   onClick={() => setActiveNotification("Message")}
@@ -83,6 +91,7 @@ const Header = ({ sideBarCollapse }: Props) => {
             <Notification
               title="Notifications"
               active={activeNotification}
+              data={notifications}
               Icons={() => (
                 <div
                   onClick={() => setActiveNotification("Notifications")}

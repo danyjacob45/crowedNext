@@ -111,6 +111,16 @@ class _UserService {
       ...axiosHeaderConfig(),
     });
   };
+
+  notifications = () => {
+    return axios.post(
+      storeBackEndRoutes.user.notifications(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),

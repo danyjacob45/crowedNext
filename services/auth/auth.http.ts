@@ -14,6 +14,7 @@ class _AuthService {
       }
     );
   };
+
   login = (data: ILogin) => {
     return axios.post(storeBackEndRoutes.auth.login(), data);
   };

@@ -5,9 +5,10 @@ interface Props {
   Icons: any;
   title: string;
   active: string;
+  data: any;
 }
 
-const notifications: React.FC<Props> = ({ Icons, title, active }) => {
+const notifications: React.FC<Props> = ({ Icons, title, active, data }) => {
   const [openNtification, setOpenNotification] = React.useState(false);
 
   React.useEffect(() => {
@@ -68,31 +69,49 @@ const notifications: React.FC<Props> = ({ Icons, title, active }) => {
         <div className="dropdown-content-body dropdown-scrollable">
           <ul
             style={{ overflowY: "scroll", maxHeight: "400px" }}
-            className="media-list py-4 pr-4"
+            className="media-list pl-0 "
           >
-            <li className="media pb-3">
-              <div className="media-body">
-                <div
-                  style={{ justifyContent: "space-between" }}
-                  className="d-flex align-items-start"
-                >
-                  <span className="text-dark ">
-                    Congrats, whitesaisss just joined your business!
-                  </span>
-                  <form
-                    method="get"
-                    action="http://local.mlm/user/delete-notification/69ff04d5-721b-43ae-aa38-f785c1f1d139"
+            {!data?.length ? (
+              <h4
+                className="p-4"
+                style={{ color: "#000", textAlign: "center" }}
+              >
+                not found
+              </h4>
+            ) : (
+              data.map((el, i) => {
+                return (
+                  <li
+                    style={{
+                      background: i % 2 == 0 ? "#afafb13b" : "#fff",
+                    }}
+                    className="media pb-3 px-3 py-2"
                   >
-                    <button
-                      type="submit"
-                      className="btn btn-danger btn-sm ml-1 mr-0"
-                    >
-                      <i className="fas fa-trash-alt"></i>
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </li>
+                    <div className="media-body">
+                      <div
+                        style={{ justifyContent: "space-between" }}
+                        className="d-flex align-items-start"
+                      >
+                        <span style={{ color: "#000" }} className=" ">
+                          {el.text}
+                        </span>
+                        <form
+                          method="get"
+                          action="http://local.mlm/user/delete-notification/69ff04d5-721b-43ae-aa38-f785c1f1d139"
+                        >
+                          <button
+                            type="submit"
+                            className="btn btn-danger btn-sm ml-1 mr-0"
+                          >
+                            <i className="fas fa-trash-alt">delete</i>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })
+            )}
           </ul>
         </div>
 
