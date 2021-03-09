@@ -105,6 +105,12 @@ class _UserService {
       }
     );
   };
+
+  withdraw = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.withdraw(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),
