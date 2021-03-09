@@ -140,7 +140,7 @@ class _UserService {
 
   twoFaLogin = (data: any) => {
     return axios.post(storeBackEndRoutes.user.twoFaLogin(), data, {
-      ...axiosHeaderConfig(),
+      // ...axiosHeaderConfig(),
     });
   };
 

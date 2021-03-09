@@ -19,20 +19,26 @@ const security = () => {
 
   const [qr, setQr] = useState();
   const [code, setCode] = useState();
-  const [error, setError] = useState();
+  const [error, setError] = useState<any>();
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
     AuthService.qrCode().then((res) => {
-      debugger;
+      // debugger;
       setQr(res.data.qr);
     });
   }, []);
 
+  useEffect(() => {
+    setDisable(store?.using2fa);
+  }, [store]);
+
   const set2fa = (e) => {
     e.preventDefault();
-    AuthService.activateTwoFa({ code, enable: !store?.using2fa })
+    AuthService.activateTwoFa({ code, enable: !disable })
       .then((res) => {
         console.log(res);
+        setDisable(!disable);
       })
       .catch((err) => {
         console.log(err);
@@ -127,7 +133,7 @@ const security = () => {
                           access with that code.
                         </p>
                         <span className="badge badge-pill badge-primary">
-                          {store?.using2fa ? "ACTIVE" : "Disabled"}
+                          {disable ? "ACTIVE" : "Disabled"}
                         </span>
                         <p>
                           1) Install an authentication app on your device. Any
@@ -163,6 +169,7 @@ const security = () => {
                                 value={code}
                                 onChange={(e: any) => {
                                   setCode(e.target.value);
+                                  setError(null);
                                 }}
                               />
                               <input
@@ -176,7 +183,7 @@ const security = () => {
                           {error && <div style={{ color: "red" }}>{error}</div>}
                           <div className="text-left">
                             <button type="submit" className="btn btn-neutral">
-                              {store?.using2fa ? "Disable" : "Enable"}
+                              {disable ? "Disable" : "Enable"}
                             </button>
                           </div>
                         </form>

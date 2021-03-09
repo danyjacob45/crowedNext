@@ -1,14 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AuthService } from "../services/user/user.http";
+import { setCurrentUser, setCurrentStore } from "../store/auth/authActions";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 function twofa() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
 
+  const history = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (history.query.username) {
+      setUsername(history.query.username);
+    }
+
+    if (history.query.password) {
+      setPassword(history.query.password);
+    }
+  }, [history.query]);
+
   const submitHandler = () => {
-    AuthService.twoFaLogin({ username, password, code });
+    AuthService.twoFaLogin({
+      username,
+      password,
+      code,
+    }).then((res) => {
+      dispatch(
+        setCurrentUser({
+          user: res.data.user,
+          token: res.data.token,
+        })
+      );
+
+      history.push("/user");
+    });
   };
+
+  console.log(history, "history");
 
   return (
     <div className="container registerContainer">
@@ -30,7 +61,7 @@ function twofa() {
             </div>
             <div className="panel-body">
               <div className="LoginHeader">
-                <a href="https://crowd-growing.com/">
+                <a href="/">
                   <img
                     src="https://crowd-growing.com/mlm-landing/static/media/pic-19.ce60862e.png"
                     alt="pic"
@@ -82,7 +113,7 @@ function twofa() {
                       <br />
                       <input
                         className="w-100"
-                        type="text"
+                        type="password"
                         name="code"
                         placeholder="password"
                         required=""

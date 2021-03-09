@@ -145,7 +145,10 @@ const home = () => {
         // debugger;
         // setServerError("incorrect user or password");
         if (err.response?.data?.errors?.MFA_SERVICE) {
-          history.push("/2fa");
+          history.push({
+            pathname: "/2fa",
+            query: { password: data.password, username: data.username },
+          });
         }
         if (err.response && err.response.data) {
           setServerError("incorrect user or password");
