@@ -30,6 +30,8 @@ export const storeBackEndRoutes = {
     activateTwoFa: () => `${BASE_URL}/private/user/mfa_state`,
     twoFaLogin: () => `${BASE_URL}/open/auth/token/totp`,
 
+    getFaq: () => `${BASE_URL}/open/faq`,
+
     addAditWithdraw: () => `${BASE_URL}/private/user/withdraws/address`,
     getWithdraws: () => `${BASE_URL}/private/user/withdraws/address/list`,
     withdraw: () => `${BASE_URL}/private/user/withdraw`,

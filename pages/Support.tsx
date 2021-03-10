@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { Button } from "../components/common/forms/button";
 import classnames from "classnames";
+import { AuthService } from "../services/user/user.http";
 
 const Dashboard = () => {
   const [openFaq, setOpenFaq] = useState(-1);
+  const [faqData, setFaqData] = useState([]);
+
+  useEffect(() => {
+    AuthService.getFaq().then((res) => {
+      // debugger;
+      console.log(res);
+      setFaqData(res.data.faq);
+    });
+  }, []);
 
   const Faq = [
     {
@@ -94,7 +104,7 @@ const Dashboard = () => {
                             <div className="col-lg-12">
                               <div className="section-title text-left"></div>
                               <div id="accordion" className="col-lg-12">
-                                {Faq.map((el, i) => {
+                                {faqData.map((el: any, i) => {
                                   return (
                                     <div
                                       key={i}
@@ -117,7 +127,7 @@ const Dashboard = () => {
                                             aria-expanded="false"
                                             aria-controls="collapse10"
                                           >
-                                            {el.title}
+                                            {el.question}
                                           </button>
                                         </h5>
                                       </div>
@@ -129,7 +139,14 @@ const Dashboard = () => {
                                         aria-labelledby="heading10"
                                         data-parent="#accordion"
                                       >
-                                        {el.text}
+                                        {/* {el.answer} */}
+
+                                        <div
+                                          className="Container px-5"
+                                          dangerouslySetInnerHTML={{
+                                            __html: el.answer,
+                                          }}
+                                        ></div>
                                       </div>
                                     </div>
                                   );

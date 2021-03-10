@@ -144,6 +144,18 @@ class _UserService {
     });
   };
 
+  getFaq = () => {
+    return axios.post(
+      storeBackEndRoutes.user.getFaq(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
+  // POST /api/v1
+
   // POST /api/v1/private/user/mfa_captcha
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
