@@ -522,11 +522,23 @@ const Dashboard = () => {
                 <div
                   style={{
                     height: " calc(100% - 54px)",
-                    background: "#DB1B4D !important ",
+                    overflow: "hidden",
+                    // background: "#DB1B4D !important ",
                   }}
-                  className="withRankBg card bg-white"
+                  className={classnames("withRankBg statusBg card ", {
+                    [user?.plan?.name]: user?.plan?.name,
+                  })}
                 >
-                  <div className="card-body">
+                  <img
+                    style={{
+                      position: "absolute",
+                      width: "61%",
+                      right: "-1px",
+                      opacity: "0.4",
+                    }}
+                    src="/assets/ranks/logoFFF.png "
+                  />
+                  <div className="card-body d-flex align-items-center justify-content-center">
                     {user?.plan ? user?.plan?.name : "No status"}
                   </div>
                 </div>
@@ -538,7 +550,10 @@ const Dashboard = () => {
                   style={{ height: " calc(100% - 54px)" }}
                   className="card withRankBg bg-white"
                 >
-                  <div className="card-body   "> no rank</div>
+                  <div className="card-body d-flex align-items-center justify-content-center  ">
+                    {" "}
+                    no rank
+                  </div>
                 </div>
               </div>
             </div>

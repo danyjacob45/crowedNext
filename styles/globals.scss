@@ -706,7 +706,22 @@ body {
 /* Founder   #004627 */
 
 .Starter.investTypes .card .card-body .centralLine {
-  background: #38973c;
+  background: #0077a5;
+}
+.statusBg.Beginner {
+  background: #38973c !important;
+}
+
+.statusBg.Advanced {
+  background: #0077a5 !important;
+}
+
+.statusBg.Pro {
+  background: #a72872 !important;
+}
+
+.statusBg.Founder {
+  background: #004627 !important;
 }
 
 .Starter.investTypes .card .card-body {
