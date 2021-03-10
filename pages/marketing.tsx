@@ -41,7 +41,10 @@ const marketing = () => {
                   <div className="card-body">
                     <ul>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_turkish.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_turkish.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -53,7 +56,10 @@ const marketing = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_german.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_german.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -65,7 +71,10 @@ const marketing = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_russian.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_russian.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -77,7 +86,10 @@ const marketing = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_vietnamese.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_vietnamese.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -89,7 +101,10 @@ const marketing = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -101,7 +116,10 @@ const marketing = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_english.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -113,7 +131,10 @@ const marketing = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_chinese.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_chinese.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -125,7 +146,10 @@ const marketing = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_polish.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_polish.pdf"
+                        >
                           <span
                             style={{
                               display: "inline-block",
@@ -133,6 +157,37 @@ const marketing = () => {
                             }}
                           >
                             Business Presentation PDF POL
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_estonian.pdf"
+                        >
+                          <span
+                            style={{
+                              display: "inline-block",
+                              minWidth: "156px",
+                            }}
+                          >
+                            Business Presentation PDF EST
+                          </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_latvian.pdf"
+                        >
+                          <span
+                            style={{
+                              display: "inline-block",
+                              minWidth: "156px",
+                            }}
+                          >
+                            Business Presentation PDF LVA
                           </span>
                         </a>
                       </li>
@@ -180,7 +235,10 @@ const marketing = () => {
                   <div className="card-body">
                     <ul>
                       <li>
-                        <a href="https://crowd-growing.com/public/mlm-landing/static/media/design_guide.pdf">
+                        <a
+                          target="_blank"
+                          href="https://crowd-growing.com/mlm-landing/static/media/design_guide.pdf"
+                        >
                           <span> Design Guide </span>{" "}
                         </a>
                       </li>
