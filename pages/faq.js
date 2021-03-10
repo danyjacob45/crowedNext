@@ -159,7 +159,7 @@ const Faq = () => {
                           href="#"
                           class="text-dark"
                         >
-                          <h6 class="mb-0"> {el.question} </h6>
+                          <h4 class="mb-0"> {el.question} </h4>
                         </a>
                         <a href="#" class="text-dark" />
                       </div>
