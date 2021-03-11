@@ -256,6 +256,19 @@ const Deposit: React.FC<Props> = ({
     );
   };
 
+  const [timeout, setTime] = useState<any>();
+
+  const chackTimout = (id, openDepositModal) => {
+    if (!openDepositModal) {
+      return clearTimeout(timeout);
+    }
+    setTime(
+      setTimeout(() => {
+        checkPayment(id);
+      }, 1500)
+    );
+  };
+
   const checkPayment = (id) => {
     if (!openDepositModal) {
       return;
@@ -265,11 +278,20 @@ const Deposit: React.FC<Props> = ({
         console.log(res);
         if (res.data.deposit.status === "COMPLETED") {
           setTransactionDone(true);
+          clearTimeout(timeout);
         } else {
           // debugger;
-          setTimeout(() => {
-            checkPayment(id);
-          }, 1500);
+          // debugger;
+          if (!openDepositModal) {
+            setTransactionDone(true);
+
+            clearTimeout(timeout);
+          }
+          {
+            // debugger;
+            chackTimout(id, openDepositModal);
+          }
+          // debugger;
         }
       })
       .catch((err) => {
@@ -303,11 +325,14 @@ const Deposit: React.FC<Props> = ({
   };
 
   const closeModal = () => {
+    // debugger;
+    clearTimeout(timeout);
     setTransactionDone(false);
     setOpenDepositModals(false);
     setOpenETH(false);
     setAmount(false);
   };
+
   const ethModal = () => {
     if (transactionDone) {
       return transactionDoneModal();
@@ -516,6 +541,7 @@ const Deposit: React.FC<Props> = ({
       maxWidth={openETH ? 500 : 600}
       showModal={openDepositModal}
       closeModal={() => {
+        closeModal();
         setOpenETH(false);
         setOpenDepositModals();
       }}
