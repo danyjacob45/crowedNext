@@ -81,7 +81,7 @@ const Sidebar = () => {
     },
     {
       icon: () => <img width="16" src="/assets/svges/Merchandise.svg" />,
-      href: "/Merchandise",
+      href: "#",
       title: "Merchandise (coming)",
     },
 
