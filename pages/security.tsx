@@ -11,6 +11,7 @@ import {
   setCurrentStore,
   updateUser,
 } from "../store/auth/authActions";
+import ModalContainer from "../components/common/modal/modalContainer";
 
 const security = () => {
   // @ts-ignore: Unreachable code error
@@ -21,6 +22,13 @@ const security = () => {
   const [code, setCode] = useState();
   const [error, setError] = useState<any>();
   const [disable, setDisable] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+
+  const [password, setPassword] = useState("");
+  const [passwordErrors, setPasswordErrors] = useState<any>({});
+  const [rePassword, setRePassword] = useState("");
+  const [loadPassword, setLoadPassword] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     AuthService.qrCode().then((res) => {
@@ -46,10 +54,84 @@ const security = () => {
       });
   };
 
+  const changePassword = () => {
+    if (password.length < 6) {
+      return setPasswordErrors({
+        ...passwordErrors,
+        password: "enter minimum 6 character",
+      });
+    } else if (password !== rePassword) {
+      return setPasswordErrors({
+        ...passwordErrors,
+        rePassword: "The password confirmation does not match.",
+      });
+    }
+    setLoadPassword(true);
+    AuthService.changePass({ oldPassword, password, rePassword }).then(
+      (res) => {
+        // debugger;
+        setLoadPassword(false);
+        if (res.data.reseted === false) {
+          return setPasswordErrors({
+            ...passwordErrors,
+            oldPassword: "wrong password",
+          });
+        }
+        setOpenModal(true);
+      }
+    );
+  };
+
   console.log(store, "storestore");
 
   return (
     <Layout title="financial">
+      <ModalContainer
+        maxWidth={600}
+        showModal={openModal}
+        closeModal={() => setOpenModal(false)}
+      >
+        <div
+          style={{ color: "#000", fontSize: "14px" }}
+          className="modal-content  "
+        >
+          <div
+            className="sweet-alert  showSweetAlert visible"
+            data-custom-className=""
+            data-has-cancel-button="false"
+            data-has-confirm-button="true"
+            data-allow-outside-click="false"
+            data-has-done-function="false"
+            data-animation="pop"
+            data-timer="null"
+            style={{ display: "inline-block" }}
+          >
+            <div className="sa-icon sa-success animate">
+              <span className="sa-line sa-tip animateSuccessTip"></span>
+              <span className="sa-line sa-long animateSuccessLong"></span>
+
+              <div className="sa-fix"></div>
+              <div className="sa-placeholder"></div>
+            </div>
+            <h2 style={{ color: "#000" }}>Success!</h2>
+            <p className="lead text-muted ">
+              The password was changed successfully
+            </p>
+
+            <div className="sa-button-container">
+              <div className="sa-confirm-button-container">
+                <button
+                  onClick={() => setOpenModal(false)}
+                  className="confirm btn btn-lg btn-primary"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ModalContainer>
+
       <div className="main-content">
         <div className="content-wrapper mt-4 row px-3">
           <div className="col-md-12">
@@ -59,8 +141,10 @@ const security = () => {
               </div>
               <div className="card-body">
                 <form
-                  action="https://crowd-growing.com/user/password"
-                  method="post"
+                  onSubmit={(e: any) => {
+                    e.preventDefault();
+                    changePassword();
+                  }}
                 >
                   <input
                     type="hidden"
@@ -74,10 +158,22 @@ const security = () => {
                     <div className="col-lg-10">
                       <input
                         type="password"
-                        name="current_password"
+                        name="oldPassword"
                         className="form-control"
+                        onChange={(e: any) => {
+                          setPasswordErrors({});
+
+                          setOldPassword(e.target.value);
+                        }}
+                        value={oldPassword}
                         // required=""
                       />
+
+                      {passwordErrors.oldPassword && (
+                        <div style={{ color: "red" }}>
+                          {passwordErrors.oldPassword}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="form-group row">
@@ -89,8 +185,19 @@ const security = () => {
                         type="password"
                         name="password"
                         className="form-control"
+                        onChange={(e: any) => {
+                          setPassword(e.target.value);
+                          setPasswordErrors({});
+                        }}
+                        value={password}
                         // required=""
                       />
+
+                      {passwordErrors.password && (
+                        <div style={{ color: "red" }}>
+                          {passwordErrors.password}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="form-group row">
@@ -100,15 +207,31 @@ const security = () => {
                     <div className="col-lg-10">
                       <input
                         type="password"
-                        name="password_confirmation"
+                        name="rePassword"
+                        onChange={(e: any) => {
+                          setPasswordErrors({});
+
+                          setRePassword(e.target.value);
+                        }}
+                        value={rePassword}
                         className="form-control"
+
                         // required=""
                       />
+                      {passwordErrors.rePassword && (
+                        <div style={{ color: "red" }}>
+                          {passwordErrors.rePassword}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="text-right">
-                    <button type="submit" className="btn btn-neutral">
-                      Submit
+                    <button
+                      disabled={loadPassword}
+                      type="submit"
+                      className="btn btn-neutral"
+                    >
+                      {loadPassword ? "load.." : "Submit"}
                     </button>
                   </div>
                 </form>

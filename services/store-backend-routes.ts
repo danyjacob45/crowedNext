@@ -31,6 +31,7 @@ export const storeBackEndRoutes = {
     twoFaLogin: () => `${BASE_URL}/open/auth/token/totp`,
 
     getFaq: () => `${BASE_URL}/open/faq`,
+    changePass: () => `${BASE_URL}/private/user/password/update`,
 
     addAditWithdraw: () => `${BASE_URL}/private/user/withdraws/address`,
     getWithdraws: () => `${BASE_URL}/private/user/withdraws/address/list`,

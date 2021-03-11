@@ -154,6 +154,14 @@ class _UserService {
     );
   };
 
+  changePass = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.changePass(), data, {
+      ...axiosHeaderConfig(),
+    });
+  };
+
+  // POST /api/v1/private/user/password/update
+
   // POST /api/v1
 
   // POST /api/v1/private/user/mfa_captcha
