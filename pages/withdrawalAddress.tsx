@@ -10,7 +10,7 @@ import { AuthService } from "../services/user/user.http";
 const withdrawalAddress = () => {
   const [addressList, setAddressList] = useState([]);
   const [showModal, setShowModal] = useState<any>("");
-  const [method, setMethod] = useState("BTC");
+  const [method, setMethod] = useState("BITCOIN");
   const [address, setAddress] = useState("");
   const [id, setId] = useState(0);
 
