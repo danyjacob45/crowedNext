@@ -23,6 +23,12 @@ export const storeBackEndRoutes = {
 
     transactions: () => `${BASE_URL}/private/user/deposits`,
     profitsFiltered: () => `${BASE_URL}/private/user/profit/filtered`,
+    deleteAllNotifications: () =>
+      `${BASE_URL}/private/user/notifications/delete-all`,
+    readAllNotifications: () =>
+      `${BASE_URL}/private/user/notifications/read-all`,
+    deleteNotification: (id: any) =>
+      `${BASE_URL}/private/user/notifications/delete/${id}`,
 
     notifications: () => `${BASE_URL}/private/user/notifications`,
 

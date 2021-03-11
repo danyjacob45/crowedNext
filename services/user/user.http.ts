@@ -160,6 +160,35 @@ class _UserService {
     });
   };
 
+  deleteNotification = (id: any) => {
+    return axios.post(
+      storeBackEndRoutes.user.deleteNotification(id),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
+  deleteAllNotifications = () => {
+    return axios.post(
+      storeBackEndRoutes.user.deleteAllNotifications(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
+  readAllNotifications = () => {
+    return axios.post(
+      storeBackEndRoutes.user.readAllNotifications(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
   // POST /api/v1/private/user/password/update
 
   // POST /api/v1

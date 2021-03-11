@@ -23,20 +23,87 @@ const Header = ({ sideBarCollapse }: Props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [activeNotification, setActiveNotification] = useState("");
+  // const [text, setText] = useState("");
 
-  useEffect(() => {
+  // const convertTZ = (date: any, tzString: any) => {
+  //   return new Date(
+  //     (typeof date === "string" ? new Date(date) : date).toLocaleString(
+  //       "en-US",
+  //       { timeZone: tzString }
+  //     )
+  //   );
+  // };
+
+  const getNotifications = () => {
     AuthService.notifications().then((res) => {
       // console.log(res);
-      setNotifications(res.data.notifications);
+      setNotifications(res.data.notifications.content);
     });
+  };
 
+  useEffect(() => {
+    getNotifications();
     const closeMenu = () => setShowMenu(false);
+
+    // var x = setInterval(function () {
+    //   var event = new Date();
+    //   var londonTime = new Date("2021/3/12 24:00");
+    //   console.log(
+    //     event.toLocaleString("en-GB", { timeZone: "Europe/London" }),
+    //     "london",
+    //     convertTZ(event, "Europe/London")
+    //   );
+    //   var now = convertTZ(event, "Europe/London").getTime();
+    //   var countDownDate = convertTZ(londonTime, "Europe/London").getTime();
+    //   var distance = countDownDate - now;
+    //   // debugger;
+    //   // var distance = distance / 1000;
+    //   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    //   var hours = Math.floor(
+    //     (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    //   );
+    //   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    //   setText(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+    //   // $("#Withdrawal").addClass("isDisabled")
+    //   // $("#paymentCountDown").removeClass("d-none")
+
+    //   if (distance < 0) {
+    //     clearInterval(x);
+    //     // $("#BalanceTimer").text("")
+    //     // $("#Withdrawal").removeClass("isDisabled")
+    //     // $("#paymentCountDown").addClass("d-none")
+    //   }
+    // }, 1000);
 
     window.addEventListener("click", closeMenu);
     return () => {
       window.removeEventListener("click", closeMenu);
+      // clearInterval(x);
     };
   }, []);
+
+  const deleteNotification = (id) => {
+    AuthService.deleteNotification(id).then((res) => {
+      console.log(res.data, "nnnnnnnnnnnnnnn");
+      getNotifications();
+    });
+  };
+
+  const deleteAllNotifications = () => {
+    AuthService.deleteAllNotifications().then((res) => {
+      console.log(res.data, "nnnnnnnnnnnnnnn");
+      getNotifications();
+    });
+  };
+
+  const readAllNotifications = () => {
+    AuthService.readAllNotifications().then((res) => {
+      console.log(res.data, "nnnnnnnnnnnnnnn");
+      getNotifications();
+    });
+  };
 
   const logout = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -55,6 +122,13 @@ const Header = ({ sideBarCollapse }: Props) => {
         }
       )}
     >
+      {/* <div
+        id="paymentCountDown"
+        className="timerPay"
+        style={{ left: "calc(50% )" }}
+      >
+        Next Payout in <strong id="BalanceTimer">{text} </strong>
+      </div> */}
       <div
         id="paymentCountDown"
         className="timerPay d-none"
@@ -78,6 +152,11 @@ const Header = ({ sideBarCollapse }: Props) => {
               title="Message"
               active={activeNotification}
               data={[]}
+              deleteItem={(id) => {
+                console.log(id);
+              }}
+              markAsRead={() => {}}
+              deleteAll={() => {}}
               Icons={() => (
                 <div
                   onClick={() => setActiveNotification("Message")}
@@ -92,6 +171,13 @@ const Header = ({ sideBarCollapse }: Props) => {
               title="Notifications"
               active={activeNotification}
               data={notifications}
+              markAsRead={() => {
+                readAllNotifications();
+              }}
+              deleteAll={() => {
+                deleteAllNotifications();
+              }}
+              deleteItem={(id: any) => deleteNotification(id)}
               Icons={() => (
                 <div
                   onClick={() => setActiveNotification("Notifications")}

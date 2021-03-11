@@ -6,9 +6,20 @@ interface Props {
   title: string;
   active: string;
   data: any;
+  deleteItem: Function;
+  deleteAll: Function;
+  markAsRead: Function;
 }
 
-const notifications: React.FC<Props> = ({ Icons, title, active, data }) => {
+const notifications: React.FC<Props> = ({
+  Icons,
+  title,
+  active,
+  data,
+  deleteItem,
+  deleteAll,
+  markAsRead,
+}) => {
   const [openNtification, setOpenNotification] = React.useState(false);
 
   React.useEffect(() => {
@@ -95,12 +106,13 @@ const notifications: React.FC<Props> = ({ Icons, title, active, data }) => {
                         <span style={{ color: "#000" }} className=" ">
                           {el.text}
                         </span>
-                        <form
-                          method="get"
-                          action="http://local.mlm/user/delete-notification/69ff04d5-721b-43ae-aa38-f785c1f1d139"
-                        >
+                        <form>
                           <button
                             type="submit"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              deleteItem(el.id);
+                            }}
                             className="btn btn-danger btn-sm ml-1 mr-0"
                           >
                             <i className="fas fa-trash-alt">delete</i>
@@ -127,14 +139,22 @@ const notifications: React.FC<Props> = ({ Icons, title, active, data }) => {
           className=" dropdown-content-footer   p-3 pl-5 text-center d-flex"
         >
           <a
-            href="http://local.mlm/user/not-delete-all"
+            href="#"
             style={{ backgroundColor: "transparent", color: "#afafb1" }}
             className="btn btn-sm ml-1 mr-0"
+            onClick={(e) => {
+              e.preventDefault();
+              deleteAll();
+            }}
           >
             <i className="fas fa-trash-alt"></i> Delete All
           </a>
           <a
-            href="http://local.mlm/user/markAsRead"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              markAsRead();
+            }}
             style={{ backgroundColor: "transparent", color: "#afafb1" }}
             className="btn  btn-sm ml-1 mr-0"
           >
