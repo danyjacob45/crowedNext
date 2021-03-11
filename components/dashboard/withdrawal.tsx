@@ -26,6 +26,7 @@ const Withdrawal: React.FC<Props> = ({
 
       if (res.data.address.length) {
         setAddress(res.data.address[0].address);
+        setDepositType(res.data.address[0].method);
       }
     });
   }, []);
@@ -109,7 +110,10 @@ const Withdrawal: React.FC<Props> = ({
     <ModalContainer
       maxWidth={600}
       showModal={openWithdrawalModal}
-      closeModal={() => setOpenWithdrawalModals(false)}
+      closeModal={() => {
+        setDone(false);
+        setOpenWithdrawalModals(false);
+      }}
     >
       <>
         {loader && (
