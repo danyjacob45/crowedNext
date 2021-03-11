@@ -23,6 +23,10 @@ const Withdrawal: React.FC<Props> = ({
   useEffect(() => {
     AuthService.getWithdraws().then((res) => {
       setAddressList(res.data.address);
+
+      if (res.data.address.length) {
+        setAddress(res.data.address[0].address);
+      }
     });
   }, []);
 
