@@ -21,6 +21,7 @@ type Props = {
 const Header = ({ sideBarCollapse }: Props) => {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [activeNotification, setActiveNotification] = useState("");
   // const [text, setText] = useState("");
@@ -38,6 +39,7 @@ const Header = ({ sideBarCollapse }: Props) => {
     AuthService.notifications().then((res) => {
       // console.log(res);
       setNotifications(res.data.notifications.content);
+      setNotificationCount(res.data.notifications.totalElements);
     });
   };
 
@@ -182,7 +184,7 @@ const Header = ({ sideBarCollapse }: Props) => {
                 <div
                   onClick={() => setActiveNotification("Notifications")}
                   className="notification bell show-count notify"
-                  data-count="0"
+                  data-count={notificationCount}
                 ></div>
               )}
             />
