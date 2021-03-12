@@ -32,6 +32,8 @@ export const storeBackEndRoutes = {
 
     notifications: () => `${BASE_URL}/private/user/notifications`,
 
+    teamStatistic: () => `${BASE_URL}/private/user/statistics`,
+
     qrCode: () => `${BASE_URL}/private/user/mfa_captcha`,
     activateTwoFa: () => `${BASE_URL}/private/user/mfa_state`,
     twoFaLogin: () => `${BASE_URL}/open/auth/token/totp`,

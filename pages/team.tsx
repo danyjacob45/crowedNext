@@ -8,6 +8,7 @@ import classnames from "classnames";
 const Dashboard = () => {
   const [team, setTeam] = useState<any>([]);
   const [activeTeam, setActiveTeam] = useState<any>(-1);
+  const [statistic, setStatistic] = useState<any>();
 
   useEffect(() => {
     AuthService.getTeam().then((res) => {
@@ -20,6 +21,11 @@ const Dashboard = () => {
 
       setTeam(teams);
       // debugger;
+    });
+
+    AuthService.teamStatistic().then((res) => {
+      console.log(res);
+      setStatistic(res.data.referrers);
     });
   }, []);
   return (
@@ -37,19 +43,19 @@ const Dashboard = () => {
               <div className="col-lg-3">
                 <span>Active Member</span>
                 <div className="card bg-white border-0">
-                  <div className="card-body">0</div>
+                  <div className="card-body">{statistic?.activeMembers}</div>
                 </div>
               </div>
               <div className="col-lg-3">
                 <span>Turnover</span>
                 <div className="card bg-white border-0">
-                  <div className="card-body">0.00 $</div>
+                  <div className="card-body">{statistic?.turnOver} $</div>
                 </div>
               </div>
               <div className="col-lg-3">
                 <span>Est. Monthly Income</span>
                 <div className="card bg-white border-0">
-                  <div className="card-body">0 $</div>
+                  <div className="card-body">{statistic?.monthlyIncome} $</div>
                 </div>
               </div>
             </div>
@@ -58,26 +64,32 @@ const Dashboard = () => {
               <div className="col-lg-3">
                 <span>Direct Commission</span>
                 <div className="card bg-white border-0">
-                  <div className="card-body">0.00 $</div>
+                  <div className="card-body">
+                    {statistic?.directCommissions.toFixed(2)} $
+                  </div>
                 </div>
               </div>
               <div className="col-lg-3">
                 <span>Residual Commission</span>
                 <div className="card bg-white border-0">
-                  <div className="card-body">0.00 $</div>
+                  <div className="card-body">
+                    {statistic?.residualCommissions} $
+                  </div>
                 </div>
               </div>
               <div className="col-lg-3">
                 <span>Total Earned</span>
                 <div className="card bg-white border-0">
-                  <div className="card-body">0.00 $</div>
+                  <div className="card-body">
+                    {statistic?.totalEarned.toFixed(2)} $
+                  </div>
                 </div>
               </div>
               <div className="col-lg-3">
                 <span>Rank</span>
                 <div className="card bg-white border-0">
                   <div className="card-body d-flex align-items-center justify-content-between">
-                    No Rank
+                    {statistic?.rank}
                   </div>
                 </div>
               </div>

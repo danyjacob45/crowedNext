@@ -189,6 +189,18 @@ class _UserService {
       }
     );
   };
+
+  teamStatistic = () => {
+    return axios.post(
+      storeBackEndRoutes.user.teamStatistic(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
+  // /private/user/statistics
   // POST /api/v1/private/user/password/update
 
   // POST /api/v1
