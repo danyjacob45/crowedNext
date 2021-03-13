@@ -7,6 +7,8 @@ import classnames from "classnames";
 
 const Dashboard = () => {
   const [team, setTeam] = useState<any>([]);
+  const [directComissions, setDirectComissions] = useState<any>([]);
+  const [openDirectComissions, setOpenDirectComissions] = useState<any>(false);
   const [activeTeam, setActiveTeam] = useState<any>(-1);
   const [statistic, setStatistic] = useState<any>();
 
@@ -18,8 +20,9 @@ const Dashboard = () => {
         teams.push(res.data.referrers[key]);
       }
       // debugger;
-      debugger;
+      // debugger;
       setTeam(teams);
+      setDirectComissions(res.data.directComissions);
       // debugger;
     });
 
@@ -107,13 +110,17 @@ const Dashboard = () => {
                 return ( */}
               <table className="table table-flush" id="basic">
                 <thead
-                // onClick={() => {
-                //   if (activeTeam === i) {
-                //     setActiveTeam(null);
-                //   } else {
-                //     setActiveTeam(i);
-                //   }
-                // }}
+                  // onClick={() => {
+                  //   if (activeTeam === i) {
+                  //     setActiveTeam(null);
+                  //   } else {
+                  //     setActiveTeam(i);
+                  //   }
+                  // }}
+                  onClick={() => {
+                    setOpenDirectComissions(!openDirectComissions);
+                    // debugger;
+                  }}
                 >
                   <tr>
                     <th>
@@ -137,12 +144,40 @@ const Dashboard = () => {
                     </th>
                     <th className="bold12">{1} LEVEL</th>
                     <th className="bold12">{0} MEMBER</th>
-                    <th className="bold12">0.00 $ TURN OVER</th>
-                    <th className="bold12">0.00 $ EARNED</th>
+                    <th className="bold12">
+                      {directComissions.length &&
+                        directComissions
+                          .reduce((sum: any, item: any) => {
+                            // debugger;
+                            if (item.investedAmount) {
+                              return sum.investedAmount + item.investedAmount;
+                            }
+                            return sum;
+                          })
+                          .toFixed(2)}
+                      $ TURN OVER
+                    </th>
+                    <th className="bold12">
+                      {directComissions.length &&
+                        directComissions
+                          .reduce((sum: any, item: any) => {
+                            // debugger;
+                            if (item.earned) {
+                              return sum.earned + item.earned;
+                            }
+                            return sum;
+                          })
+                          .toFixed(2)}
+                      $ EARNED
+                    </th>
                   </tr>
                 </thead>
 
-                <tbody className="d-none">
+                <tbody
+                  className={classnames({
+                    "d-none": !openDirectComissions,
+                  })}
+                >
                   <tr>
                     <td></td>
 
@@ -151,16 +186,22 @@ const Dashboard = () => {
                     <th className="bold12">Invested Amount</th>
                     <th className="bold12">Earned</th>
                   </tr>
+                  {directComissions.map((el) => {
+                    return (
+                      <tr key={"i"}>
+                        <td></td>
+
+                        <td>{el.realUsername} </td>
+                        <td>{el.email}</td>
+                        <td>{el.investedAmount} $</td>
+                        <td>{el.earned}$</td>
+                      </tr>
+                    );
+                  })}
+
                   {/* {el.map((user, i) => { */}
                   {/* return ( */}
-                  <tr key={"i"}>
-                    <td></td>
 
-                    <td>{"user.realUsername"} </td>
-                    <td>{"user.email"}</td>
-                    <td>100.00 $</td>
-                    <td>3.83$</td>
-                  </tr>
                   {/* ); */}
                   {/* })} */}
                 </tbody>
