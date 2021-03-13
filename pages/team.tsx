@@ -18,7 +18,7 @@ const Dashboard = () => {
         teams.push(res.data.referrers[key]);
       }
       // debugger;
-
+      debugger;
       setTeam(teams);
       // debugger;
     });
@@ -213,8 +213,30 @@ const Dashboard = () => {
                         </th>
                         <th className="bold12">{i + 1} LEVEL</th>
                         <th className="bold12">{el.length} MEMBER</th>
-                        <th className="bold12">400.00 $ TURN OVER</th>
-                        <th className="bold12">15.30 $ EARNED</th>
+                        <th className="bold12">
+                          {el
+                            .reduce((sum: any, item: any) => {
+                              // debugger;
+                              if (item.investedAmount) {
+                                return sum.investedAmount + item.investedAmount;
+                              }
+                              return sum;
+                            })
+                            .toFixed(2)}
+                          $ TURN OVER
+                        </th>
+                        <th className="bold12">
+                          {el
+                            .reduce((sum: any, item) => {
+                              // debugger;
+                              if (item.earned) {
+                                return sum.earned + item.earned;
+                              }
+                              return sum;
+                            })
+                            .toFixed(2)}{" "}
+                          $ EARNED
+                        </th>
                       </tr>
                     </thead>
 
@@ -236,8 +258,18 @@ const Dashboard = () => {
 
                             <td>{user.realUsername} </td>
                             <td>{user.email}</td>
-                            <td>100.00 $</td>
-                            <td>3.83$</td>
+                            <td>
+                              {user?.investedAmount
+                                ? user?.investedAmount.toFixed(2)
+                                : user?.investedAmount}{" "}
+                              $
+                            </td>
+                            <td>
+                              {user?.earned
+                                ? user?.earned?.toFixed(2)
+                                : user?.earned}
+                              $
+                            </td>
                           </tr>
                         );
                       })}
