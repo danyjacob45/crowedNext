@@ -96,7 +96,7 @@ const Registration = ({
             "is-invalid": errors.referrer || serverError.referrer,
           })}
           placeholder="Sponsor Name"
-          ref={register({ required: true })}
+          ref={register({ required: false })}
         />
         <div class="invalid-feedback">
           {serverError.referrer || "Sponsor Name is required"}
@@ -268,10 +268,10 @@ const Registration = ({
       <div class="checkBoxWrapper ">
         <label>
           <input
-            name="TandC"
+            name="tandC"
             type="checkbox"
             className={classnames("", {
-              hasError: errors.TandC,
+              hasError: errors.tandC,
             })}
             ref={register({
               required: true,
@@ -284,10 +284,10 @@ const Registration = ({
         <br />
         <label>
           <input
-            name="Police"
+            name="police"
             type="checkbox"
             className={classnames("", {
-              hasError: errors.Police,
+              hasError: errors.police,
             })}
             ref={register({
               required: true,
@@ -300,10 +300,10 @@ const Registration = ({
 
         <label>
           <input
-            name="Citizen"
+            name="citizen"
             type="checkbox"
             className={classnames("", {
-              hasError: errors.Citizen,
+              hasError: errors.citizen,
             })}
             ref={register({
               required: true,
