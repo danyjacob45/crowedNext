@@ -321,18 +321,16 @@ const home = ({ children }) => {
                     <li>
                       <a href="/">About Us</a>
                     </li>
-                    <li>
-                      <a href="/">Goals and Vision</a>
-                    </li>
+
                     <li>
                       <a href="/">Business Model</a>
                     </li>
                     <li>
-                      <a href="/">Life Cycle </a>
+                      <a href="/">Strategy </a>
                     </li>
                     <li>
                       <a href="/">
-                        Locations
+                        team
                         {/* How to make Profits */}
                       </a>
                     </li>
@@ -340,10 +338,7 @@ const home = ({ children }) => {
                       <a href="/">Products</a>
                     </li> */}
                     <li>
-                      <a href="/"> Our Team</a>
-                    </li>
-                    <li>
-                      <a href="/">Roadmap</a>
+                      <a href="/">locations</a>
                     </li>
                   </ul>
                 )}
