@@ -38,8 +38,10 @@ const Header = ({ sideBarCollapse }: Props) => {
   const getNotifications = () => {
     AuthService.notifications().then((res) => {
       // console.log(res);
-      setNotifications(res.data.notifications.content);
-      setNotificationCount(res.data.notifications.totalElements);
+      setNotifications(res.data.notifications);
+      setNotificationCount(
+        res.data.notifications.filter((el) => !el.seen).length
+      );
     });
   };
 

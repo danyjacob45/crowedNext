@@ -94,6 +94,7 @@ const notifications: React.FC<Props> = ({
                 return (
                   <li
                     style={{
+                      opacity: el.seen ? "0.6" : "1",
                       background: i % 2 == 0 ? "#afafb13b" : "#fff",
                     }}
                     className="media pb-3 px-3 py-2"
