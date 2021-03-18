@@ -1,13 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import { Card, Nav } from "react-bootstrap";
 import { Button } from "../components/common/forms/button";
 import Deposit from "../components/dashboard/deposit";
 import Withdrawal from "../components/dashboard/withdrawal";
+import { AuthService } from "../services/user/user.http";
+import classnames from "classnames";
 
 const financial = () => {
   const [openDepositModal, setOpenDepositModals] = useState(false);
+  const [activeTab, setActiveTab] = useState<any>(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+  const [team, setTeam] = useState<any>([]);
+  const [directComissions, setDirectComissions] = useState<any>([]);
+
+  useEffect(() => {
+    AuthService.transactions().then((res) => {
+      setTransactions(res.data.deposits.content);
+      // debugger;
+      // setHasReferrer(res.data.referrers && res.data.referrers.length);
+    });
+
+    AuthService.getTeam().then((res) => {
+      let teams: any = [];
+
+      for (const key in res.data.referrers) {
+        teams.push(res.data.referrers[key]);
+      }
+      // debugger;
+      // debugger;
+      setTeam(teams);
+      setDirectComissions(res.data.directComissions);
+      // debugger;
+    });
+  }, []);
 
   return (
     <Layout title="financial">
@@ -136,15 +163,7 @@ const financial = () => {
               {/* {team.map((el, i) => {
                 return ( */}
               <table className="table table-flush" id="basic">
-                <thead
-                // onClick={() => {
-                //   if (activeTeam === i) {
-                //     setActiveTeam(null);
-                //   } else {
-                //     setActiveTeam(i);
-                //   }
-                // }}
-                >
+                <thead>
                   <tr>
                     <th></th>
                     <th className="bold12">TYPE </th>
@@ -154,13 +173,13 @@ const financial = () => {
                   </tr>
                 </thead>
                 <thead
-                // onClick={() => {
-                //   if (activeTeam === i) {
-                //     setActiveTeam(null);
-                //   } else {
-                //     setActiveTeam(i);
-                //   }
-                // }}
+                  onClick={() => {
+                    if (activeTab === "deposit") {
+                      setActiveTab(null);
+                    } else {
+                      setActiveTab("deposit");
+                    }
+                  }}
                 >
                   <tr>
                     <th>
@@ -183,37 +202,149 @@ const financial = () => {
                       </svg>
                     </th>
                     <th className="bold12">Deposit</th>
-                    <th className="bold12">{0} MEMBER</th>
+                    <th className="bold12">
+                      {transactions.length &&
+                        // @ts-ignore: Unreachable code error
+                        transactions?.reduce((sum: any, el: any) => {
+                          if (sum.finalAmount) {
+                            return sum.finalAmount + el.finalAmount;
+                          }
+                          return sum + el.finalAmount;
+                        })}{" "}
+                      $
+                    </th>
                     <th className="bold12">ETH</th>
-                    <th className="bold12">02/12/2020 12:12</th>
+                    <th className="bold12">15/3/2021 12:12</th>
                   </tr>
                 </thead>
 
-                <tbody className="d-none">
+                <tbody
+                  style={{
+                    display: activeTab === "deposit" ? "contents" : "none",
+                  }}
+                >
+                  {transactions.map((el: any, i) => {
+                    const time = new Date(el.createdAt);
+                    return (
+                      <tr key={i}>
+                        <td></td>
+
+                        <td>{el?.type} </td>
+                        <td>{el.finalAmount} $</td>
+                        <td>{el.depositMethod}</td>
+                        <td>
+                          {" "}
+                          {time.getFullYear() +
+                            "/" +
+                            (time.getMonth() + 1) +
+                            "/" +
+                            time.getDate() +
+                            " "}
+                          {time.getHours() +
+                            ":" +
+                            time.getMinutes() +
+                            ":" +
+                            time.getSeconds()}{" "}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+                {/* /////////// */}
+                {/* //////////////////////////// */}
+                <thead
+                  onClick={() => {
+                    if (activeTab === "COMMISSION") {
+                      setActiveTab(null);
+                    } else {
+                      setActiveTab("COMMISSION");
+                    }
+                  }}
+                >
                   <tr>
-                    <td></td>
-
-                    <th className="bold12">Username</th>
-                    <th className="bold12">Email Address</th>
-                    <th className="bold12">Invested Amount</th>
-                    <th className="bold12">Earned</th>
+                    <th>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="plus-circle"
+                        role="img"
+                        width="11"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        className="svg-inline--fa fa-plus-circle fa-w-16 fa-2x"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"
+                          className=""
+                        ></path>
+                      </svg>
+                    </th>
+                    <th className="bold12">Direct Commission</th>
+                    <th className="bold12">
+                      {directComissions.length &&
+                        directComissions
+                          .reduce((sum: any, item: any) => {
+                            // debugger;
+                            if (item.investedAmount) {
+                              return sum.investedAmount + item.investedAmount;
+                            }
+                            return sum;
+                          })
+                          .toFixed(2)}{" "}
+                      $
+                    </th>
+                    <th className="bold12">
+                      Earned $
+                      {directComissions.length &&
+                        directComissions
+                          .reduce((sum: any, item: any) => {
+                            // debugger;
+                            if (item.earned) {
+                              return sum.earned + item.earned;
+                            }
+                            return sum;
+                          })
+                          .toFixed(2)}
+                    </th>
+                    <th className="bold12">15/3/2021 12:12</th>
                   </tr>
-                  {/* {el.map((user, i) => { */}
-                  {/* return ( */}
-                  <tr key={"i"}>
-                    <td></td>
+                </thead>
 
-                    <td>{"user.realUsername"} </td>
-                    <td>{"user.email"}</td>
-                    <td>100.00 $</td>
-                    <td>3.83$</td>
-                  </tr>
-                  {/* ); */}
-                  {/* })} */}
+                <tbody
+                  style={{
+                    display: activeTab === "COMMISSION" ? "contents" : "none",
+                  }}
+                >
+                  {directComissions.map((el: any, i) => {
+                    const time = new Date(el.createdAt);
+                    return (
+                      <tr key={i}>
+                        <td></td>
+
+                        <td>Direct Commission </td>
+                        <td>{el.investedAmount}</td>
+                        <td>{el.earned}</td>
+                        <td>
+                          {" "}
+                          {time.getFullYear() +
+                            "/" +
+                            (time.getMonth() + 1) +
+                            "/" +
+                            time.getDate() +
+                            " "}
+                          {time.getHours() +
+                            ":" +
+                            time.getMinutes() +
+                            ":" +
+                            time.getSeconds()}{" "}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
-              {/* );
-              })} */}
             </div>
           </div>
         </div>
