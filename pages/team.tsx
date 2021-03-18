@@ -19,6 +19,8 @@ const Dashboard = () => {
       for (const key in res.data.referrers) {
         teams.push(res.data.referrers[key]);
       }
+
+      // debugger;
       // debugger;
       // debugger;
       setTeam(teams);
@@ -31,6 +33,67 @@ const Dashboard = () => {
       setStatistic(res.data.referrers);
     });
   }, []);
+
+  const getSum = (arr, key) => {
+    let acumulator = 0;
+
+    arr.map((el) => {
+      if (el[key]) {
+        acumulator += el[key];
+      }
+    });
+
+    return acumulator;
+  };
+
+  const renderEmptyLvs = () => {
+    let lng = 8 - team.length;
+    // debugger;
+    let arr = new Array(lng).fill("2");
+
+    return arr.map((el, i) => {
+      console.log(el);
+      return (
+        <table className="table table-flush" id="basic">
+          <thead
+            onClick={() => {
+              if (activeTeam === i + team.length + 1) {
+                setActiveTeam(null);
+              } else {
+                setActiveTeam(i + team.length + 1);
+              }
+            }}
+          >
+            <tr>
+              <th>
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fas"
+                  data-icon="plus-circle"
+                  role="img"
+                  width="11"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  className="svg-inline--fa fa-plus-circle fa-w-16 fa-2x"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"
+                    className=""
+                  ></path>
+                </svg>
+              </th>
+              <th className="bold12">{i + team.length + 1} LEVEL</th>
+              <th className="bold12">{0} MEMBER</th>
+              <th className="bold12">0 $ TURN OVER</th>
+              <th className="bold12">0 $ EARNED</th>
+            </tr>
+          </thead>
+        </table>
+      );
+    });
+  };
   return (
     <Layout title="Dashboard">
       <div className="main-content">
@@ -146,29 +209,22 @@ const Dashboard = () => {
                     <th className="bold12">{0} MEMBER</th>
                     <th className="bold12">
                       {directComissions.length &&
-                        directComissions
-                          .reduce((sum: any, item: any) => {
-                            // debugger;
-                            if (item.investedAmount) {
-                              return sum.investedAmount + item.investedAmount;
-                            }
-                            return sum;
-                          })
-                          ?.toFixed(2)}
+                        // directComissions
+                        //   .reduce((sum: any, item: any) => {
+                        //     // debugger;
+                        //     if (!item.investedAmount || !sum.investedAmount) {
+                        //       return 0;
+                        //     }
+                        //     if (item.investedAmount) {
+                        //       return sum.investedAmount + item.investedAmount;
+                        //     }
+                        //     return sum + item.investedAmount;
+                        //   })
+                        getSum(directComissions, "investedAmount").toFixed(2)}
                       $ TURN OVER
                     </th>
                     <th className="bold12">
-                      {directComissions.length &&
-                        directComissions
-                          .reduce((sum: any, item: any) => {
-                            // debugger;
-                            if (item.earned) {
-                              return sum.earned + item.earned;
-                            }
-                            return sum;
-                          })
-                          ?.toFixed(2)}
-                      $ EARNED
+                      {getSum(directComissions, "earned").toFixed(2)}$ EARNED
                     </th>
                   </tr>
                 </thead>
@@ -221,6 +277,7 @@ const Dashboard = () => {
                 <h3 className="mb-0">Residual Bonus</h3>
               </div>
               {team.map((el, i) => {
+                // debugger;
                 return (
                   <table className="table table-flush" id="basic">
                     <thead
@@ -255,19 +312,23 @@ const Dashboard = () => {
                         <th className="bold12">{i + 1} LEVEL</th>
                         <th className="bold12">{el.length} MEMBER</th>
                         <th className="bold12">
-                          {el
-                            .reduce((sum: any, item: any) => {
-                              // debugger;
-                              if (item.investedAmount) {
-                                return sum.investedAmount + item.investedAmount;
-                              }
-                              return sum;
-                            })
-                            ?.toFixed(2)}
+                          {
+                            // el
+                            //   .reduce((sum: any, item: any) => {
+                            //     // debugger;
+                            //     if (item.investedAmount) {
+                            //       return sum.investedAmount + item.investedAmount;
+                            //     }
+                            //     return sum;
+                            //   })
+                            el &&
+                              el.length &&
+                              getSum(el, "investedAmount").toFixed(2)
+                          }
                           $ TURN OVER
                         </th>
                         <th className="bold12">
-                          {el
+                          {/* {el
                             .reduce((sum: any, item) => {
                               // debugger;
                               if (item.earned) {
@@ -275,7 +336,10 @@ const Dashboard = () => {
                               }
                               return sum;
                             })
-                            .toFixed(2)}{" "}
+                            .toFixed(2)}{" "} */}
+                          {el &&
+                            el.length &&
+                            getSum(directComissions, "earned").toFixed(2)}
                           $ EARNED
                         </th>
                       </tr>
@@ -318,6 +382,7 @@ const Dashboard = () => {
                   </table>
                 );
               })}
+              {renderEmptyLvs()}
             </div>
 
             {/* /////// */}
