@@ -292,7 +292,7 @@ const financial = () => {
                             }
                             return sum;
                           })
-                          .toFixed(2)}{" "}
+                          ?.toFixed(2)}{" "}
                       $
                     </th>
                     <th className="bold12">
@@ -306,7 +306,7 @@ const financial = () => {
                             }
                             return sum;
                           })
-                          .toFixed(2)}
+                          ?.toFixed(2)}
                     </th>
                     <th className="bold12">15/3/2021 12:12</th>
                   </tr>

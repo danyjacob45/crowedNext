@@ -87,7 +87,7 @@ const Dashboard = () => {
         res.data.profits.map((el: any) => {
           sum += el.profit;
         });
-        setAllProfitSum(Number(sum).toFixed(2));
+        setAllProfitSum(Number(sum)?.toFixed(2));
         // setInvestments(res.data.profits);
       })
       .catch((err) => {
@@ -121,7 +121,7 @@ const Dashboard = () => {
         res.data.profits.map((el: any) => {
           sum += el.profit;
         });
-        setProfitSum(Number(sum).toFixed(2));
+        setProfitSum(Number(sum)?.toFixed(2));
         // debugger;
       })
       .catch((err) => {
@@ -153,7 +153,7 @@ const Dashboard = () => {
                     className="card-body dashboard-balance dashboard-balance-withBg"
                     style={{ position: "relative" }}
                   >
-                    {Number(user?.balance?.spendable).toFixed(2)} $
+                    {Number(user?.balance?.spendable)?.toFixed(2)} $
                     <a
                       data-toggle="modal"
                       // onclick="openInvoice()"

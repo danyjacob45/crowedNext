@@ -68,7 +68,7 @@ const Dashboard = () => {
                 <span>Direct Commission</span>
                 <div className="card bg-white border-0">
                   <div className="card-body">
-                    {statistic?.directCommissions.toFixed(2)} $
+                    {statistic?.directCommissions?.toFixed(2)} $
                   </div>
                 </div>
               </div>
@@ -154,7 +154,7 @@ const Dashboard = () => {
                             }
                             return sum;
                           })
-                          .toFixed(2)}
+                          ?.toFixed(2)}
                       $ TURN OVER
                     </th>
                     <th className="bold12">
@@ -167,7 +167,7 @@ const Dashboard = () => {
                             }
                             return sum;
                           })
-                          .toFixed(2)}
+                          ?.toFixed(2)}
                       $ EARNED
                     </th>
                   </tr>
@@ -263,7 +263,7 @@ const Dashboard = () => {
                               }
                               return sum;
                             })
-                            .toFixed(2)}
+                            ?.toFixed(2)}
                           $ TURN OVER
                         </th>
                         <th className="bold12">
@@ -301,7 +301,7 @@ const Dashboard = () => {
                             <td>{user.email}</td>
                             <td>
                               {user?.investedAmount
-                                ? user?.investedAmount.toFixed(2)
+                                ? user?.investedAmount?.toFixed(2)
                                 : user?.investedAmount}{" "}
                               $
                             </td>
