@@ -26,7 +26,7 @@ class _AuthService {
   register = (data: IRegister) => {
     return axios.post(storeBackEndRoutes.auth.register(), {
       ...data,
-      password_confirmation: data.password,
+      // password_confirmation: data.password,
     });
   };
   // registerStepTwo = (data) => {

@@ -268,10 +268,10 @@ const Registration = ({
       <div class="checkBoxWrapper ">
         <label>
           <input
-            name="tandC"
+            name="tendC"
             type="checkbox"
             className={classnames("", {
-              hasError: errors.tandC,
+              hasError: errors.tendC,
             })}
             ref={register({
               required: true,
