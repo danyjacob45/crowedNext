@@ -96,7 +96,7 @@ const Registration = ({
             "is-invalid": errors.referrer || serverError.referrer,
           })}
           placeholder="Sponsor Name"
-          ref={register({ required: false })}
+          ref={register({ required: true })}
         />
         <div class="invalid-feedback">
           {serverError.referrer || "Sponsor Name is required"}
