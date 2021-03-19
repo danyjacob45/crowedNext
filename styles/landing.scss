@@ -2179,8 +2179,11 @@ a:hover {
 .newFooter {
   background: #ccc;
   a {
-    color: #6b6b6b;
+    color: #2d2d2d;
     font-size: 14px;
+  }
+  span {
+    color: #2d2d2d;
   }
 }
 .registerContainer .checkBoxWrapper input {
