@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import classnames from "classnames";
 import axios from "axios";
 import { isEmail } from "./utils";
-// import { useHistory } from "react-router";
+import { useRouter } from "next/router";
 // import { Link } from "next/link";
+import { useDispatch } from "react-redux";
+import { setCurrentUser, setCurrentStore } from "../store/auth/authActions";
+
 import Link from "next/link";
 import { AuthService } from "../services/auth/auth.http";
 
@@ -14,6 +17,8 @@ const Registration = ({
   setRegAuthModal,
   defaultValue,
 }) => {
+  let history = useRouter();
+
   const [serverError, setServerError] = React.useState({});
   const [loading, setLoading] = React.useState(false);
   const {
@@ -26,6 +31,8 @@ const Registration = ({
     getValues,
   } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmitRegister = (data) => {
     setLoading(true);
 
@@ -34,6 +41,14 @@ const Registration = ({
         // window.location.href = "http://crowd-growing.com/user/dashboard";
         // "proxy": "http://51.255.211.219:8080",
         // setRegisterSuccessModal(true)
+        dispatch(
+          setCurrentUser({
+            user: res.data.user,
+            token: res.data.token,
+          })
+        );
+
+        history.push("/user?isFirst=true");
         setRegAuthModal(null);
         setLoading(false);
       })
@@ -66,7 +81,6 @@ const Registration = ({
     setServerError({});
   };
 
-  //   let history = useHistory();
   return (
     <form
       onSubmit={handleSubmit(onSubmitRegister)}

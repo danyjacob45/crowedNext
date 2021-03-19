@@ -58,8 +58,9 @@ const No = () => {
 
 const Dashboard = () => {
   const { user } = useSelector((store: any) => store.auth);
+  let history = useRouter();
+
   useCheckAuth();
-  const route = useRouter();
   const [origin, setOrigin] = useState("");
   const [copyReferer, setCopyReferer] = useState(false);
   const [copyReferer2, setCopyReferer2] = useState(false);
@@ -132,6 +133,8 @@ const Dashboard = () => {
   const [openDepositModal, setOpenDepositModals] = useState(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
 
+  console.log(history, "historyhistoryhistory");
+
   return (
     <Layout title="Dashboard">
       <Deposit
@@ -142,6 +145,63 @@ const Dashboard = () => {
         openWithdrawalModal={openWithdrawalModal}
         setOpenWithdrawalModals={(val: boolean) => setOpenWithdrawalModals(val)}
       />
+      {/* //////////// */}
+
+      {/* {history.query.isFirst === "true" && ( */}
+      <div
+        className={classnames("modal fade ", {
+          show: history.query.isFirst === "true",
+          "d-none": history.query.isFirst !== "true",
+        })}
+        id="myModal"
+        aria-modal="true"
+        onClick={() => {
+          history.push("/user");
+        }}
+        style={{ paddingRight: "21px", zIndex: "231414", display: "block" }}
+      >
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="modal-dialog modal-lg"
+        >
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal">
+                ×
+              </button>
+            </div>
+
+            <div className="modal-body">
+              {history.query.isFirst === "true" && (
+                <iframe
+                  width="100%"
+                  height="415"
+                  src="https://www.youtube.com/embed/cjClq2Ds3EQ"
+                  // frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  // allowfullscreen=""
+                ></iframe>
+              )}
+            </div>
+
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+                onClick={() => history.push("/user")}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* )} */}
+
+      {/* //////////////////////// */}
       <div className="main-content main-content-Dashboard">
         <div className="content-wrapper">
           <div className="container-fluid mt--6">
