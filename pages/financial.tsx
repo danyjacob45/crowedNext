@@ -23,20 +23,21 @@ const financial = () => {
       // setHasReferrer(res.data.referrers && res.data.referrers.length);
     });
 
-    AuthService.getTeam().then((res) => {
-      let teams: any = [];
+    AuthService.residualBonus().then((res) => {
+      // let teams: any = [];
 
-      for (const key in res.data.referrers) {
-        res.data.referrers[key].map((el) => {
-          teams.push(el);
-        });
-      }
-      console.log(teams);
+      // for (const key in res.data.referrers) {
+      //   res.data.referrers[key].map((el) => {
+      //     teams.push(el);
+      //   });
+      // }
+      // console.log(teams);
       // debugger;
       // debugger;
-      setTeam(teams);
+      debugger;
+      setTeam(res.data.investments.content.filter((el) => el.from === "BONUS"));
       setDirectComissions(
-        res.data.directComissions.filter((el) => el.investedAmount)
+        res.data.investments.content.filter((el) => el.from === "DIRECT")
       );
       // debugger;
     });
@@ -417,30 +418,10 @@ const financial = () => {
                     </th>
                     <th className="bold12">Direct Commission</th>
                     <th className="bold12">
-                      {directComissions.length &&
-                        directComissions
-                          .reduce((sum: any, item: any) => {
-                            // debugger;
-                            if (item.investedAmount) {
-                              return sum.investedAmount + item.investedAmount;
-                            }
-                            return sum;
-                          })
-                          ?.toFixed(2)}{" "}
-                      $
+                      {getSum(directComissions, "amount").toFixed(2)}$
                     </th>
                     <th className="bold12">
-                      Earned $
-                      {directComissions.length &&
-                        directComissions
-                          .reduce((sum: any, item: any) => {
-                            // debugger;
-                            if (item.earned) {
-                              return sum.earned + item.earned;
-                            }
-                            return sum;
-                          })
-                          ?.toFixed(2)}
+                      Earned ${getSum(directComissions, "extra").toFixed(2)}
                     </th>
                     <th className="bold12">
                       {directComissions.length &&
@@ -463,8 +444,8 @@ const financial = () => {
                         <td></td>
 
                         <td>Direct Commission </td>
-                        <td>{el.investedAmount}</td>
-                        <td>{el.earned}</td>
+                        <td>{el.amount}$</td>
+                        <td>${el.extra}</td>
                         <td>
                           {" "}
                           {time.getFullYear() +
@@ -525,10 +506,10 @@ const financial = () => {
                           }
                           return sum + el.finalAmount;
                         })}{" "} */}
-                      {team.length && getSum(team, "investedAmount")}$
+                      {team.length && getSum(team, "amount")}$
                     </th>
                     <th className="bold12">
-                      Earned ${team.length && getSum(team, "earned").toFixed(2)}
+                      Earned ${team.length && getSum(team, "extra").toFixed(2)}
                     </th>
                     <th className="bold12">
                       {team.length && getLastDate(team[0].createdAt)}
@@ -549,9 +530,9 @@ const financial = () => {
                         <td></td>
 
                         <td>{"Residual Bonus"} </td>
-                        <td>{el.investedAmount} $</td>
+                        <td>{el.amount} $</td>
 
-                        <td> ${el.earned}</td>
+                        <td> ${el.extra}</td>
                         <td>
                           {" "}
                           {time.getFullYear() +

@@ -44,6 +44,16 @@ class _UserService {
     );
   };
 
+  residualBonus = () => {
+    return axios.post(
+      storeBackEndRoutes.user.residualBonus(),
+      { limit: 10000, page: 0 },
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
   transactionCheck = (id: any) => {
     return axios.post(
       storeBackEndRoutes.user.transactionCheck(id),

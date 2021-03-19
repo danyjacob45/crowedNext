@@ -21,6 +21,8 @@ export const storeBackEndRoutes = {
     transactionCheck: (id: any) => `${BASE_URL}/private/user/deposit/${id}`,
     profits: () => `${BASE_URL}/private/user/profits`,
 
+    residualBonus: () => `${BASE_URL}/private/user/investments`,
+
     transactions: () => `${BASE_URL}/private/user/deposits`,
     profitsFiltered: () => `${BASE_URL}/private/user/profit/filtered`,
     deleteAllNotifications: () =>
