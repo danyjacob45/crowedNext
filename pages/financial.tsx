@@ -35,7 +35,9 @@ const financial = () => {
       // debugger;
       // debugger;
       setTeam(teams);
-      setDirectComissions(res.data.directComissions);
+      setDirectComissions(
+        res.data.directComissions.filter((el) => el.investedAmount)
+      );
       // debugger;
     });
     AuthService.profits()
