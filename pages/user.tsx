@@ -158,6 +158,8 @@ const Dashboard = () => {
         onClick={() => {
           history.push("/user");
         }}
+        // @ts-ignore: Unreachable code error
+
         style={{ paddingRight: "21px", zIndex: "231414", display: "block" }}
       >
         <div
@@ -267,7 +269,7 @@ const Dashboard = () => {
                       href="/"
                       onClick={(e: any) => {
                         e.preventDefault();
-                        route.push("/invest");
+                        history.push("/invest");
                       }}
                     >
                       INVEST NOW
