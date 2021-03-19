@@ -546,7 +546,7 @@ const financial = () => {
                       <tr key={i}>
                         <td></td>
 
-                        <td>{"Profit Share"} </td>
+                        <td>{"Residual Bonus"} </td>
                         <td>{el.investedAmount} $</td>
 
                         <td> ${el.earned}</td>

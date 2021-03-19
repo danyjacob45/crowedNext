@@ -103,7 +103,7 @@ const Dashboard = () => {
               <div className="col-lg-3">
                 <span>Member</span>
                 <div className="card bg-white border-0">
-                  <div className="card-body">1</div>
+                  <div className="card-body">{statistic?.allMembers}</div>
                 </div>
               </div>
               <div className="col-lg-3">
