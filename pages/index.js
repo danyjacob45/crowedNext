@@ -809,27 +809,46 @@ const home = () => {
           <div className="container">
             <h2>Business Model</h2>
             <div className="row d-none d-md-flex">
-              <div className="col-md-12">
-                <img className="w-100" src="/assets/svges/ttt1.svg" />
+              <div className="col-3 d-flex align-items-center justify-content-center">
+                <div className="businessImg">
+                  <img src="/assets/imgs/fk1.png" />
+                  {/* <span>jfadsk jdfnjkasf kjdjfas fjndjkfa</span> */}
+                </div>
+              </div>
+              <div className="col-md-6">
+                <img className="w-100" src="/assets/svges/esss.svg" />
+                {/* <img className="w-100" src="/assets/svges/ttt1.svg" /> */}
+              </div>
+              <div className="col-3 d-flex align-items-center justify-content-center">
+                <div className="businessImg">
+                  <img src="/assets/imgs/fk2.png" />
+                  {/* <span>jfadsk jdfnjkasf kjdjfas fjndjkfa</span> */}
+                </div>
               </div>
             </div>
             <div className="row mt-5 d-flex d-md-none">
+              <div className="col-12">
+                <div className="businessImg m-auto pb-4">
+                  <img src="/assets/imgs/fk1.png" />
+                  {/* <span>jfadsk jdfnjkasf kjdjfas fjndjkfa</span> */}
+                </div>
+              </div>
               <div className="col-md-5">
                 <div className="row justify-content-center h-100">
                   <div className="col-6 ">
                     <div className="greenBox p-3 h-100">
-                      Renowned Trading & Asset Management Desks, Cooperations
+                      Cooperation.Investment <br />
+                      in facilities/Hosting of
                       <br />
-                      <br />
-                      Investment into new blooming marketsCrypto, CBD, Fintech
+                      growing equipment
                     </div>
                   </div>
                   <div className="col-6">
                     <div className="row  h-100">
-                      <div className="col-12  h-50  ">
+                      <div className="col-12    h-100 ">
                         <div
-                          style={{ height: "calc(100% - 10px)" }}
-                          className="greenBox investment p-3 mb-3 text-center"
+                          // style={{ height: "calc(100% - 10px)" }}
+                          className="greenBox investment p-3  h-100   text-center"
                         >
                           <svg
                             aria-hidden="true"
@@ -840,6 +859,7 @@ const home = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
                             class="svg-inline--fa fa-arrow-left fa-w-14 fa-2x"
+                            style={{ top: "10px" }}
                           >
                             <path
                               fill="currentColor"
@@ -847,17 +867,6 @@ const home = () => {
                               class=""
                             ></path>
                           </svg>
-                          Investment / Cooperation
-                        </div>
-                      </div>
-                      <div className="col-12 h-50  ">
-                        <div
-                          style={{
-                            height: "calc(100% - 10px)",
-                            marginTop: "10px",
-                          }}
-                          className="greenBox p-3   text-center"
-                        >
                           <svg
                             aria-hidden="true"
                             focusable="false"
@@ -867,6 +876,7 @@ const home = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
                             class="svg-inline--fa fa-arrow-right fa-w-14 fa-2x"
+                            style={{ top: "35px" }}
                           >
                             <path
                               fill="currentColor"
@@ -874,7 +884,7 @@ const home = () => {
                               class=""
                             ></path>
                           </svg>
-                          Profit
+                          Purchase of growing equipment
                         </div>
                       </div>
                     </div>
@@ -887,16 +897,19 @@ const home = () => {
                 </div>
               </div>
               <div className="col-md-5">
-                <div className="row justify-content-center h-100">
+                <div className="row justify-content-center ">
                   <div className="col-6 ">
-                    <div className="greenBox p-3 h-100">
-                      Comunity of Clients,Investors, Affiliates
+                    <div style={{ height: "72px" }} className="greenBox p-3">
+                      Profit From Harvest
                     </div>
                   </div>
                   <div className="col-6">
-                    <div className="row h-100 ">
-                      <div className="col-12 h-50 ">
-                        <div className="greenBox  p-3 mb-3 text-center">
+                    <div className="row  h-100">
+                      <div className="col-12     ">
+                        <div
+                          style={{ height: "72px" }}
+                          className="greenBox investment p-3    text-center"
+                        >
                           <svg
                             aria-hidden="true"
                             focusable="false"
@@ -906,6 +919,7 @@ const home = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
                             class="svg-inline--fa fa-arrow-left fa-w-14 fa-2x"
+                            style={{ top: "10px" }}
                           >
                             <path
                               fill="currentColor"
@@ -913,11 +927,6 @@ const home = () => {
                               class=""
                             ></path>
                           </svg>
-                          Buy In
-                        </div>
-                      </div>
-                      <div className="col-12 ">
-                        <div className="greenBox p-3 text-center">
                           <svg
                             aria-hidden="true"
                             focusable="false"
@@ -927,6 +936,7 @@ const home = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
                             class="svg-inline--fa fa-arrow-right fa-w-14 fa-2x"
+                            style={{ top: "35px" }}
                           >
                             <path
                               fill="currentColor"
@@ -941,10 +951,79 @@ const home = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="col-12">
+                <div className="businessImg m-auto pt-4">
+                  <img src="/assets/imgs/fk2.png" />
+                  {/* <span>jfadsk jdfnjkasf kjdjfas fjndjkfa</span> */}
+                </div>
+              </div>
             </div>
 
-            <div className="row mt-5 pt-5">
-              <div className="col-12 col-md-6">
+            <div style={{ color: "#fff" }} className="row mt-5 pt-5">
+              <div className="col-12  mb-4 mt-4">
+                <h1>The main problems</h1>
+              </div>
+              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+                <span className="pink">01</span>
+                <div>
+                  A large investment is needed to get started, as facilities,
+                  products, equipment, etc. need to be financed to launch the
+                  business.
+                </div>
+              </div>
+              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+                <span className="pink">02</span>
+                <div>
+                  Furthermore, many people lack the specific expertise in the
+                  cannabis market to be able to implement something profitable
+                  and functional.
+                </div>
+              </div>
+              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+                <span className="pink">03</span>
+                <div>
+                  Also difficult and varying regulations in different countries
+                  make it even more challenging to enter the cannabis business.
+                </div>
+              </div>
+
+              <div className="col-12 mb-4 mt-4 ">
+                <h1>Our solution</h1>
+              </div>
+              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+                <span className="">01</span>
+                <div>
+                  The big advantage for customers of Crowd Growing is that they
+                  can easily profit from the cannabis market. Crowd Growing
+                  enables them to profit with the same leverage that normally
+                  only big investors in this market have, as they provide the
+                  necessary infrastructure.
+                </div>
+              </div>
+              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+                <span className="">02</span>
+                <div>
+                  Crowd Growing provides the complete chain of logistics and
+                  hosts the customers‘ equipment. This provides each customer
+                  the opportunity to become a part of a big player in this
+                  market without the need of their own products, facilities or
+                  expertise.
+                </div>
+              </div>
+
+              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+                <span>03</span>
+
+                <div>
+                  Since our growing strategy is based on a certain cycle, where
+                  each week new plants are planted as well as old plants are
+                  harvested, it is possible to sell new harvests on a weekly
+                  basis and therefore also share profits of these sales with our
+                  clients.
+                </div>
+              </div>
+              {/* <div className="col-12 col-md-6">
                 Problems of investors in this market:
                 <br />
                 <div style={{ color: " #ef476f" }} className="mt-3">
@@ -988,7 +1067,7 @@ const home = () => {
                   basis and therefore also share profits of these sales with our
                   clients.
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </Element>
