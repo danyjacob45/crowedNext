@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 // import {useH} from 'next/router'
 import { useRouter } from "next/router";
 import classnames from "classnames";
+// import TTT from "../svg/esss.svg";
 
 import ScrollAnimation from "react-animate-on-scroll";
 
@@ -816,7 +817,9 @@ const home = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <img className="w-100" src="/assets/svges/esss.svg" />
+                {/* <img src="https://svgshare.com/i/VJa.svg" title="" /> */}
+                {/* <img className="w-100" src="../svg/esss.svg" /> */}
+                <img className="w-100" src="/assets/svges/esss.png" />
                 {/* <img className="w-100" src="/assets/svges/ttt1.svg" /> */}
               </div>
               <div className="col-3 d-flex align-items-center justify-content-center">
