@@ -7,10 +7,10 @@ import ModalContainer from "../components/common/modal/modalContainer";
 import { AuthService } from "../services/user/user.http";
 import DataTable from "../components/common/dataTables";
 const investTypes = {
-  FOUNDER: "FOUNDER",
-  PROFESSIONAL: "PROFESSIONAL",
-  ADVANCED: "ADVANCED",
-  BEGINNER: "BEGINNER",
+  FOUNDER: "Founder",
+  PROFESSIONAL: "Professional",
+  ADVANCED: "Advanced",
+  BEGINNER: "Beginner",
 };
 
 const investment = () => {
@@ -20,6 +20,7 @@ const investment = () => {
   const [profit, setProfit] = useState<any>(null);
   const [success, setSuccess] = useState<any>(null);
   const [investments, setInvestments] = useState<any>([]);
+  const [plans, setPlans] = useState<any>([]);
 
   const getInvestments = () => {
     AuthService.profits()
@@ -33,6 +34,12 @@ const investment = () => {
 
   useEffect(() => {
     getInvestments();
+
+    AuthService.getPans().then((res) => {
+      console.log(res);
+      setPlans(res.data.plans);
+      // debugger;
+    });
   }, []);
 
   const calculateInvestment = (amount) => {
@@ -195,55 +202,71 @@ const investment = () => {
             </div>
 
             <div className="row">
-              <div
-                className={classnames("col-md-3  Starter investTypes ", {
-                  active: activeInvest === investTypes.BEGINNER,
-                })}
-              >
-                <div className="pricing card-group flex-column flex-md-row mb-3">
-                  <div className="card card-pricing border-0 bg-white text-center mb-4">
-                    <div className="card-body px-lg-12">
-                      <img
-                        className="freeImgs"
-                        src="/assets/ranks/logoFFF.png "
-                      />
-                      <div className="row">
-                        <div className="col-12">
-                          <h4 className="text-uppercase ls-1 text-dark py-3 mb-0 text-center">
-                            Beginner
-                          </h4>
-                        </div>
-                      </div>
-                      <div className="priceRange_Line display-2 text-dark text-center">
-                        <div className="pricesLine mt-4">
-                          <div className="linContainer">
-                            <div className="startPrice">$100</div>
-                            <div className="endPrice">$999</div>
-                            <div className="leftTube Tube">
-                              <i className="far fa-check-circle"></i>
-                            </div>
-                            <div className="centralLine"></div>
-                            <div className="rightTube Tube">
-                              <i className="far fa-check-circle"></i>
+              {plans.map((el: any, i) => {
+                return (
+                  <div
+                    key={i}
+                    className={classnames("col-md-3   investTypes ", {
+                      [el.clazz]: el.clazz,
+                      active:
+                        activeInvest === investTypes[el.name.toUpperCase()],
+                    })}
+                  >
+                    <div className="pricing card-group flex-column flex-md-row mb-3">
+                      <div className="card card-pricing border-0 bg-white text-center mb-4">
+                        <div className="card-body px-lg-12">
+                          <img
+                            className="freeImgs"
+                            src="/assets/ranks/logoFFF.png "
+                          />
+                          <div className="row">
+                            <div className="col-12">
+                              <h4 className="text-uppercase ls-1 text-dark py-3 mb-0 text-center">
+                                {el.name}
+                              </h4>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      <br />
-                      <div className="text-sm text-white font-13 mb-0 text-left">
-                        <p>
-                          Monthly profit 8% – 10%
+                          <div className="priceRange_Line display-2 text-dark text-center">
+                            <div className="pricesLine mt-4">
+                              <div className="linContainer">
+                                <div className="startPrice">
+                                  ${el.minDeposit}
+                                </div>
+                                <div className="endPrice">${el.maxPrice}</div>
+                                <div className="leftTube Tube">
+                                  <i className="far fa-check-circle"></i>
+                                </div>
+                                <div className="centralLine"></div>
+                                <div className="rightTube Tube">
+                                  <i className="far fa-check-circle"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: el.description,
+                            }}
+                            className="text-sm text-white font-13 mb-0 text-left"
+                          >
+                            {/* <p
+                             
+                            > */}
+                            {/* Monthly profit 8% – 10%
                           <br />
                           weekly payouts
                           <br />
-                          hosting time: 1000 days
-                        </p>
+                          hosting time: 1000 days */}
+                            {/* </p> */}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div
+                );
+              })}
+              {/* <div
                 className={classnames("col-md-3  Advanced investTypes ", {
                   active: activeInvest === investTypes.ADVANCED,
                 })}
@@ -338,8 +361,8 @@ const investment = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
+              </div> */}
+              {/* <div
                 className={classnames("col-md-3  Founder investTypes ", {
                   active: activeInvest === investTypes.FOUNDER,
                 })}
@@ -388,7 +411,7 @@ const investment = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="investForm">
@@ -409,14 +432,14 @@ const investment = () => {
                   onChange={(e: any) => {
                     closeModal();
                     setAmount(e.target.value);
-                    if (e.target.value >= 10000) {
-                      setActiveInvest(investTypes.FOUNDER);
-                    } else if (e.target.value >= 2500) {
-                      setActiveInvest(investTypes.PROFESSIONAL);
-                    } else if (e.target.value >= 1000) {
-                      setActiveInvest(investTypes.ADVANCED);
-                    } else if (e.target.value >= 100) {
-                      setActiveInvest(investTypes.BEGINNER);
+                    if (e.target.value >= plans[3].minDeposit) {
+                      setActiveInvest(investTypes[plans[3].name.toUpperCase()]);
+                    } else if (e.target.value >= plans[2].minDeposit) {
+                      setActiveInvest(investTypes[plans[2].name.toUpperCase()]);
+                    } else if (e.target.value >= plans[1].minDeposit) {
+                      setActiveInvest(investTypes[plans[1].name.toUpperCase()]);
+                    } else if (e.target.value >= plans[0].minDeposit) {
+                      setActiveInvest(investTypes[plans[0].name.toUpperCase()]);
                     }
                     calculateInvestment(e.target.value);
                   }}
@@ -451,9 +474,9 @@ const investment = () => {
                       ? "rgb(56, 151, 60) !important"
                       : activeInvest === investTypes.ADVANCED
                       ? "rgb(0, 119, 165)"
-                      : activeInvest === investTypes.ADVANCED
+                      : activeInvest === investTypes.PROFESSIONAL
                       ? "rgb(167, 40, 114)"
-                      : activeInvest === investTypes.ADVANCED
+                      : activeInvest === investTypes.FOUNDER
                       ? "rgb(0, 70, 39)"
                       : "rgb(56, 151, 60) !important",
                 }}
@@ -467,15 +490,15 @@ const investment = () => {
                 <ul className=" text-center">
                   <li className="">
                     <span className="title">week </span>{" "}
-                    <span> {profit?.week} $</span>
+                    <span> {profit?.week?.toFixed(2)} $</span>
                   </li>
                   <li className="">
                     <span className="title">month </span>{" "}
-                    <span> {profit?.month} $</span>
+                    <span> {profit?.month?.toFixed(2)} $</span>
                   </li>
                   <li className="">
                     <span className="title">year </span>{" "}
-                    <span> {profit?.year} $</span>
+                    <span> {profit?.year?.toFixed(2)} $</span>
                   </li>
                 </ul>
               </div>

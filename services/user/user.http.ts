@@ -64,6 +64,18 @@ class _UserService {
     );
   };
 
+  getPans = () => {
+    return axios.post(
+      storeBackEndRoutes.user.getPans(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
+  // POST /api/v1/open/plan/all
+
   profits = () => {
     return axios.post(
       storeBackEndRoutes.user.profits(),

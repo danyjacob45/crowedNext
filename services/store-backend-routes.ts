@@ -34,6 +34,8 @@ export const storeBackEndRoutes = {
 
     notifications: () => `${BASE_URL}/private/user/notifications`,
 
+    getPans: () => `${BASE_URL}/open/plan/all `,
+
     teamStatistic: () => `${BASE_URL}/private/user/statistics`,
 
     qrCode: () => `${BASE_URL}/private/user/mfa_captcha`,
