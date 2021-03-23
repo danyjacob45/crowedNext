@@ -10,7 +10,13 @@ import { useSelector } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Pie, Line } from "react-chartjs-2";
 import { AuthService } from "../services/user/user.http";
+import { Preview, print } from "react-html2pdf";
+import ReactToPdf from "react-to-pdf";
 import classnames from "classnames";
+import { url } from "inspector";
+
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 const Yes = () => {
   return (
@@ -72,6 +78,7 @@ const Dashboard = () => {
   const [profitSum, setProfitSum] = useState<any>(0);
   const [allProfitSum, setAllProfitSum] = useState<any>(0);
   const [investedSum, setInvestedSum] = useState<any>(0);
+  const [showRank, setShowRank] = useState<any>(false);
 
   useEffect(() => {
     if (window) {
@@ -130,6 +137,22 @@ const Dashboard = () => {
       });
   }, [profitType]);
 
+  const exportPdf = () => {
+    // @ts-ignore: Unreachable code error
+
+    html2canvas(document.querySelector("#previewImage")).then((canvas) => {
+      // document.body.appendChild(canvas); // if you want see your screenshot in body.
+      // @ts-ignore: Unreachable code error
+
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", [132, 130]);
+      // @ts-ignore: Unreachable code error
+
+      pdf.addImage(imgData, "PNG", -2, 0);
+      pdf.save("download.pdf");
+    });
+  };
+
   const [openDepositModal, setOpenDepositModals] = useState(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
 
@@ -146,6 +169,89 @@ const Dashboard = () => {
         setOpenWithdrawalModals={(val: boolean) => setOpenWithdrawalModals(val)}
       />
       {/* //////////// */}
+
+      {/* <ReactToPdf
+        options={{
+          // format: [4, 2],
+          orientation: "landscape",
+          // format: [4, 4],
+        }}
+        x={-0.5}
+        y={0.5}
+        scale={1.6}
+      >
+        {({ toPdf, targetRef }) => ( */}
+
+      {showRank && (
+        <div className="pdfWrapper">
+          <div
+            className="close"
+            style={{
+              position: "absolute",
+              right: "13px",
+              top: "12px",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              setShowRank(false);
+            }}
+            id="closeRank"
+          >
+            {" "}
+            X
+          </div>
+
+          <div
+            // ref={targetRef}
+            // id="closeRank"
+            id="previewImage"
+            //  style="background-image: url({{     isset($rank->image ) ? 'asset/ranks/' .$rank->image: ''  }})"
+            style={{
+              backgroundImage: "url('/assets/ranks/bilder-02.png')",
+              width: "500px",
+              height: "500px",
+            }}
+            className="rankModal "
+          >
+            <div className="container">
+              <div className="content">
+                <h3> Congratulation </h3>
+
+                <div className="img logo">
+                  <img src="/assetS/ranks/logo.png" alt="logo" />
+                </div>
+                <h6>{"DAVID"}</h6>
+                <h6>username</h6>
+                <h6>{"name "}</h6>
+                <h5 className="rank1"> {"ranked "} </h5>
+                <div className="ClubWrapper">
+                  <h4> Club </h4>
+                  <h6> member </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className=" text-center mt-4">
+            <a
+              id="btn-Convert-Html2Image"
+              className="btn d-block btn-sm btn-neutral "
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                exportPdf();
+                // toPdf();
+                // print('a', 'jsx-template')
+              }}
+            >
+              {/* <div style={{width: 500, height: 500, background: 'red'}} onClick={toPdf}/> */}
+              Download certificate
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* )}
+      </ReactToPdf> */}
 
       {/* {history.query.isFirst === "true" && ( */}
       <div
@@ -609,12 +715,46 @@ const Dashboard = () => {
                 <span>Rank </span>
 
                 <div
-                  style={{ height: " calc(100% - 54px)" }}
+                  // style={{ height: " calc(100% - 54px)" }}
+                  style={{
+                    // backgroundImage: "url('/assets/ranks/bilder-02.png')",
+                    height: " calc(100% - 54px)",
+                  }}
                   className="card withRankBg bg-white"
                 >
-                  <div className="card-body d-flex align-items-center justify-content-center  ">
+                  <div
+                    style={{
+                      backgroundImage: "url('/assets/ranks/bilder-02.png')",
+                      // height: " calc(100% - 54px)",
+                      backgroundSize: "153%",
+                    }}
+                    className="card-body d-flex align-items-center justify-content-center  flex-column "
+                  >
                     {" "}
-                    no rank
+                    {/* no rank */}
+                    <p
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "calc(100% - 60px)",
+                      }}
+                    >
+                      {"FDJ"} Club
+                    </p>
+                    <div>
+                      <button
+                        id="RankButton"
+                        className="btn btn-sm btn-neutral"
+                        style={{ float: "right" }}
+                        onClick={() => {
+                          setShowRank(true);
+                        }}
+                      >
+                        {" "}
+                        show rank
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

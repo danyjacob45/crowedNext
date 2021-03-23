@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ModalContainer from "../common/modal/modalContainer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { AuthService } from "../../services/user/user.http";
+import axios from "axios";
 import classnames from "classnames";
 interface Props {
   openDepositModal: Boolean;
@@ -135,7 +136,7 @@ const Deposit: React.FC<Props> = ({
       }
 
       function setApiUrlPrefix(urlPrefix) {
-        debugger;
+        // debugger;
         origin = urlPrefix;
       }
 
@@ -726,11 +727,24 @@ const Deposit: React.FC<Props> = ({
 
                   if (depositType === "BTC") {
                     // @ts-ignore: Unreachable code error
-                    window.bitpay.setApiUrlPrefix(
-                      "https://www.crowdgrowing.tk"
-                    );
-                    // @ts-ignore: Unreachable code error
-                    window.bitpay.showInvoice("T7u4ByKibY3cYBZQ1owQaN");
+                    axios
+                      .post("http://51.255.211.219/create-payment", {
+                        token: localStorage.getItem("token"),
+                        amount: 200.3,
+                      })
+                      .then((res) => {
+                        // debugger;
+                        // @ts-ignore: Unreachable code error
+
+                        window.bitpay.setApiUrlPrefix(
+                          "https://www.crowdgrowing.tk"
+                        );
+                        // @ts-ignore: Unreachable code error
+                        window.bitpay.showInvoice(res.data);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
                   }
                   if (depositType === "ETH" || depositType === "USDT") {
                     ethHandler();
