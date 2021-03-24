@@ -339,10 +339,8 @@ const Dashboard = () => {
                               return sum;
                             })
                             .toFixed(2)}{" "} */}
-                          {el &&
-                            el.length &&
-                            getSum(directComissions, "earned").toFixed(2)}
-                          $ EARNED
+                          x{el && el.length && getSum(el, "earned").toFixed(2)}$
+                          EARNED
                         </th>
                       </tr>
                     </thead>
