@@ -1,14 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import "./style.scss";
 import Wrapper from "../components/pagesWrapper";
+import { AuthService } from "../services/user/user.http";
+import axios from "axios";
+import classnames from "classnames";
+
+const investTypes = {
+  FOUNDER: "Founder",
+  PROFESSIONAL: "Professional",
+  ADVANCED: "Advanced",
+  BEGINNER: "Beginner",
+};
 
 var terms = () => {
+  const [plans, setPlans] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post("http://51.255.211.219:8080/api/v1/open/plan/all")
+      .then((res) => {
+        console.log(res);
+        setPlans(res.data.plans);
+        // debugger;
+      });
+  }, []);
+
   return (
     <Wrapper>
       <div className="pageContainer hostingAndPlans">
         <h3>Hosting Plans</h3>
 
         <div className="container">
+          <div className="row mb-5">
+            {plans.map((el, i) => {
+              return (
+                <div
+                  key={i}
+                  className={classnames("col-md-3   investTypes ", {
+                    [el.clazz]: el.clazz,
+                  })}
+                >
+                  <div className="pricing card-group flex-column flex-md-row mb-3">
+                    <div className="card card-pricing border-0 bg-white text-center mb-4">
+                      <div className="card-body px-lg-12">
+                        <img
+                          className="freeImgs"
+                          src="/assets/ranks/logoFFF.png "
+                        />
+                        <div className="row">
+                          <div className="col-12">
+                            <h4 className="text-uppercase ls-1 text-dark py-3 mb-0 text-center">
+                              {el.name}
+                            </h4>
+                          </div>
+                        </div>
+                        <div className="priceRange_Line display-2 text-dark text-center">
+                          <div className="pricesLine mt-4">
+                            <div className="linContainer">
+                              <div className="startPrice">${el.minDeposit}</div>
+                              <div className="endPrice">${el.maxPrice}</div>
+                              <div className="leftTube Tube">
+                                <i className="far fa-check-circle"></i>
+                              </div>
+                              <div className="centralLine"></div>
+                              <div className="rightTube Tube">
+                                <i className="far fa-check-circle"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <br />
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: el.description,
+                          }}
+                          className="text-sm text-white font-13 mb-0 text-left"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
           <div className="row">
             <div className="col-sm-8">
               <div className="row">
