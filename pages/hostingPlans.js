@@ -41,7 +41,12 @@ var terms = () => {
                   })}
                 >
                   <div className="pricing card-group flex-column flex-md-row mb-3">
-                    <div className="card card-pricing border-0 bg-white text-center mb-4">
+                    <div
+                      style={{
+                        minHeight: " 132px",
+                      }}
+                      className="card card-pricing border-0 bg-white text-center mb-4"
+                    >
                       <div className="card-body px-lg-12">
                         <img
                           className="freeImgs"
@@ -69,13 +74,13 @@ var terms = () => {
                             </div>
                           </div>
                         </div>
-                        <br />
+                        {/* <br />
                         <div
                           dangerouslySetInnerHTML={{
                             __html: el.description,
                           }}
                           className="text-sm text-white font-13 mb-0 text-left"
-                        ></div>
+                        ></div> */}
                       </div>
                     </div>
                   </div>

@@ -703,11 +703,19 @@ const home = () => {
               </div>
             </ScrollAnimation>
             <ScrollAnimation animateOnce={true} animateIn="animate__zoomIn">
-              <div className="row mt-4">
+              <div className="row mt-5 pt-5">
                 <div className="col-12 col-md-4">
+                  <img
+                    style={{
+                      height: "133px",
+                      margin: "auto",
+                      display: "inherit",
+                    }}
+                    src="/assets/svges/icons3-01.svg"
+                  />
+
                   <div className="number">01</div>
                   <div className="about-img">
-                    <img src="/assets/imgs/about1.png" />
                     <p className="mt-3">
                       Positively impact thousands of people’s health by
                       developing the highest quality of cannabis products and
@@ -717,9 +725,16 @@ const home = () => {
                 </div>
                 <div className="col-12 col-md-4">
                   {" "}
+                  <img
+                    style={{
+                      height: "133px",
+                      margin: "auto",
+                      display: "inherit",
+                    }}
+                    src="/assets/svges/icons3-02.svg"
+                  />
                   <div className="number">02</div>
                   <div className="about-img">
-                    <img src="/assets/imgs/about2.png" />
                     <p className="mt-3">
                       Positively impact thousands of people’s health by
                       developing the highest quality of cannabis products and
@@ -729,9 +744,16 @@ const home = () => {
                 </div>{" "}
                 <div className="col-12 col-md-4">
                   {" "}
+                  <img
+                    style={{
+                      height: "133px",
+                      margin: "auto",
+                      display: "inherit",
+                    }}
+                    src="/assets/svges/icons3.svg"
+                  />
                   <div className="number">03</div>
                   <div className="about-img">
-                    <img src="/assets/imgs/about3.png" />
                     <p className="mt-3">
                       Positively impact thousands of people’s health by
                       developing the highest quality of cannabis products and
