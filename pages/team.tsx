@@ -208,7 +208,7 @@ const Dashboard = () => {
                       </svg>
                     </th>
                     <th className="bold12">{1} LEVEL</th>
-                    <th className="bold12">{0} MEMBER</th>
+                    <th className="bold12">{directComissions.length} MEMBER</th>
                     <th className="bold12">
                       {directComissions.length &&
                         // directComissions
