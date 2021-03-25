@@ -730,7 +730,7 @@ const Deposit: React.FC<Props> = ({
                     axios
                       .post("http://51.255.211.219/create-payment", {
                         token: localStorage.getItem("token"),
-                        amount: 200.3,
+                        amount: amount,
                       })
                       .then((res) => {
                         // debugger;

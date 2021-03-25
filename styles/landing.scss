@@ -3155,3 +3155,10 @@ a:hover {
     transform: translate(-50%, -50%);
   }
 }
+
+.esssImg {
+  transition: 0.3s;
+  &:hover {
+    filter: drop-shadow(9px 12px 4px #000);
+  }
+}

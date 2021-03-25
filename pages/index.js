@@ -812,19 +812,19 @@ const home = () => {
             <div className="row d-none d-md-flex">
               <div className="col-3 d-flex align-items-center justify-content-center">
                 <div className="businessImg">
-                  <img src="/assets/imgs/fk1.png" />
+                  <img className="esssImg" src="/assets/imgs/fk1.png" />
                   {/* <span>jfadsk jdfnjkasf kjdjfas fjndjkfa</span> */}
                 </div>
               </div>
               <div className="col-md-6">
                 {/* <img src="https://svgshare.com/i/VJa.svg" title="" /> */}
                 {/* <img className="w-100" src="../svg/esss.svg" /> */}
-                <img className="w-100" src="/assets/svges/esss.png" />
+                <img className="w-100 esssImg" src="/assets/svges/esss.png" />
                 {/* <img className="w-100" src="/assets/svges/ttt1.svg" /> */}
               </div>
               <div className="col-3 d-flex align-items-center justify-content-center">
                 <div className="businessImg">
-                  <img src="/assets/imgs/fk2.png" />
+                  <img className="esssImg" src="/assets/imgs/fk2.png" />
                   {/* <span>jfadsk jdfnjkasf kjdjfas fjndjkfa</span> */}
                 </div>
               </div>
@@ -991,7 +991,7 @@ const home = () => {
                 </div>
               </div>
 
-              <div className="col-12 mb-4 mt-4 ">
+              <div className="col-12 mb-4 mt-5 pt-5 ">
                 <h1>Our solution</h1>
               </div>
               <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
