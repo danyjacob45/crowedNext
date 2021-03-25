@@ -39,7 +39,7 @@ const ResetPassword = ({
         if (err.response && err.response.data) {
           setServerError({ email: err.response.data.message });
         } else {
-          setServerError({ email: "server error :/" });
+          setServerError({ email: "Server Error Try Again Later" });
         }
       });
     // setLoadaing(true);

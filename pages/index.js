@@ -156,7 +156,7 @@ const home = () => {
 
           // setServerError(err.response.data && err.response.data.message);
         } else {
-          setServerError("server error :/");
+          setServerError("Server Error Try Again Later");
         }
       });
     // setLoadaing(true);

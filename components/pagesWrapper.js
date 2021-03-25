@@ -142,7 +142,7 @@ const home = ({ children }) => {
         if (err.response && err.response.data) {
           setServerError(err.response.data && err.response.data.message);
         } else {
-          setServerError("server error :/");
+          setServerError("Server Error Try Again Later");
         }
       });
     // setLoadaing(true);

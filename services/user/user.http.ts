@@ -137,7 +137,7 @@ class _UserService {
   notifications = () => {
     return axios.post(
       storeBackEndRoutes.user.notifications(),
-      {},
+      { limit: 1000, page: 0 },
       {
         ...axiosHeaderConfig(),
       }
