@@ -105,8 +105,29 @@ const Dashboard = () => {
     AuthService.getTeam().then((res) => {
       setHasReferrer(res.data.referrers && res.data.referrers["level-1"]);
     });
-    AuthService.transactions().then((res) => {
-      setTransactions(res.data.deposits.content);
+    AuthService.transactionsAll().then((res) => {
+      let data: any = [
+        ...res.data.transactions.deposits.content.map((el) => ({
+          ...el,
+          nType: "deposit",
+          amount: el.finalAmount,
+        })),
+        ...res.data.transactions.investments.content.map((el) => ({
+          ...el,
+          nType: "Investment",
+        })),
+        ...res.data.transactions.profits.content.map((el) => ({
+          ...el,
+          nType: "Profit share",
+        })),
+      ];
+      // debugger;
+      data = data.sort(function (x, y) {
+        return y.createdAt - x.createdAt;
+      });
+      // debugger;/
+      // if (res.data.transactions.deposits.content) debugger;
+      setTransactions(data);
       // debugger;
       // setHasReferrer(res.data.referrers && res.data.referrers.length);
     });
@@ -949,8 +970,8 @@ const Dashboard = () => {
 
                           return (
                             <tr key={i}>
-                              <td>{el?.type}</td>
-                              <td>{el.finalAmount} $</td>
+                              <td>{el?.nType}</td>
+                              <td>{el.amount} $</td>
                               <td>
                                 {/* 2020/10/24 06:22:AM */}
                                 {time.getFullYear() +

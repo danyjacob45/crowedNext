@@ -102,6 +102,16 @@ class _UserService {
     );
   };
 
+  transactionsAll = () => {
+    return axios.post(
+      storeBackEndRoutes.user.transactionsAll(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
   addAditWithdraw = (data: any) => {
     return axios.post(storeBackEndRoutes.user.addAditWithdraw(), data, {
       ...axiosHeaderConfig(),
