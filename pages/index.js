@@ -841,7 +841,16 @@ const home = () => {
               <div className="col-md-6">
                 {/* <img src="https://svgshare.com/i/VJa.svg" title="" /> */}
                 {/* <img className="w-100" src="../svg/esss.svg" /> */}
-                <img className="w-100 esssImg" src="/assets/svges/esss.png" />
+                <img
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    history.push("/hostingPlans");
+                  }}
+                  className="w-100 esssImg"
+                  src="/assets/svges/esss.png"
+                />
                 {/* <img className="w-100" src="/assets/svges/ttt1.svg" /> */}
               </div>
               <div className="col-3 d-flex align-items-center justify-content-center">
