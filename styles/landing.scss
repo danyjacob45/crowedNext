@@ -3163,3 +3163,36 @@ a:hover {
     filter: drop-shadow(9px 12px 4px #000);
   }
 }
+
+.hoverScale {
+  transition: 0.2s;
+
+  &:hover {
+    transform: scale(1.1) !important;
+  }
+}
+
+.socialHover {
+  img.hover {
+    display: none;
+  }
+  img {
+    display: inline-block;
+  }
+  &:hover {
+    img.hover {
+      display: inline-block;
+    }
+    img {
+      display: none;
+    }
+  }
+}
+
+.fa-facebook {
+  &:hover {
+    path {
+      fill: #4267b2 !important;
+    }
+  }
+}

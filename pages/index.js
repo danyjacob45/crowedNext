@@ -366,7 +366,7 @@ const home = () => {
                       e.preventDefault();
                       setRegAuthModal("register");
                     }}
-                    className="navBtn"
+                    className="navBtn hoverScale"
                     href=""
                   >
                     Get Started
@@ -413,18 +413,20 @@ const home = () => {
                 <img width="23" src="/assets/svges/inst.svg" />
               </a> */}
             <a
-              className="px-2 d-inline-bock"
+              className="px-2 d-inline-bock socialHover"
               href="https://t.me/crowdgrowing"
               target="_blank"
             >
               <img width="23" src="/assets/svges/twt.svg" />
+              <img className="hover" width="23" src="/assets/svges/twtC.svg" />
             </a>
             <a
-              className="px-2 d-inline-bock"
+              className="px-2 d-inline-bock socialHover"
               href="https://www.youtube.com/channel/UCFXf8dvgTlnrfE23eTblBkQ?"
               target="_blank"
             >
               <img width="23" src="/assets/svges/yout.svg" />
+              <img className="hover" width="23" src="/assets/svges/youtC.svg" />
             </a>
           </div>
         </div>
@@ -669,7 +671,7 @@ const home = () => {
                     e.preventDefault();
                     setRegAuthModal("register");
                   }}
-                  className="navBtnInMain"
+                  className="navBtnInMain d-inline-block hoverScale"
                   href=""
                 >
                   Get Started
@@ -998,7 +1000,7 @@ const home = () => {
               <div className="col-12  mb-4 mt-4">
                 <h1>The main problems</h1>
               </div>
-              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+              <div className="col-12 col-md-4 hoverScale mb-3 mb-md-0 modelText">
                 <span className="pink">01</span>
                 <div>
                   A large investment is needed to get started, as facilities,
@@ -1006,7 +1008,7 @@ const home = () => {
                   business.
                 </div>
               </div>
-              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+              <div className="col-12 col-md-4 hoverScale mb-3 mb-md-0 modelText">
                 <span className="pink">02</span>
                 <div>
                   Furthermore, many people lack the specific expertise in the
@@ -1014,7 +1016,7 @@ const home = () => {
                   and functional.
                 </div>
               </div>
-              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+              <div className="col-12 hoverScale col-md-4 mb-3 mb-md-0 modelText">
                 <span className="pink">03</span>
                 <div>
                   Also difficult and varying regulations in different countries
@@ -1022,10 +1024,10 @@ const home = () => {
                 </div>
               </div>
 
-              <div className="col-12 mb-4 mt-5 pt-5 ">
+              <div className="col-12  mb-4 mt-5 pt-5 ">
                 <h1>Our solution</h1>
               </div>
-              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+              <div className="col-12 hoverScale col-md-4 mb-3 mb-md-0 modelText">
                 <span className="">01</span>
                 <div>
                   The big advantage for customers of Crowd Growing is that they
@@ -1035,7 +1037,7 @@ const home = () => {
                   necessary infrastructure.
                 </div>
               </div>
-              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+              <div className="col-12 hoverScale col-md-4 mb-3 mb-md-0 modelText">
                 <span className="">02</span>
                 <div>
                   Crowd Growing provides the complete chain of logistics and
@@ -1046,7 +1048,7 @@ const home = () => {
                 </div>
               </div>
 
-              <div className="col-12 col-md-4 mb-3 mb-md-0 modelText">
+              <div className="col-12 hoverScale col-md-4 mb-3 mb-md-0 modelText">
                 <span>03</span>
 
                 <div>
@@ -1120,7 +1122,10 @@ const home = () => {
               <div className="strategyCrd">
                 <div className="cardTitle">Step 1</div>
                 <div className="cardTitle2">Cuttings</div>
-                <img src="/assets/imgs/strategy1.png" />
+                <img
+                  className="hoverScale d-inline-block"
+                  src="/assets/imgs/strategy1.png"
+                />
 
                 <p className="cardP mt-3">
                   Preparation of own feminized genetics focus on good look,
@@ -1134,7 +1139,10 @@ const home = () => {
               <div className="strategyCrd">
                 <div className="cardTitle">Step 2</div>
                 <div className="cardTitle2">Vegetation</div>
-                <img src="/assets/imgs/strategy2.png" />
+                <img
+                  className="hoverScale d-inline-block"
+                  src="/assets/imgs/strategy2.png"
+                />
 
                 <p className="cardP mt-3">
                   Growth of the plant until the flowering start (18h light /6h
@@ -1146,7 +1154,10 @@ const home = () => {
               <div className="strategyCrd">
                 <div className="cardTitle">Step 3</div>
                 <div className="cardTitle2">Flowering</div>
-                <img src="/assets/imgs/strategy3.png" />
+                <img
+                  className="hoverScale d-inline-block"
+                  src="/assets/imgs/strategy3.png"
+                />
 
                 <p className="cardP mt-3">
                   After 4-5 weeks lightning gets switched to 12h light/ 12h dark
@@ -1157,7 +1168,10 @@ const home = () => {
               <div className="strategyCrd">
                 <div className="cardTitle">Step 4</div>
                 <div className="cardTitle2">Harvesting drying, trimming</div>
-                <img src="/assets/imgs/strategy4.png" />
+                <img
+                  className="hoverScale d-inline-block"
+                  src="/assets/imgs/strategy4.png"
+                />
 
                 <p className="cardP mt-3">
                   After this previous 8 week process, the harvesting time
@@ -1172,7 +1186,10 @@ const home = () => {
               <div className="strategyCrd">
                 <div className="cardTitle">Step 5</div>
                 <div className="cardTitle2">Packaging and sale</div>
-                <img src="/assets/imgs/strategy5.png" />
+                <img
+                  className="hoverScale d-inline-block"
+                  src="/assets/imgs/strategy5.png"
+                />
 
                 <p className="cardP mt-3">
                   Before the product can be distributed a laboratory test is
@@ -1186,7 +1203,10 @@ const home = () => {
                   <div className="strategyCrd slide">
                     <div className="cardTitle">Step 1</div>
                     <div className="cardTitle2">Cuttings</div>
-                    <img src="/assets/imgs/strategy1.png" />
+                    <img
+                      className="hoverScale d-inline-block"
+                      src="/assets/imgs/strategy1.png"
+                    />
 
                     <p className="cardP mt-3">
                       Preparation of own feminized genetics focus on good look,
@@ -1200,7 +1220,10 @@ const home = () => {
                   <div className="strategyCrd slide">
                     <div className="cardTitle">Step 2</div>
                     <div className="cardTitle2">Vegetation</div>
-                    <img src="/assets/imgs/strategy2.png" />
+                    <img
+                      className="hoverScale d-inline-block"
+                      src="/assets/imgs/strategy2.png"
+                    />
 
                     <p className="cardP mt-3">
                       Growth of the plant until the flowering start (18h light
@@ -1212,7 +1235,10 @@ const home = () => {
                   <div className="strategyCrd slide">
                     <div className="cardTitle">Step 3</div>
                     <div className="cardTitle2">Flowering</div>
-                    <img src="/assets/imgs/strategy3.png" />
+                    <img
+                      className="hoverScale d-inline-block"
+                      src="/assets/imgs/strategy3.png"
+                    />
 
                     <p className="cardP mt-3">
                       After 4-5 weeks lightning gets switched to 12h light/ 12h
@@ -1225,7 +1251,10 @@ const home = () => {
                     <div className="cardTitle2">
                       Harvesting drying, trimming
                     </div>
-                    <img src="/assets/imgs/strategy4.png" />
+                    <img
+                      className="hoverScale d-inline-block"
+                      src="/assets/imgs/strategy4.png"
+                    />
 
                     <p className="cardP mt-3">
                       After this previous 8 week process, the harvesting time
@@ -1240,7 +1269,10 @@ const home = () => {
                   <div className="strategyCrd slide ">
                     <div className="cardTitle">Step 5</div>
                     <div className="cardTitle2">Packaging and sale</div>
-                    <img src="/assets/imgs/strategy5.png" />
+                    <img
+                      className="hoverScale d-inline-block"
+                      src="/assets/imgs/strategy5.png"
+                    />
 
                     <p className="cardP mt-3">
                       Before the product can be distributed a laboratory test is

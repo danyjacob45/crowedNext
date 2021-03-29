@@ -39,7 +39,7 @@ const marketing = () => {
                 <span> Presentations </span>
                 <div className="card bg-white border-0">
                   <div className="card-body">
-                    <ul>
+                    <ul className="pl-0 marketingList">
                       <li>
                         <a
                           target="_blank"
@@ -199,7 +199,7 @@ const marketing = () => {
                 <span> Video </span>
                 <div className="card bg-white border-0">
                   <div className="card-body">
-                    <ul>
+                    <ul className="pl-0 marketingList">
                       <li>
                         <a href="https://www.youtube.com/watch?v=F7dcJW02fKw&amp;t=18s">
                           <span> Welcome Video </span>{" "}
@@ -233,7 +233,7 @@ const marketing = () => {
                 <span> Media </span>
                 <div className="card bg-white border-0">
                   <div className="card-body">
-                    <ul>
+                    <ul className="pl-0 marketingList">
                       <li>
                         <a
                           target="_blank"
@@ -250,10 +250,10 @@ const marketing = () => {
                 <span> Social Media </span>
                 <div className="card bg-white border-0">
                   <div className="card-body">
-                    <ul>
+                    <ul className="pl-0">
                       <li>
                         <a href="https://cutt.ly/cgfb">
-                          <span className="socialSpan">
+                          <span className="socialSpan fb">
                             <FbIcon />
                             facebook
                           </span>
@@ -261,7 +261,7 @@ const marketing = () => {
                       </li>
                       <li>
                         <a href="https://cutt.ly/cgtg">
-                          <span className="socialSpan">
+                          <span className="socialSpan tg ">
                             <Telegram />
                             telegram
                           </span>
@@ -269,7 +269,7 @@ const marketing = () => {
                       </li>
                       <li>
                         <a href="https://cutt.ly/cgyt">
-                          <span className="socialSpan">
+                          <span className="socialSpan tube">
                             <Youtube />
                             youtube
                           </span>
