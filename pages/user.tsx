@@ -109,12 +109,12 @@ const Dashboard = () => {
       let data: any = [
         ...res.data.transactions.deposits.content.map((el) => ({
           ...el,
-          nType: "deposit",
+          nType: el.depositMethod,
           amount: el.finalAmount,
         })),
         ...res.data.transactions.investments.content.map((el) => ({
           ...el,
-          nType: "Investment",
+          nType: el.from === "DIRECT" ? "Direct Commission" : "Residual Bonus",
         })),
         ...res.data.transactions.profits.content.map((el) => ({
           ...el,
