@@ -13,6 +13,7 @@ export const storeBackEndRoutes = {
 
   user: {
     uploadImage: () => `${BASE_URL}/private/user/picture/update`,
+    verifyEmail: () => `${BASE_URL}/private/verify/email`,
     updateProfile: () => `${BASE_URL}/private/user/update`,
     calcInvestment: () => `${BASE_URL}/private/plans/calculate`,
     investment: () => `${BASE_URL}/private/plans/buy`,

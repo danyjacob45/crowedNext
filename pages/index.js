@@ -47,6 +47,9 @@ const home = () => {
   const [regAuthModal, setRegAuthModal] = React.useState(null);
   const [serverError, setServerError] = React.useState(null);
   const [referralValue, setReferralValue] = React.useState(null);
+  const [validation, setValidation] = React.useState(null);
+  const [codeError, setCodeError] = React.useState(null);
+  const [code, setCode] = React.useState(null);
 
   // const [regAuthModal, setRegAuthModal] = React.useState(null);
 
@@ -57,6 +60,13 @@ const home = () => {
       setRegAuthModal("register");
       setReferralValue(history.asPath.split("=")[1]);
     }
+    // debugger;
+    if (history.asPath.split("=")[0] === "/?validation") {
+      setValidation(true);
+    } else {
+      setValidation(false);
+    }
+    // debugger;
     console.log(history);
 
     if (localStorage.getItem("token")) {
@@ -93,7 +103,7 @@ const home = () => {
     if (window.innerWidth < 992) {
       setIsMobil(true);
     }
-  }, []);
+  }, [history.asPath]);
 
   const getRoadYear = () => {
     if (!isMobil) {
@@ -430,16 +440,16 @@ const home = () => {
             </a>
           </div>
         </div>
-        {registerSuccessModal && (
+        {validation && (
           <div className="rt-container">
             <div className="col-rt-12">
               <div className="Scriptcontent">
                 <div id="card" className="animated fadeIn">
                   <div id="upper-side">
-                    {/* <h3 id="status">Success</h3> */}
+                    <h3 id="status">Email verification</h3>
                   </div>
                   <div id="lower-side">
-                    {registerSuccessModal === "resetPass" ? (
+                    {/* {registerSuccessModal === "resetPass" ? (
                       <p id="message">
                         password reset link send on you email address
                       </p>
@@ -447,12 +457,65 @@ const home = () => {
                       <p>Password changed successfully </p>
                     ) : (
                       ""
-                    )}
+                    )} */}
 
+                    <div className="form-group is-invalid">
+                      <label style={{ color: " #000" }}>
+                        Enter the verification code sent to your email
+                      </label>
+                      <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        tabindex="1"
+                        placeholder="username"
+                        className={classnames("form-control", {
+                          "is-invalid": codeError,
+                        })}
+                        onChange={(e) => {
+                          setCode(e.target.value);
+                          setCodeError(null);
+                        }}
+                      />
+                      <div className="invalid-feedback">{codeError}</div>
+                    </div>
                     <a
                       href="#"
                       onClick={() => {
-                        setRegisterSuccessModal(false);
+                        // setRegisterSuccessModal(false);
+                        // setRegAuthModal("login");
+                        if (!code) {
+                          setCodeError("Enter verification code");
+                        } else {
+                          AuthService.verifyEmail({
+                            code: code,
+                          })
+                            .then((res) => {
+                              dispatch(
+                                setCurrentUser({
+                                  user: res.data.user,
+                                  token: localStorage.getItem("preToken"),
+                                })
+                              );
+                              localStorage.removeItem("preToken");
+
+                              history.push("/user?isFirst=true");
+                            })
+                            .catch((err) => {
+                              setCodeError("wrong verification code");
+                            });
+                          // "code": "string"
+                        }
+                      }}
+                      className="mr-3"
+                      id="contBtn"
+                    >
+                      send
+                    </a>
+                    <a
+                      href="#"
+                      onClick={() => {
+                        // setRegisterSuccessModal(false);
                         // setRegAuthModal("login");
                         history.push("/");
                       }}

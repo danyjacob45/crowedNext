@@ -29,6 +29,14 @@ class _AuthService {
       // password_confirmation: data.password,
     });
   };
+
+  verifyEmail = (data: any) => {
+    return axios.post(storeBackEndRoutes.user.verifyEmail(), data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("preToken")}`,
+      },
+    });
+  };
   // registerStepTwo = (data) => {
   //   return axiosWithToken.post(
   //     storeBackEndRoutes.auth.registerStepTwo(),

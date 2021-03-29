@@ -41,16 +41,17 @@ const Registration = ({
         // window.location.href = "http://crowd-growing.com/user/dashboard";
         // "proxy": "http://51.255.211.219:8080",
         // setRegisterSuccessModal(true)
-        dispatch(
-          setCurrentUser({
-            user: res.data.user,
-            token: res.data.token,
-          })
-        );
+        // dispatch(
+        //   setCurrentUser({
+        //     user: res.data.user,
+        //     token: res.data.token,
+        //   })
+        // );
 
-        history.push("/user?isFirst=true");
+        history.push("/?validation=true");
+        localStorage.setItem("preToken", res.data.token);
         setRegAuthModal(null);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
