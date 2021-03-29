@@ -79,6 +79,7 @@ const Dashboard = () => {
   const [allProfitSum, setAllProfitSum] = useState<any>(0);
   const [investedSum, setInvestedSum] = useState<any>(0);
   const [showRank, setShowRank] = useState<any>(false);
+  const [rank, setRank] = useState<any>(null);
 
   useEffect(() => {
     if (window) {
@@ -86,6 +87,48 @@ const Dashboard = () => {
       setOrigin(hostname);
       // console.log(hostname, "window.location");
     }
+
+    AuthService.teamStatistic().then((res) => {
+      console.log(res);
+      // 2.5 K
+      // 25 K
+      // 50 K
+      // 100 K
+      // 250 K
+      // 500 K
+      //  1 M
+      //  2.5 M
+      //  5 M
+      //  10 M
+
+      // debugger;
+      if (res.data.referrers.rank === "No Rank") {
+        return setRank(null);
+      } else if (res.data.referrers.rank === "2.5 K") {
+        return setRank({ rank: 1, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "25 K") {
+        return setRank({ rank: 2, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "50 K") {
+        return setRank({ rank: 3, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "100 K") {
+        return setRank({ rank: 4, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "250 K") {
+        return setRank({ rank: 5, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "500 K") {
+        return setRank({ rank: 6, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "1 M") {
+        return setRank({ rank: 7, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "2.5 M") {
+        return setRank({ rank: 8, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "5 M") {
+        return setRank({ rank: 9, club: res.data.referrers.rank });
+      } else if (res.data.referrers.rank === "10 M") {
+        return setRank({ rank: 10, club: res.data.referrers.rank });
+      }
+
+      // setStatistic(res.data.referrers);
+      // setRank({club:})
+    });
 
     AuthService.profits()
       .then((res) => {
@@ -241,10 +284,10 @@ const Dashboard = () => {
                 <div className="img logo">
                   <img src="/assetS/ranks/logo.png" alt="logo" />
                 </div>
-                <h6>{"DAVID"}</h6>
-                <h6>username</h6>
-                <h6>{"name "}</h6>
-                <h5 className="rank1"> {"ranked "} </h5>
+                <h6>{user.firstName}</h6>
+                <h6>{user.lastName}</h6>
+                {/* <h6>{"name "}</h6> */}
+                <h5 className="rank1"> {rank.club} </h5>
                 <div className="ClubWrapper">
                   <h4> Club </h4>
                   <h6> member </h6>
@@ -745,37 +788,45 @@ const Dashboard = () => {
                 >
                   <div
                     style={{
-                      backgroundImage: "url('/assets/ranks/bilder-02.png')",
+                      backgroundImage: rank?.rank
+                        ? `url('/assets/ranks/bilder-0${rank?.rank}.png')`
+                        : "",
                       // height: " calc(100% - 54px)",
                       backgroundSize: "153%",
                     }}
                     className="card-body d-flex align-items-center justify-content-center  flex-column "
                   >
                     {" "}
+                    {!rank?.rank ? (
+                      "no rank"
+                    ) : (
+                      <>
+                        <p
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "calc(100% - 60px)",
+                          }}
+                        >
+                          {rank.club} Club
+                        </p>
+                        <div>
+                          <button
+                            id="RankButton"
+                            className="btn btn-sm btn-neutral"
+                            style={{ float: "right" }}
+                            onClick={() => {
+                              setShowRank(true);
+                            }}
+                          >
+                            {" "}
+                            show rank
+                          </button>
+                        </div>
+                      </>
+                    )}
                     {/* no rank */}
-                    <p
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        height: "calc(100% - 60px)",
-                      }}
-                    >
-                      {"FDJ"} Club
-                    </p>
-                    <div>
-                      <button
-                        id="RankButton"
-                        className="btn btn-sm btn-neutral"
-                        style={{ float: "right" }}
-                        onClick={() => {
-                          setShowRank(true);
-                        }}
-                      >
-                        {" "}
-                        show rank
-                      </button>
-                    </div>
                   </div>
                 </div>
               </div>
