@@ -277,7 +277,7 @@ const Deposit: React.FC<Props> = ({
     AuthService.transactionCheck(id)
       .then((res) => {
         console.log(res);
-        if (res.data.deposit.status === "COMPLETED") {
+        if (res.data.deposit.status === "COMPLETE") {
           setTransactionDone(true);
           clearTimeout(timeout);
         } else {
