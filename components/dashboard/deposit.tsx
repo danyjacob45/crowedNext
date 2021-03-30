@@ -401,7 +401,8 @@ const Deposit: React.FC<Props> = ({
                 <div className="d-flex justify-content-between mb-2">
                   <span>Amount: </span>
                   <span id="amountAth">
-                    {openETH?.crypto} {depositType}{" "}
+                    {depositType === "ETH" ? openETH?.crypto : amount}{" "}
+                    {depositType}{" "}
                   </span>
                 </div>
                 {/* <button className="btn p-0 btn-icon fa fa-copy copyBtn">
