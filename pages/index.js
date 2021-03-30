@@ -763,7 +763,8 @@ const home = () => {
                   have created a unique cultivation concept - our so-called
                   Growing Street. This concept has been tested and perfected
                   over the past 2 years and is now ready to be offered in its
-                  current form to the global market.
+                  current form to the global market. To sum up our goals and
+                  vision: (ICONS)
                 </p>
               </div>
             </ScrollAnimation>
@@ -782,7 +783,7 @@ const home = () => {
                   <div className="number">01</div>
                   <div className="about-img">
                     <p className="mt-3">
-                      Positively impact thousands of people’s health by
+                      - Positively impact thousands of people’s health by
                       developing the highest quality of cannabis products and
                       boost the global distribution.
                     </p>
@@ -801,9 +802,8 @@ const home = () => {
                   <div className="number">02</div>
                   <div className="about-img">
                     <p className="mt-3">
-                      Positively impact thousands of people’s health by
-                      developing the highest quality of cannabis products and
-                      boost the global distribution.
+                      - Give people an opportunity to easily participate in the
+                      emerging market of cannabis through our business model.
                     </p>
                   </div>
                 </div>{" "}
@@ -820,9 +820,8 @@ const home = () => {
                   <div className="number">03</div>
                   <div className="about-img">
                     <p className="mt-3">
-                      Positively impact thousands of people’s health by
-                      developing the highest quality of cannabis products and
-                      boost the global distribution.
+                      - With a sustainable as well as profitable business we aim
+                      to become a global market leader in the cannabis industry.
                     </p>
                   </div>
                 </div>

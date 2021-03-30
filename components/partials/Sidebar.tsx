@@ -163,7 +163,15 @@ const Sidebar = () => {
               <a className="navbar-brand pr-1 d-flex" href="/profile">
                 <img
                   height="31"
-                  src={auth?.user?.picture || "/assets/images/logo.png"}
+                  style={{
+                    borderRadius: "50px",
+                    width: "31px",
+                    objectFit: "cover",
+                  }}
+                  src={
+                    "http://51.255.211.219:8080/api/v1/open/files/" +
+                      auth?.user?.picture || "/assets/images/logo.png"
+                  }
                   alt="avatar"
                 />
 

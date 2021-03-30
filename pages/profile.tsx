@@ -138,7 +138,12 @@ const profile = () => {
           <div className="sa-button-container">
             <div className="sa-confirm-button-container">
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  if (showModal !== "profile") {
+                    window.location.reload();
+                  }
+                  setShowModal(false);
+                }}
                 className="confirm btn btn-lg btn-primary"
               >
                 OK
