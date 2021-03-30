@@ -50,7 +50,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/tr/flat/64.png"
+                            ></img>
                             Business Presentation PDF TK
                           </span>
                         </a>
@@ -65,7 +71,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/de/flat/64.png"
+                            ></img>
                             Business Presentation PDF GER
                           </span>
                         </a>
@@ -80,7 +92,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/ru/flat/64.png"
+                            ></img>
                             Business Presentation PDF RUS
                           </span>
                         </a>
@@ -95,7 +113,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/vn/flat/64.png"
+                            ></img>
                             Business Presentation PDF VN
                           </span>
                         </a>
@@ -110,7 +134,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/es/flat/64.png"
+                            ></img>
                             Business Presentation PDF ES
                           </span>
                         </a>
@@ -125,7 +155,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.crwflags.com/fotw/images/g/gb-eng.gif"
+                            ></img>
                             Business Presentation PDF EN
                           </span>
                         </a>
@@ -140,7 +176,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/cn/flat/64.png"
+                            ></img>
                             Business Presentation PDF CHN
                           </span>
                         </a>
@@ -155,7 +197,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/pl/flat/64.png"
+                            ></img>
                             Business Presentation PDF POL
                           </span>
                         </a>
@@ -171,7 +219,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://www.countryflags.io/st/flat/64.png"
+                            ></img>
                             Business Presentation PDF EST
                           </span>
                         </a>
@@ -186,7 +240,13 @@ const marketing = () => {
                               display: "inline-block",
                               minWidth: "156px",
                             }}
+                            className="d-flex align-items-center justify-content-center"
                           >
+                            <img
+                              width="30"
+                              className="mr-2"
+                              src="https://cdn.britannica.com/49/6249-004-D8906A92/Flag-Latvia.jpg"
+                            ></img>
                             Business Presentation PDF LVA
                           </span>
                         </a>
