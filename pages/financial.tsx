@@ -246,14 +246,8 @@ const financial = () => {
                     </th>
                     <th className="bold12">Deposit</th>
                     <th className="bold12">
-                      {transactions.length &&
-                        // @ts-ignore: Unreachable code error
-                        transactions?.reduce((sum: any, el: any) => {
-                          if (sum.finalAmount) {
-                            return sum.finalAmount + el.finalAmount;
-                          }
-                          return sum + el.finalAmount;
-                        })}{" "}
+                      {investments.length &&
+                        getSum(transactions, "finalAmount").toFixed(2)}
                       $
                     </th>
                     <th className="bold12">ETH</th>
