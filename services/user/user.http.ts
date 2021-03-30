@@ -128,6 +128,16 @@ class _UserService {
     );
   };
 
+  withdrawList = () => {
+    return axios.post(
+      storeBackEndRoutes.user.withdrawList(),
+      {},
+      {
+        ...axiosHeaderConfig(),
+      }
+    );
+  };
+
   deleteWithdraws = (id: any) => {
     return axios.post(
       storeBackEndRoutes.user.deleteWithdraws(id),

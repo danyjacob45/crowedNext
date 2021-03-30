@@ -51,6 +51,7 @@ export const storeBackEndRoutes = {
     addAditWithdraw: () => `${BASE_URL}/private/user/withdraws/address`,
     getWithdraws: () => `${BASE_URL}/private/user/withdraws/address/list`,
     withdraw: () => `${BASE_URL}/private/user/withdraw`,
+    withdrawList: () => `${BASE_URL}/private/user/withdraws`,
     deleteWithdraws: (id: any) =>
       `${BASE_URL}/private/user/withdraws/address/remove/${id}`,
   },

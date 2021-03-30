@@ -166,12 +166,28 @@ const Dashboard = () => {
         })),
       ];
       // debugger;
-      data = data.sort(function (x, y) {
-        return y.createdAt - x.createdAt;
+      AuthService.withdrawList().then((withdrawRes) => {
+        // debugger;
+        // setWithdraw(res.data.withdraws.content);
+        data = [
+          ...data,
+          ...withdrawRes.data.withdraws.content.map((el) => ({
+            ...el,
+            nType: "withdraw",
+          })),
+        ];
+
+        data = data.sort(function (x, y) {
+          return y.createdAt - x.createdAt;
+        });
+        // debugger;/
+        // if (res.data.transactions.deposits.content) debugger;
+
+        setTransactions(data);
+        // debugger;
+        // setHasReferrer(res.data.referrers && res.data.referrers.length);
       });
-      // debugger;/
-      // if (res.data.transactions.deposits.content) debugger;
-      setTransactions(data);
+
       // debugger;
       // setHasReferrer(res.data.referrers && res.data.referrers.length);
     });

@@ -127,7 +127,6 @@ const home = () => {
   const onSubmitLogin = (data) => {
     AuthService.login(data)
       .then((res) => {
-        // debugger;
         if (res.data.token) {
           // localStorage.setItem("token", res.data.token);
           // console.log(res.data, "rrress")
@@ -146,8 +145,9 @@ const home = () => {
                 }
               )
               .then((res2) => {
+                // if (true) {
+                // if (res2.data.user.security.emailVerified) {
                 if (true) {
-                  // if (res.data.user.security.emailVerified) {
                   dispatch(
                     setCurrentUser({
                       user: res.data.user,

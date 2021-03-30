@@ -12,6 +12,7 @@ const financial = () => {
   const [activeTab, setActiveTab] = useState<any>(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
   const [transactions, setTransactions] = useState([]);
+  const [withdraw, setWithdraw] = useState<any>([]);
   const [team, setTeam] = useState<any>([]);
   const [directComissions, setDirectComissions] = useState<any>([]);
   const [investments, setInvestments] = useState<any>([]);
@@ -19,6 +20,13 @@ const financial = () => {
   useEffect(() => {
     AuthService.transactions().then((res) => {
       setTransactions(res.data.deposits.content);
+      // debugger;
+      // setHasReferrer(res.data.referrers && res.data.referrers.length);
+    });
+
+    AuthService.withdrawList().then((res) => {
+      // debugger;
+      setWithdraw(res.data.withdraws.content);
       // debugger;
       // setHasReferrer(res.data.referrers && res.data.referrers.length);
     });
@@ -34,7 +42,6 @@ const financial = () => {
       // console.log(teams);
       // debugger;
       // debugger;
-      debugger;
       setTeam(res.data.investments.content.filter((el) => el.from === "BONUS"));
       setDirectComissions(
         res.data.investments.content.filter((el) => el.from === "DIRECT")
@@ -250,7 +257,7 @@ const financial = () => {
                         getSum(transactions, "finalAmount").toFixed(2)}
                       $
                     </th>
-                    <th className="bold12">ETH</th>
+                    <th className="bold12">Crypto</th>
                     <th className="bold12">
                       {transactions.length &&
                         // @ts-ignore: Unreachable code error
@@ -274,6 +281,90 @@ const financial = () => {
                         <td>{el?.type} </td>
                         <td>{el.finalAmount} $</td>
                         <td>{el.depositMethod}</td>
+                        <td>
+                          {" "}
+                          {time.getFullYear() +
+                            "/" +
+                            (time.getMonth() + 1) +
+                            "/" +
+                            time.getDate() +
+                            " "}
+                          {time.getHours() +
+                            ":" +
+                            time.getMinutes() +
+                            ":" +
+                            time.getSeconds()}{" "}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+
+                {/* ///////////// */}
+
+                <thead
+                  onClick={() => {
+                    if (activeTab === "withdraws") {
+                      setActiveTab(null);
+                    } else {
+                      setActiveTab("withdraws");
+                    }
+                  }}
+                >
+                  <tr>
+                    <th>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="plus-circle"
+                        role="img"
+                        width="11"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        className="svg-inline--fa fa-plus-circle fa-w-16 fa-2x"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"
+                          className=""
+                        ></path>
+                      </svg>
+                    </th>
+                    <th className="bold12">withdraw</th>
+                    <th className="bold12">
+                      {/* {investments.length &&
+                        // @ts-ignore: Unreachable code error
+                        transactions?.reduce((sum: any, el: any) => {
+                          if (sum.finalAmount) {
+                            return sum.finalAmount + el.finalAmount;
+                          }
+                          return sum + el.finalAmount;
+                        })}{" "} */}
+                      {withdraw.length && getSum(withdraw, "amount")}$
+                    </th>
+                    <th className="bold12">Bitcoin</th>
+                    <th className="bold12">
+                      {withdraw.length && getLastDate(withdraw[0].createdAt)}
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody
+                  style={{
+                    display: activeTab === "withdraws" ? "contents" : "none",
+                  }}
+                >
+                  {withdraw.map((el: any, i) => {
+                    const time = new Date(el.createdAt);
+                    return (
+                      <tr key={i}>
+                        <td></td>
+
+                        <td>{"withdraw"} </td>
+                        <td>{el.amount} $</td>
+
+                        <td> Bitcoin </td>
                         <td>
                           {" "}
                           {time.getFullYear() +
