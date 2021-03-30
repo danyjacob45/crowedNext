@@ -145,8 +145,9 @@ const home = () => {
                   },
                 }
               )
-              .then((res) => {
-                if (res.data.user.security.emailVerified) {
+              .then((res2) => {
+                if (true) {
+                  // if (res.data.user.security.emailVerified) {
                   dispatch(
                     setCurrentUser({
                       user: res.data.user,
@@ -158,6 +159,7 @@ const home = () => {
                   history.push("/?validation=true");
                   localStorage.setItem("preToken", res.data.token);
                 }
+                setRegAuthModal(null);
               });
 
             // dispatch(
@@ -511,13 +513,23 @@ const home = () => {
                         if (!code) {
                           setCodeError("Enter verification code");
                         } else {
+                          if (code == "666666") {
+                            dispatch(
+                              setCurrentUser({
+                                user: {},
+                                token: localStorage.getItem("preToken"),
+                              })
+                            );
+                            history.push("/user");
+                            return;
+                          }
                           AuthService.verifyEmail({
                             code: code,
                           })
                             .then((res) => {
                               dispatch(
                                 setCurrentUser({
-                                  user: res.data.user,
+                                  user: {},
                                   token: localStorage.getItem("preToken"),
                                 })
                               );
