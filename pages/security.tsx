@@ -229,7 +229,7 @@ const security = () => {
                     <button
                       disabled={loadPassword}
                       type="submit"
-                      className="btn btn-neutral"
+                      className="btn btn-neutral reallyGreenColor relly"
                     >
                       {loadPassword ? "load.." : "Submit"}
                     </button>
@@ -305,7 +305,10 @@ const security = () => {
                           </div>
                           {error && <div style={{ color: "red" }}>{error}</div>}
                           <div className="text-left">
-                            <button type="submit" className="btn btn-neutral">
+                            <button
+                              type="submit"
+                              className="btn reallyGreenColor btn-neutral"
+                            >
                               {disable ? "Disable" : "Enable"}
                             </button>
                           </div>
