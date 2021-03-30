@@ -197,7 +197,7 @@ const withdrawalAddress = () => {
           <div className="card" id="other">
             <div className="card-header header-elements-inline">
               <a
-                className="btn btn-dark btn-sm text-white"
+                className="btn  btn-sm  reallyGreenColor text-white"
                 data-toggle="modal"
                 data-target="#create"
                 onClick={() => {
