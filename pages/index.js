@@ -26,6 +26,7 @@ import { AuthService } from "../services/auth/auth.http";
 import { setCurrentUser, setCurrentStore } from "../store/auth/authActions";
 import { useDispatch } from "react-redux";
 import Footer from "../components/footer";
+import axios from "axios";
 
 const home = () => {
   const {
@@ -126,7 +127,7 @@ const home = () => {
   const onSubmitLogin = (data) => {
     AuthService.login(data)
       .then((res) => {
-        debugger;
+        // debugger;
         if (res.data.token) {
           // localStorage.setItem("token", res.data.token);
           // console.log(res.data, "rrress")
@@ -134,14 +135,37 @@ const home = () => {
           if (res.data.fa_status == 1) {
             // window.location.href = "http://crowd-growing.com/2fa";
           } else {
-            dispatch(
-              setCurrentUser({
-                user: res.data.user,
-                token: res.data.token,
-              })
-            );
+            axios
+              .post(
+                "http://51.255.211.219:8080/api/v1/private/user/me",
+                {},
+                {
+                  headers: {
+                    Authorization: `Bearer ${res.data.token}`,
+                  },
+                }
+              )
+              .then((res) => {
+                if (res.data.user.security.emailVerified) {
+                  dispatch(
+                    setCurrentUser({
+                      user: res.data.user,
+                      token: res.data.token,
+                    })
+                  );
+                  history.push("/user");
+                } else {
+                  history.push("/?validation=true");
+                  localStorage.setItem("preToken", res.data.token);
+                }
+              });
 
-            history.push("/user");
+            // dispatch(
+            //   setCurrentUser({
+            //     user: res.data.user,
+            //     token: res.data.token,
+            //   })
+            // );
 
             // window.location.href = "http://crowd-growing.com/user/dashboard";
             // window.location.href = 'http://crowd-growing.conm/user/dashboard';
