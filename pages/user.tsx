@@ -157,11 +157,12 @@ const Dashboard = () => {
         })),
         ...res.data.transactions.investments.content.map((el) => ({
           ...el,
+          amount: el.extra,
           nType: el.from === "DIRECT" ? "Direct Commission" : "Residual Bonus",
         })),
         ...res.data.transactions.profits.content.map((el) => ({
           ...el,
-          nType: "Profit share",
+          nType: "Investment",
         })),
       ];
       // debugger;
@@ -392,7 +393,7 @@ const Dashboard = () => {
                       data-target="#modal-formx2"
                       href=""
                       id="Wi"
-                      className="btn btn-sm btn-neutral greenColor"
+                      className="btn btn-sm btn-neutral greenColor reallyGreenColor "
                       onClick={(e: any) => {
                         e.preventDefault();
                         setOpenDepositModals(true);
@@ -409,7 +410,7 @@ const Dashboard = () => {
                         e.preventDefault();
                         setOpenWithdrawalModals(true);
                       }}
-                      className="btn btn-sm btn-neutral greenColor right "
+                      className="btn btn-sm btn-neutral greenColor reallyGreenColor right "
                     >
                       <i className="fa fa-arrow-right"></i> Withdrawal{" "}
                     </a>

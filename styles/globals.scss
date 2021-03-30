@@ -103,6 +103,9 @@ select {
   border-radius: 0.2em;
   font-size: 0.9em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  &:hover {
+    background: #5e8f3b !important;
+  }
 }
 
 .notification::before,
@@ -1276,15 +1279,27 @@ body {
 // .card-body {
 //   padding: 2rem 1.5rem !important;
 // }
+.reallyGreenColor {
+  background-color: #5e8f3b !important;
+  &:hover {
+    color: #aee289 !important;
+  }
+}
 
 .main-content-Dashboard .greenColor {
+  &.reallyGreenColor {
+    background-color: #5e8f3b !important;
+    &:hover {
+      color: #aee289 !important;
+    }
+  }
   color: #fff;
   &:hover {
     color: #ccc;
   }
 }
 .card.bg-white.investNowCard {
-  background-color: #aaaaaa !important;
+  background-color: #5e8f3b !important;
 }
 
 .btn-neutral {
@@ -1316,7 +1331,7 @@ body {
 }
 
 .navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
-  background: #aaa !important;
+  background: #5e8f3b !important;
 }
 
 .navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link:hover {

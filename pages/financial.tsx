@@ -128,7 +128,7 @@ const financial = () => {
                               data-target="#modal-formx2"
                               href=""
                               id="Wi"
-                              className="btn btn-sm btn-neutral"
+                              className="btn btn-sm btn-neutral  reallyGreenColor"
                               onClick={(e: any) => {
                                 e.preventDefault();
                                 setOpenDepositModals(true);
@@ -178,7 +178,7 @@ const financial = () => {
                               data-target="#modal-formx"
                               href=""
                               id="Wi"
-                              className="btn btn-sm btn-neutral"
+                              className="btn btn-sm btn-neutral reallyGreenColor"
                               onClick={(e: any) => {
                                 e.preventDefault();
                                 setOpenWithdrawalModals(true);

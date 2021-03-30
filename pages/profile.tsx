@@ -243,7 +243,10 @@ const profile = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <button type="submit" className="btn btn-neutral">
+                    <button
+                      type="submit"
+                      className="btn reallyGreenColor btn-neutral"
+                    >
                       Update<i className="icon-paperplane ml-2"></i>
                     </button>
                   </div>
@@ -293,7 +296,10 @@ const profile = () => {
                     </span>
                   </div>
                   <div className="text-right">
-                    <button type="submit" className="btn btn-neutral">
+                    <button
+                      type="submit"
+                      className="btn reallyGreenColor btn-neutral"
+                    >
                       Upload<i className="icon-paperplane ml-2"></i>
                     </button>
                   </div>
