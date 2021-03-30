@@ -224,7 +224,7 @@ const marketing = () => {
                             <img
                               width="30"
                               className="mr-2"
-                              src="https://www.countryflags.io/st/flat/64.png"
+                              src="https://www.countryflags.io/ee/flat/64.png"
                             ></img>
                             Business Presentation PDF EST
                           </span>
