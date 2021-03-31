@@ -531,7 +531,7 @@ const Deposit: React.FC<Props> = ({
                   type="button"
                   className="btn btn-secondary"
                   data-dismiss="modal"
-                  onChange={() => {
+                  onClick={() => {
                     closeModal();
                   }}
                 >
