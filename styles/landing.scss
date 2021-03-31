@@ -3119,21 +3119,20 @@ a:hover {
 
   span {
     position: absolute;
-    font-size: 69px;
+    font-size: 26px;
     text-transform: uppercase;
     color: #2ea031ad;
     z-index: 1;
-    top: -45px;
-    left: -13px;
+    top: -7px;
+    left: -2px;
     font-weight: bold;
     &.pink {
       color: #ef476f85;
     }
 
     @media screen and (max-width: 776px) {
-      font-size: 49px;
-      top: -25px;
-
+      font-size: 27px;
+      top: -6px;
       left: -3px;
     }
   }

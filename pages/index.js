@@ -508,7 +508,7 @@ const home = () => {
                     <a
                       href="#"
                       onClick={() => {
-                        // setRegisterSuccessModal(false);
+                        // setRegisterSuccessModFal(false);
                         // setRegAuthModal("login");
                         if (!code) {
                           setCodeError("Enter verification code");
@@ -819,7 +819,7 @@ const home = () => {
                   <div className="number">01</div>
                   <div className="about-img">
                     <p className="mt-3">
-                      - Positively impact thousands of people’s health by
+                      Positively impact thousands of people’s health by
                       developing the highest quality of cannabis products and
                       boost the global distribution.
                     </p>
@@ -838,7 +838,7 @@ const home = () => {
                   <div className="number">02</div>
                   <div className="about-img">
                     <p className="mt-3">
-                      - Give people an opportunity to easily participate in the
+                      Give people an opportunity to easily participate in the
                       emerging market of cannabis through our business model.
                     </p>
                   </div>
@@ -856,7 +856,7 @@ const home = () => {
                   <div className="number">03</div>
                   <div className="about-img">
                     <p className="mt-3">
-                      - With a sustainable as well as profitable business we aim
+                      With a sustainable as well as profitable business we aim
                       to become a global market leader in the cannabis industry.
                     </p>
                   </div>
