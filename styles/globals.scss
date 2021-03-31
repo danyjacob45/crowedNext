@@ -1651,6 +1651,9 @@ body {
   background-size: cover;
   color: #fff;
   background-size: cover !important;
+  &.Professional {
+    background: #a72872 !important;
+  }
 }
 
 .statusBg {
