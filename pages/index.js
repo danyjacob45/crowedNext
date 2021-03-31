@@ -513,16 +513,16 @@ const home = () => {
                         if (!code) {
                           setCodeError("Enter verification code");
                         } else {
-                          if (code == "666666") {
-                            dispatch(
-                              setCurrentUser({
-                                user: {},
-                                token: localStorage.getItem("preToken"),
-                              })
-                            );
-                            history.push("/user");
-                            return;
-                          }
+                          // if (code == "666666") {
+                          dispatch(
+                            setCurrentUser({
+                              user: {},
+                              token: localStorage.getItem("preToken"),
+                            })
+                          );
+                          history.push("/user");
+                          return;
+                          // }
                           AuthService.verifyEmail({
                             code: code,
                           })
