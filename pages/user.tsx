@@ -162,6 +162,7 @@ const Dashboard = () => {
           ...el,
           nType: el.depositMethod,
           amount: el.finalAmount,
+          deposit: true,
         })),
         ...res.data.transactions.investments.content.map((el) => ({
           ...el,
@@ -1053,7 +1054,17 @@ const Dashboard = () => {
 
                           return (
                             <tr key={i}>
-                              <td>{el?.nType}</td>
+                              <td>
+                                {el?.nType}
+                                {el.deposit ? (
+                                  <span
+                                    style={{ color: "#000" }}
+                                    className="badge bg-secondary ml-3"
+                                  >
+                                    {el.status}
+                                  </span>
+                                ) : null}
+                              </td>
                               <td>{el.amount} $</td>
                               <td>
                                 {/* 2020/10/24 06:22:AM */}

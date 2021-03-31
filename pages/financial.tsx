@@ -278,7 +278,17 @@ const financial = () => {
                       <tr key={i}>
                         <td></td>
 
-                        <td>{el?.type} </td>
+                        <td>
+                          {el?.type}
+                          {el.status ? (
+                            <span
+                              style={{ color: "#000" }}
+                              className="badge bg-secondary ml-3"
+                            >
+                              {el.status}
+                            </span>
+                          ) : null}
+                        </td>
                         <td>{el.finalAmount} $</td>
                         <td>{el.depositMethod}</td>
                         <td>
