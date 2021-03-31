@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import ModalContainer from "../common/modal/modalContainer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { AuthService } from "../../services/user/user.http";
@@ -13,6 +15,10 @@ const Deposit: React.FC<Props> = ({
   openDepositModal,
   setOpenDepositModals,
 }) => {
+  const { user } = useSelector((store: any) => {
+    return store.auth;
+  });
+
   const [depositType, setDepositType] = useState("BTC");
   const [copyReferer, setCopyReferer] = useState(false);
   const [copyReferer2, setCopyReferer2] = useState(false);
@@ -452,8 +458,9 @@ const Deposit: React.FC<Props> = ({
               </div>
               <hr className="my-3" />
               <h4 style={{ color: "#000" }} className="text-center m-0">
-                To complete your payment, please send 0.0078758016803903{" "}
-                {depositType} to the address below.
+                To complete your payment, please send{" "}
+                {depositType === "ETH" ? openETH?.crypto : amount} {depositType}{" "}
+                to the address below.
               </h4>
               <div
                 style={{ flexDirection: "column", alignItems: "center" }}
@@ -577,7 +584,7 @@ const Deposit: React.FC<Props> = ({
               className="text-center mb-4"
               style={{ fontWeight: "bold", fontSize: "19px" }}
             >
-              Balance $0.00
+              Balance ${user.balance.spendable.toFixed(2)}
             </div>
             <div className="form-group row">
               <div className="text-center w-100 mb-0">

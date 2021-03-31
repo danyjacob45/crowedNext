@@ -3,6 +3,7 @@ import ModalContainer from "../common/modal/modalContainer";
 import classnames from "classnames";
 import { AuthService } from "../../services/user/user.http";
 import { red } from "@material-ui/core/colors";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
   openWithdrawalModal: Boolean;
@@ -13,6 +14,10 @@ const Withdrawal: React.FC<Props> = ({
   openWithdrawalModal,
   setOpenWithdrawalModals,
 }) => {
+  const { user } = useSelector((store: any) => {
+    return store.auth;
+  });
+
   const [depositType, setDepositType] = useState("BITCOIN");
   const [addressList, setAddressList] = useState([]);
   const [address, setAddress] = useState("");
@@ -144,7 +149,9 @@ const Withdrawal: React.FC<Props> = ({
             <div className="row">
               <div className="col-lg-12">
                 <div className="card-header header-elements-inline">
-                  <h2 className="text-center colorBlack">Balance $0.00</h2>
+                  <h2 className="text-center colorBlack">
+                    Balance ${user.balance.spendable.toFixed(2)}
+                  </h2>
                 </div>
               </div>
             </div>
