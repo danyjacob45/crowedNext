@@ -157,8 +157,8 @@ const withdrawalAddress = () => {
                       name="method"
                     >
                       <option value="BITCOIN">Bitcoin</option>
-                      <option value="ETH">Ethereum</option>
-                      <option value="USDT">Usdt</option>
+                      {/* <option value="ETH">Ethereum</option>
+                      <option value="USDT">Usdt</option> */}
                     </select>
                   </div>
                 </div>
