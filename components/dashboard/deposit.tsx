@@ -584,7 +584,7 @@ const Deposit: React.FC<Props> = ({
               className="text-center mb-4"
               style={{ fontWeight: "bold", fontSize: "19px" }}
             >
-              Balance ${user.balance.spendable.toFixed(2)}
+              Balance ${user?.balance?.spendable.toFixed(2)}
             </div>
             <div className="form-group row">
               <div className="text-center w-100 mb-0">

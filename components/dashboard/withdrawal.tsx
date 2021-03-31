@@ -24,6 +24,7 @@ const Withdrawal: React.FC<Props> = ({
   const [amount, setAmount] = useState("");
   const [loader, setLoader] = useState(false);
   const [done, setDone] = useState(false);
+  const [serverError, setServerError] = useState<any>(false);
 
   useEffect(() => {
     AuthService.getWithdraws().then((res) => {
@@ -48,6 +49,10 @@ const Withdrawal: React.FC<Props> = ({
       .catch((err) => {
         console.log(err);
         setLoader(false);
+        debugger;
+        if (err?.response?.data?.errors) {
+          setServerError(err.response.data.errors.WITHDRAW_REQUEST);
+        }
       });
   };
 
@@ -150,7 +155,7 @@ const Withdrawal: React.FC<Props> = ({
               <div className="col-lg-12">
                 <div className="card-header header-elements-inline">
                   <h2 className="text-center colorBlack">
-                    Balance ${user.balance.spendable.toFixed(2)}
+                    Balance ${user?.balance?.spendable.toFixed(2)}
                   </h2>
                 </div>
               </div>
@@ -159,6 +164,17 @@ const Withdrawal: React.FC<Props> = ({
               <div className="mb-3" style={{ color: "#000" }}>
                 Method
               </div>
+              {serverError && (
+                <div
+                  style={{
+                    color: "red",
+                    marginBottom: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  {serverError}
+                </div>
+              )}
               <div className="methodGroup">
                 <span
                   onClick={() => {
@@ -220,6 +236,7 @@ const Withdrawal: React.FC<Props> = ({
                     name="amount"
                     min="50"
                     onChange={(e: any) => {
+                      setServerError("");
                       setAmount(e.target.value);
                     }}
                     value={amount}
@@ -257,6 +274,8 @@ const Withdrawal: React.FC<Props> = ({
                   data-fouc=""
                   //   required=""
                   onChange={(e: any) => {
+                    setServerError("");
+
                     const selected: any = addressList.find(
                       (el: any) => el.address === e.target.value
                     );
@@ -284,6 +303,7 @@ const Withdrawal: React.FC<Props> = ({
               <button
                 onClick={(e) => {
                   // debugger;
+                  if (!address) return;
                   e.preventDefault();
                   withdraw();
                   // @ts-ignore: Unreachable code error
