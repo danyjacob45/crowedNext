@@ -147,6 +147,14 @@ const Dashboard = () => {
 
     AuthService.getTeam().then((res) => {
       setHasReferrer(res.data.referrers && res.data.referrers["level-1"]);
+      let teams: any = [];
+
+      for (const key in res.data.referrers) {
+        teams = [...teams, ...res.data.referrers[key]];
+      }
+
+      console.log(teams.length);
+      // debugger;
     });
     AuthService.transactionsAll().then((res) => {
       let data: any = [
@@ -163,6 +171,11 @@ const Dashboard = () => {
         ...res.data.transactions.profits.content.map((el) => ({
           ...el,
           nType: "Investment",
+        })),
+        ...res.data.transactions.profits.content.map((el) => ({
+          ...el,
+          amount: el.profit,
+          nType: "Profit share",
         })),
       ];
       // debugger;
