@@ -1554,62 +1554,6 @@ const home = () => {
         </Element>
         <Element
           style={{ position: "relative" }}
-          name="OurCEO"
-          className="profits Seo ourTeam"
-        >
-          <div className="container pt-5">
-            {/* <h2 className="">Our Team</h2> */}
-
-            <ScrollAnimation animateOnce={true} animateIn="animate__fadeInUp">
-              <div className="row">
-                <div className="col-12 col-md-6 text-right">
-                  <h2>
-                    BORIS MELICHOV <span style={{ fontWeight: 400 }}> CEO</span>
-                  </h2>
-                  <p>
-                    Boris Melichov is an Austrian entrepreneur with many years
-                    of business experience. Over the last 20 years he has built
-                    up 12 different companies in diverse business areas with
-                    over 200 employees working for his companies.
-                  </p>
-                  <p>
-                    When the CBD market in Europe began to flourish in 2016, a
-                    family stroke of fate brought the cannabis & CBD industry to
-                    his attention, as he gave his father CBD products to relieve
-                    his pain of end-stage cancer. Shortly after his father
-                    passed away, Boris embraced it as his vision and mission to
-                    support the development of the CBD market, as he was
-                    convinced of the positive impact of its products.
-                  </p>
-                  <p>
-                    Since then he built up a huge network within the European
-                    cannabis industry and was working as an agronomic consultant
-                    for many facilities and corporations. He got to know and
-                    partnered with Crowd Growing in 2018 as both their visions
-                    share similarities and a mutual synergy was recognized.
-                    Since then he has been one of the key specialists in terms
-                    of developing the concept of our unique “growing street”.
-                  </p>
-                  <p>
-                    Since end of 2020 Boris Melichov is officially the CEO of
-                    Crowd Growing.
-                  </p>
-                  <p>
-                    Living in Bulgaria, where also one of our main cooperation
-                    partners is located, his main tasks are the controlling as
-                    well as the expansion of the facilities and the extension of
-                    the existing and potential new co-operations.
-                  </p>
-                </div>
-                <div className="col-12 col-md-6">
-                  <img className="w-100 mt-5 pt-1" src="/assets/imgs/seo.png" />
-                </div>
-              </div>
-            </ScrollAnimation>
-          </div>
-        </Element>
-        <Element
-          style={{ position: "relative" }}
           name="RoadMap"
           className="RoadMap"
         >
