@@ -5,6 +5,11 @@ import ModalContainer from "../common/modal/modalContainer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { AuthService } from "../../services/user/user.http";
 import axios from "axios";
+import {
+  setCurrentUser,
+  setCurrentStore,
+  updateUser,
+} from "../../store/auth/authActions";
 import classnames from "classnames";
 interface Props {
   openDepositModal: Boolean;
@@ -18,6 +23,8 @@ const Deposit: React.FC<Props> = ({
   const { user } = useSelector((store: any) => {
     return store.auth;
   });
+
+  const dispatch = useDispatch();
 
   const [depositType, setDepositType] = useState("BTC");
   const [copyReferer, setCopyReferer] = useState(false);
@@ -285,6 +292,17 @@ const Deposit: React.FC<Props> = ({
         console.log(res);
         if (res.data.deposit.status === "COMPLETE") {
           setTransactionDone(true);
+          dispatch(
+            updateUser({
+              user: {
+                ...user,
+                balance: {
+                  ...user.balance,
+                  spendable: Number(user.balance.spendable) - Number(amount),
+                },
+              },
+            })
+          );
           clearTimeout(timeout);
         } else {
           // debugger;
