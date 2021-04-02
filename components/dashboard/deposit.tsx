@@ -298,7 +298,7 @@ const Deposit: React.FC<Props> = ({
                 ...user,
                 balance: {
                   ...user.balance,
-                  spendable: Number(user.balance.spendable) - Number(amount),
+                  spendable: Number(user.balance.spendable) + Number(amount),
                 },
               },
             })

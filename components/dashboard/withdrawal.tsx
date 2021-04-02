@@ -4,6 +4,11 @@ import classnames from "classnames";
 import { AuthService } from "../../services/user/user.http";
 import { red } from "@material-ui/core/colors";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  setCurrentUser,
+  setCurrentStore,
+  updateUser,
+} from "../../store/auth/authActions";
 
 interface Props {
   openWithdrawalModal: Boolean;
@@ -17,6 +22,8 @@ const Withdrawal: React.FC<Props> = ({
   const { user } = useSelector((store: any) => {
     return store.auth;
   });
+
+  const dispatch = useDispatch();
 
   const [depositType, setDepositType] = useState("BITCOIN");
   const [addressList, setAddressList] = useState([]);
@@ -44,6 +51,17 @@ const Withdrawal: React.FC<Props> = ({
         setLoader(false);
         setDone(true);
         console.log(res);
+        dispatch(
+          updateUser({
+            user: {
+              ...user,
+              balance: {
+                ...user.balance,
+                spendable: Number(user.balance.spendable) - Number(amount),
+              },
+            },
+          })
+        );
         // debugger;
       })
       .catch((err) => {
