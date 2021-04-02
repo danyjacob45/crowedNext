@@ -310,6 +310,16 @@ body.stop-scrolling {
   z-index: 2000;
 }
 @media all and (max-width: 767px) {
+  .problemSolving {
+    max-width: calc(100vw - 40px);
+    margin: auto;
+  }
+  .input-group-prepend {
+    height: 35px;
+  }
+  .dataTables_length {
+    justify-content: center;
+  }
   .sweet-alert {
     width: auto;
     margin-left: 0;

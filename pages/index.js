@@ -1094,7 +1094,10 @@ const home = () => {
               </div>
             </div>
 
-            <div style={{ color: "#fff" }} className="row mt-5 pt-5">
+            <div
+              style={{ color: "#fff" }}
+              className="row problemSolving mt-5 pt-5"
+            >
               <div className="col-12  mb-4 mt-4">
                 <h1>The main problems</h1>
               </div>
@@ -1157,51 +1160,6 @@ const home = () => {
                   clients.
                 </div>
               </div>
-              {/* <div className="col-12 col-md-6">
-                Problems of investors in this market:
-                <br />
-                <div style={{ color: " #ef476f" }} className="mt-3">
-                  The main problems investors face when entering the cannabis
-                  market are, in a nutshell, the following:
-                </div>
-                <div style={{ color: " #ef476f" }} className="mt-3">
-                  A large investment is needed to get started, as facilities,
-                  products, equipment, etc. need to be financed to launch the
-                  business. Furthermore, many people lack the specific expertise
-                  in the cannabis market to be able to implement something
-                  profitable and functional.
-                </div>
-                <div style={{ color: " #ef476f" }} className="mt-3">
-                  Also difficult and varying regulations in different countries
-                  make it even more challenging to enter the cannabis business.
-                </div>
-              </div>
-              <div className="col-12 col-md-6 pt-4 pt-md-0">
-                <span className="OurSolution" style={{ color: "#2ea031" }}>
-                  Our solution:
-                </span>
-                <div className="mt-3">
-                  The big advantage for customers of Crowd Growing is that they
-                  can easily profit from the cannabis market. Crowd Growing
-                  enables them to profit with the same leverage that normally
-                  only big investors in this market have, as they provide the
-                  necessary infrastructure.
-                </div>
-                <div className="mt-3">
-                  Crowd Growing provides the complete chain of logistics and
-                  hosts the customers‘ equipment. This provides each customer
-                  the opportunity to become a part of a big player in this
-                  market without the need of their own products, facilities or
-                  expertise.
-                </div>
-                <div className="mt-3">
-                  Since our growing strategy is based on a certain cycle, where
-                  each week new plants are planted as well as old plants are
-                  harvested, it is possible to sell new harvests on a weekly
-                  basis and therefore also share profits of these sales with our
-                  clients.
-                </div>
-              </div> */}
             </div>
           </div>
         </Element>

@@ -217,11 +217,12 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    AuthService.profitsFiltered({ type: profitType })
+    AuthService.profitsFiltered({ type: profitType, limit: 20, page: 1 })
       .then((res) => {
-        setProfitChartData(res.data.profits);
+        // debugger;
+        setProfitChartData(res.data.logs.content);
         let sum = 0;
-        res.data.profits.map((el: any) => {
+        res.data.logs.content.map((el: any) => {
           sum += el.profit;
         });
         setProfitSum(Number(sum)?.toFixed(2));
@@ -489,7 +490,7 @@ const Dashboard = () => {
                         height: "250px",
                         width: "100%",
                         position: "relative",
-                        paddingTop: "50px !important",
+                        paddingTop: "50px ",
                       }}
                     >
                       <div className="chartjs-size-monitor">
