@@ -318,6 +318,21 @@ body.stop-scrolling {
     height: 35px;
   }
   .dataTables_length {
+    label {
+      justify-content: center;
+    }
+  }
+
+  #datatable-basic_filter {
+    width: 90%;
+    padding-right: 0;
+    margin: auto;
+  }
+  .colbasic_filter {
+    display: flex;
+    justify-content: center;
+  }
+  .dataTables_length {
     justify-content: center;
   }
   .sweet-alert {

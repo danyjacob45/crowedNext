@@ -168,7 +168,7 @@ const dataTable = ({ investments }) => {
                   </label>
                 </div>
               </div>
-              <div className="col-sm-12 col-md-6">
+              <div className="col-sm-12 col-md-6 colbasic_filter">
                 <div id="datatable-basic_filter" className="dataTables_filter">
                   <label className="d-flex align-items-center">
                     Search:
