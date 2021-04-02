@@ -2550,6 +2550,7 @@ a:hover {
     position: absolute;
     bottom: 0px;
     background: #fff;
+    background: #ffffff9e;
     transform: translate(-50%, 100%);
     left: 50%;
   }
@@ -2568,8 +2569,9 @@ a:hover {
   }
 
   .headerWrapper .menu.openBurgerMenu ul {
-    height: 280px;
+    // height: 280px;
     // height: auto;
+    height: 193px;
   }
 
   .headerWrapper .menu ul a.navBtn {
