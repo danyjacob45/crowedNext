@@ -133,7 +133,7 @@ const Dashboard = () => {
                 <span>Direct Commission</span>
                 <div className="card bg-white border-0">
                   <div className="card-body">
-                    {statistic?.directCommissions?.toFixed(2)} $
+                    {Number(statistic?.directCommissions).toFixed(2)} $
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@ const Dashboard = () => {
                 <span>Total Earned</span>
                 <div className="card bg-white border-0">
                   <div className="card-body">
-                    {statistic?.totalEarned.toFixed(2)} $
+                    {Number(statistic?.totalEarned).toFixed(2)} $
                   </div>
                 </div>
               </div>
