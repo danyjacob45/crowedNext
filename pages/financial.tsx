@@ -13,6 +13,7 @@ const financial = () => {
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [withdraw, setWithdraw] = useState<any>([]);
+  const [profitShare, setProfitShare] = useState<any>([]);
   const [team, setTeam] = useState<any>([]);
   const [directComissions, setDirectComissions] = useState<any>([]);
   const [investments, setInvestments] = useState<any>([]);
@@ -51,6 +52,14 @@ const financial = () => {
     AuthService.profits()
       .then((res) => {
         setInvestments(res.data.profits);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    AuthService.transactionsAll()
+      .then((res) => {
+        setProfitShare(res.data.transactions.founderLog.content);
       })
       .catch((err) => {
         console.log(err);
@@ -434,15 +443,15 @@ const financial = () => {
                           }
                           return sum + el.finalAmount;
                         })}{" "} */}
-                      {investments.length && getSum(investments, "amount")}$
+                      {profitShare.length && getSum(profitShare, "amount")}$
                     </th>
                     <th className="bold12">
                       Earned $
-                      {investments.length &&
+                      {profitShare.length &&
                         getSum(investments, "profit").toFixed(2)}
                     </th>
                     <th className="bold12">
-                      {investments.length &&
+                      {profitShare.length &&
                         getLastDate(investments[0].createdAt)}
                     </th>
                   </tr>
@@ -453,7 +462,7 @@ const financial = () => {
                     display: activeTab === "ProfitShare" ? "contents" : "none",
                   }}
                 >
-                  {investments.map((el: any, i) => {
+                  {profitShare.map((el: any, i) => {
                     const time = new Date(el.createdAt);
                     return (
                       <tr key={i}>
