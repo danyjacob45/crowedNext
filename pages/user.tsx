@@ -90,6 +90,7 @@ const Dashboard = () => {
 
     AuthService.teamStatistic().then((res) => {
       console.log(res);
+      setAllProfitSum(Number(res.data.referrers.profitShare).toFixed(2));
       // 2.5 K
       // 25 K
       // 50 K
@@ -134,11 +135,11 @@ const Dashboard = () => {
       .then((res) => {
         // debugger;
         setHasInvestment(res.data.profits.length);
-        let sum = 0;
-        res.data.profits.map((el: any) => {
-          sum += el.profit;
-        });
-        setAllProfitSum(Number(sum)?.toFixed(2));
+        // let sum = 0;
+        // res.data.profits.map((el: any) => {
+        //   sum += el.profit;
+        // });
+        // setAllProfitSum(Number(sum)?.toFixed(2));
         // setInvestments(res.data.profits);
       })
       .catch((err) => {
@@ -173,7 +174,7 @@ const Dashboard = () => {
           ...el,
           nType: "Investment",
         })),
-        ...res.data.transactions.profits.content.map((el) => ({
+        ...res.data.transactions.founderLog.content.map((el) => ({
           ...el,
           amount: el.profit,
           nType: "Profit share",
