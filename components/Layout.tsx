@@ -8,7 +8,7 @@ import { setCurrentUser } from "../store/auth/authActions";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { IStoreState } from "../store/reducers/rootReducer";
 import { IUser } from "../store/auth/authReducers";
-
+import classnames from "classnames";
 type Props = {
   children: React.ReactNode;
   title?: string;
@@ -45,14 +45,14 @@ const Layout: React.FC<Props> = ({ title = "Next app", children, user }) => {
             <Sidebar />
 
             <main
-              className="mainContainer"
-              style={{
-                marginLeft: `${sideBarCollapse ? "62px" : "250px"}`,
+              className={classnames("mainContainer ", { sideBarCollapse })}
+              // style={{
+              //   marginLeft: `${sideBarCollapse ? "62px" : "250px"}`,
 
-                width: `${
-                  sideBarCollapse ? "calc(100% - 62px)" : "calc(100% - 250px)"
-                }`,
-              }}
+              //   width: `${
+              //     sideBarCollapse ? "calc(100% - 62px)" : "calc(100% - 250px)"
+              //   }`,
+              // }}
             >
               <>{children}</>
             </main>
