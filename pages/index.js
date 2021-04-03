@@ -156,7 +156,8 @@ const home = () => {
                   );
                   // history.push("/user");
 
-                  window.location.href = "http://crowdapp13.herokuapp.com/user";
+                  // window.location.href = "http://crowdapp13.herokuapp.com/user";
+                  history.push("/user");
                 } else {
                   history.push("/?validation=true");
                   localStorage.setItem("preToken", res.data.token);
