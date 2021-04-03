@@ -443,12 +443,13 @@ const financial = () => {
                           }
                           return sum + el.finalAmount;
                         })}{" "} */}
-                      {profitShare.length && getSum(profitShare, "amount")}$
+                      {profitShare.length &&
+                        getSum(investments, "profit").toFixed(2)}
+                      $
                     </th>
                     <th className="bold12">
                       Earned $
-                      {profitShare.length &&
-                        getSum(investments, "profit").toFixed(2)}
+                      {profitShare.length && getSum(profitShare, "amount")}
                     </th>
                     <th className="bold12">
                       {profitShare.length &&
