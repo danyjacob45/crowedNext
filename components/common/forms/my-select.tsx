@@ -9,7 +9,7 @@ interface IOption {
 
 type Props = {};
 
-const MySelect = ({}: Props) => {
+const MySelect = () => {
   return <></>;
 };
 
