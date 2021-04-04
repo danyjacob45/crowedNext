@@ -263,7 +263,12 @@ const financial = () => {
                     <th className="bold12">Deposit</th>
                     <th className="bold12">
                       {investments.length &&
-                        getSum(transactions, "finalAmount").toFixed(2)}
+                        getSum(
+                          transactions.filter(
+                            (el: any) => el.status !== "REJECTED"
+                          ),
+                          "finalAmount"
+                        ).toFixed(2)}
                       $
                     </th>
                     <th className="bold12">Crypto</th>
@@ -415,6 +420,7 @@ const financial = () => {
                 >
                   <tr>
                     <th>
+                      f
                       <svg
                         aria-hidden="true"
                         focusable="false"
