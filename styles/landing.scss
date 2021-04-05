@@ -3230,3 +3230,14 @@ a:hover {
     }
   }
 }
+
+.telgHover {
+  color: #ccc;
+  &:hover {
+    color: #28a8e9;
+
+    path {
+      color: #28a8e9;
+    }
+  }
+}

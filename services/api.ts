@@ -1,5 +1,5 @@
-export const BASE_URL = "http://51.255.211.219:8080/api/v1";
-// export const STORE_API_BASE_URL = "http://127.0.0.1:8001/store";
+export const BASE_URL = "https://api.crowd-growing.com/api/v1";
+// export const BASE_URL = "http://51.255.211.219:8080/api/v1";
 
 // eslint-disable-next-line no-useless-escape
 // const domain = document.domain.match(/[^\.]*\.[^.]*$/);

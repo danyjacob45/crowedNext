@@ -17,7 +17,7 @@ var terms = () => {
 
   useEffect(() => {
     axios
-      .post("http://51.255.211.219:8080/api/v1/open/plan/all")
+      .post("https://api.crowd-growing.com/api/v1/open/plan/all")
       .then((res) => {
         console.log(res);
         setPlans(res.data.plans);

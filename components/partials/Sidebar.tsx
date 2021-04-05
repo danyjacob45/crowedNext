@@ -170,7 +170,7 @@ const Sidebar = () => {
                   }}
                   src={
                     auth?.user?.picture && auth?.user?.picture != "null"
-                      ? `http://51.255.211.219:8080/api/v1/open/files/${auth?.user?.picture}`
+                      ? `https://api.crowd-growing.com/api/v1/open/files/${auth?.user?.picture}`
                       : "/assets/images/logo.png"
                   }
                   alt="avatar"
