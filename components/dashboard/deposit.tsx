@@ -754,7 +754,7 @@ const Deposit: React.FC<Props> = ({
                   if (depositType === "BTC") {
                     // @ts-ignore: Unreachable code error
                     axios
-                      .post("http://51.255.211.219/create-payment", {
+                      .post("https://admin.crowd-growing.com/create-payment", {
                         token: localStorage.getItem("token"),
                         amount: amount,
                       })

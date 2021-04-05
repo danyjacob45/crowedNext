@@ -420,7 +420,6 @@ const financial = () => {
                 >
                   <tr>
                     <th>
-                      f
                       <svg
                         aria-hidden="true"
                         focusable="false"
