@@ -16,7 +16,7 @@ type Props = {
   user: IUser | null;
 };
 
-const Layout: React.FC<Props> = ({ title = "Next app", children, user }) => {
+const Layout: React.FC<Props> = ({ title = "Next app", children }) => {
   useCheckAuth();
   // console.log(user);
 
