@@ -39,7 +39,7 @@ const Sidebar = () => {
   });
 
   useEffect(() => {
-    // console.log(window.innerWidth);
+    console.log(window.innerWidth);
 
     if (window.innerWidth < 800) {
       if (!sideBarCollapse) {
@@ -169,9 +169,8 @@ const Sidebar = () => {
                     objectFit: "cover",
                   }}
                   src={
-                    "http://51.255.211.219:8080/api/v1/open/files/" +
-                      auth?.user?.picture && auth?.user?.picture != "null"
-                      ? auth?.user?.picture
+                    auth?.user?.picture && auth?.user?.picture != "null"
+                      ? `http://51.255.211.219:8080/api/v1/open/files/${auth?.user?.picture}`
                       : "/assets/images/logo.png"
                   }
                   alt="avatar"
