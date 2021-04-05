@@ -18,7 +18,7 @@ type Props = {
 
 const Layout: React.FC<Props> = ({ title = "Next app", children, user }) => {
   useCheckAuth();
-  console.log(user);
+  // console.log(user);
 
   const { sideBarCollapse } = useSelector((store: any) => {
     return store.ui;
@@ -27,7 +27,7 @@ const Layout: React.FC<Props> = ({ title = "Next app", children, user }) => {
 
   useEffect(() => {
     setPageLoading(true);
-    console.log("loading");
+    // console.log("loading");
   }, []);
 
   return (

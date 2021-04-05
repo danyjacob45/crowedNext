@@ -253,7 +253,7 @@ const Dashboard = () => {
   const [openDepositModal, setOpenDepositModals] = useState(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
 
-  console.log(history, "historyhistoryhistory");
+  // console.log(history, "historyhistoryhistory");
 
   return (
     <Layout title="Dashboard">

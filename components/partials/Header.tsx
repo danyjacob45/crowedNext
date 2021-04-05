@@ -142,7 +142,7 @@ const Header = ({ sideBarCollapse }: Props) => {
       </div>
 
       <div className="leftSide">
-        <a href="http://local.mlm/user/dashboard">
+        <a href="/user">
           <img height="32" src="/assets/svges/logof.svg" alt="logo" />
         </a>
       </div>

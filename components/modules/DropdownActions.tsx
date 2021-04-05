@@ -19,7 +19,7 @@ const DropdownActions = ({ children, btClass }: Props) => {
   }, []);
 
   const toggleAnimation = () => {
-    console.log(DropDownEvent.events);
+    // console.log(DropDownEvent.events);
     DropDownEvent.trigger("hide_list");
 
     const tl = gsap.timeline();

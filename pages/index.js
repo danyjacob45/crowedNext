@@ -68,7 +68,7 @@ const home = () => {
       setValidation(false);
     }
     // debugger;
-    console.log(history);
+    // console.log(history);
 
     if (localStorage.getItem("token")) {
       AuthService.getUser()
@@ -85,7 +85,7 @@ const home = () => {
         .catch((err) => {});
     }
     window.addEventListener("scroll", (e) => {
-      console.log(window.scrollY);
+      // console.log(window.scrollY);
       if (window.scrollY > 0) {
         setHeaderScroll(true);
       } else {
@@ -145,8 +145,8 @@ const home = () => {
                 }
               )
               .then((res2) => {
-                // if (true) {
-                if (res2.data.user.security.emailVerified) {
+                if (true) {
+                  // if (res2.data.user.security.emailVerified) {
                   // if (true) {
                   dispatch(
                     setCurrentUser({
@@ -530,15 +530,19 @@ const home = () => {
                             code: code,
                           })
                             .then((res) => {
-                              dispatch(
-                                setCurrentUser({
-                                  user: {},
-                                  token: localStorage.getItem("preToken"),
-                                })
-                              );
-                              localStorage.removeItem("preToken");
+                              if (res.data.verified) {
+                                dispatch(
+                                  setCurrentUser({
+                                    user: {},
+                                    token: localStorage.getItem("preToken"),
+                                  })
+                                );
+                                localStorage.removeItem("preToken");
 
-                              history.push("/user?isFirst=true");
+                                history.push("/user?isFirst=true");
+                              } else {
+                                setCodeError("wrong verification code");
+                              }
                             })
                             .catch((err) => {
                               setCodeError("wrong verification code");

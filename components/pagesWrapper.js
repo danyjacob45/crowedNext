@@ -51,7 +51,7 @@ const home = ({ children }) => {
 
   const history = useRouter();
 
-  console.log(history);
+  // console.log(history);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -69,7 +69,7 @@ const home = ({ children }) => {
         .catch((err) => {});
     }
     window.addEventListener("scroll", (e) => {
-      console.log(window.scrollY);
+      // console.log(window.scrollY);
       if (window.scrollY > 0) {
         setHeaderScroll(true);
       } else {

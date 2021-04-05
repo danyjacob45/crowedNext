@@ -39,7 +39,7 @@ const Sidebar = () => {
   });
 
   useEffect(() => {
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
 
     if (window.innerWidth < 800) {
       if (!sideBarCollapse) {
@@ -106,7 +106,7 @@ const Sidebar = () => {
 
   const { asPath } = useRouter();
 
-  console.log(sideBarCollapse, "sideBarCollapse");
+  // console.log(sideBarCollapse, "sideBarCollapse");
   const renderSubMenus = ({
     subMenus,
     menuName,
@@ -170,7 +170,9 @@ const Sidebar = () => {
                   }}
                   src={
                     "http://51.255.211.219:8080/api/v1/open/files/" +
-                      auth?.user?.picture || "/assets/images/logo.png"
+                      auth?.user?.picture && auth?.user?.picture != "null"
+                      ? auth?.user?.picture
+                      : "/assets/images/logo.png"
                   }
                   alt="avatar"
                 />
