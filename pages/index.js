@@ -146,8 +146,8 @@ const home = () => {
               )
               .then((res2) => {
                 // if (true) {
-                // if (res2.data.user.security.emailVerified) {
-                if (true) {
+                if (res2.data.user.security.emailVerified) {
+                  // if (true) {
                   dispatch(
                     setCurrentUser({
                       user: res.data.user,
@@ -494,10 +494,10 @@ const home = () => {
                       </label>
                       <input
                         type="text"
-                        name="username"
+                        name="verification-code"
                         id="username"
                         tabindex="1"
-                        placeholder="username"
+                        placeholder="verification code "
                         className={classnames("form-control", {
                           "is-invalid": codeError,
                         })}
@@ -517,14 +517,14 @@ const home = () => {
                           setCodeError("Enter verification code");
                         } else {
                           // if (code == "666666") {
-                          dispatch(
-                            setCurrentUser({
-                              user: {},
-                              token: localStorage.getItem("preToken"),
-                            })
-                          );
-                          history.push("/user");
-                          return;
+                          // dispatch(
+                          //   setCurrentUser({
+                          //     user: {},
+                          //     token: localStorage.getItem("preToken"),
+                          //   })
+                          // );
+                          // history.push("/user");
+                          // return;
                           // }
                           AuthService.verifyEmail({
                             code: code,

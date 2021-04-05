@@ -56,7 +56,7 @@ const Registration = ({
       .catch((err) => {
         setLoading(false);
 
-        debugger;
+        // debugger;
         if (err.response && err.response.data) {
           if (err.response.data.message) {
             setServerError({ referrer: err.response.data.message });
