@@ -169,7 +169,7 @@ const Sidebar = () => {
                     objectFit: "cover",
                   }}
                   src={
-                    auth?.user?.picture && auth?.user?.picture != "null"
+                    auth?.user?.picture && auth?.user?.picture != "NULL"
                       ? `https://api.crowd-growing.com/api/v1/open/files/${auth?.user?.picture}`
                       : "/assets/images/logo.png"
                   }
