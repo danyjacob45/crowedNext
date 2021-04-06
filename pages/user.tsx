@@ -218,7 +218,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    AuthService.profitsFiltered({ type: profitType, limit: 20, page: 1 })
+    AuthService.profitsFiltered({ type: profitType, limit: 20, page: 0 })
       .then((res) => {
         // debugger;
         setProfitChartData(res.data.logs.content);
