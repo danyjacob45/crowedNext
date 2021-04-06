@@ -206,7 +206,11 @@ const profile = () => {
                         type="text"
                         name="country"
                         className="form-control"
-                        value={profileInfo.country}
+                        value={
+                          profileInfo.country !== "NULL"
+                            ? profileInfo.country
+                            : ""
+                        }
                         onChange={changeProfileField}
                       />
                     </div>
@@ -218,7 +222,9 @@ const profile = () => {
                         type="text"
                         name="city"
                         className="form-control"
-                        value={profileInfo.city}
+                        value={
+                          profileInfo.city !== "NULL" ? profileInfo.city : ""
+                        }
                         onChange={changeProfileField}
                       />
                     </div>
@@ -230,7 +236,11 @@ const profile = () => {
                         type="text"
                         name="zipCode"
                         className="form-control"
-                        value={profileInfo.zipCode}
+                        value={
+                          profileInfo.zipCode !== "NULL"
+                            ? profileInfo.zipCode
+                            : ""
+                        }
                         onChange={changeProfileField}
                       />
                     </div>
@@ -242,7 +252,11 @@ const profile = () => {
                         type="text"
                         name="address"
                         className="form-control"
-                        value={profileInfo.address}
+                        value={
+                          profileInfo.address !== "NULL"
+                            ? profileInfo.address
+                            : ""
+                        }
                         onChange={changeProfileField}
                       />
                     </div>
