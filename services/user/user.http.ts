@@ -92,6 +92,16 @@ class _UserService {
     });
   };
 
+  chartData = () => {
+    return axios.post(
+      storeBackEndRoutes.user.chartData(),
+      {},
+      {
+        // ...axiosHeaderConfig(),
+      }
+    );
+  };
+
   transactions = () => {
     return axios.post(
       storeBackEndRoutes.user.transactions(),

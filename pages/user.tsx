@@ -80,6 +80,7 @@ const Dashboard = () => {
   const [investedSum, setInvestedSum] = useState<any>(0);
   const [showRank, setShowRank] = useState<any>(false);
   const [rank, setRank] = useState<any>(null);
+  const [chartData, setChartData] = useState<any>({});
 
   useEffect(() => {
     if (window) {
@@ -87,6 +88,15 @@ const Dashboard = () => {
       setOrigin(hostname);
       // console.log(hostname, "window.location");
     }
+
+    AuthService.chartData()
+      .then((res) => {
+        // debugger;
+        setChartData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     AuthService.teamStatistic().then((res) => {
       console.log(res);
@@ -883,7 +893,13 @@ const Dashboard = () => {
                           labels: ["Founder", "Payout"],
                           datasets: [
                             {
-                              data: [1000, 2000],
+                              data: [
+                                chartData?.founderShare / chartData?.founders >
+                                100
+                                  ? chartData?.founders * 10
+                                  : chartData?.founders,
+                                chartData?.founderShare,
+                              ],
                               backgroundColor: ["#004627", "#258d25"],
                               borderColor: "transparent",
                             },
@@ -912,13 +928,13 @@ const Dashboard = () => {
                                   dataLabel = dataLabel.slice();
 
                                   if (tooltipItem.index === 0) {
-                                    dataLabel[0] += value;
+                                    dataLabel[0] += chartData?.founders;
                                   } else {
                                     dataLabel[0] += value + " $";
                                   }
                                 } else {
                                   if (tooltipItem.index === 0) {
-                                    dataLabel += value;
+                                    dataLabel += chartData?.founders;
                                   } else {
                                     dataLabel += value + " $";
                                   }
@@ -931,12 +947,18 @@ const Dashboard = () => {
                         }}
                       />
                     </div>
-                    <h4 className="chartText ">56 / 1000 Founders</h4>
+                    <h4 className="chartText ">
+                      {chartData.founders} / {chartData.founderLimit} Founders
+                    </h4>
                     <h4 className="chartText">
-                      Founders Total Profit 15,456.00 $
+                      Founders Total Profit {chartData.founderShare} $
                     </h4>
 
-                    <h4 className="chartText">Total Average 276.00 $</h4>
+                    <h4 className="chartText">
+                      Total Average{" "}
+                      {(chartData.founderShare / chartData.founders).toFixed(2)}{" "}
+                      $
+                    </h4>
                   </div>
                 </div>
               </div>
