@@ -894,11 +894,11 @@ const Dashboard = () => {
                           datasets: [
                             {
                               data: [
-                                chartData?.founderShare / chartData?.founders >
+                                chartData?.founderLimit / chartData?.founders >
                                 100
                                   ? chartData?.founders * 10
                                   : chartData?.founders,
-                                chartData?.founderShare,
+                                chartData?.founderLimit,
                               ],
                               backgroundColor: ["#004627", "#258d25"],
                               borderColor: "transparent",
