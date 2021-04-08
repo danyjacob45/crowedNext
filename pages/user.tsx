@@ -890,7 +890,7 @@ const Dashboard = () => {
                         // width="100%"
                         min-height="240px"
                         data={{
-                          labels: ["Founder", "Payout"],
+                          labels: ["Existing Founders: ", "Free Places Left: "],
                           datasets: [
                             {
                               data: [
@@ -898,7 +898,7 @@ const Dashboard = () => {
                                 100
                                   ? chartData?.founders * 10
                                   : chartData?.founders,
-                                chartData?.founderLimit,
+                                chartData?.founderLimit - chartData?.founders,
                               ],
                               backgroundColor: ["#004627", "#258d25"],
                               borderColor: "transparent",
@@ -930,13 +930,13 @@ const Dashboard = () => {
                                   if (tooltipItem.index === 0) {
                                     dataLabel[0] += chartData?.founders;
                                   } else {
-                                    dataLabel[0] += value + " $";
+                                    dataLabel[0] += value + " ";
                                   }
                                 } else {
                                   if (tooltipItem.index === 0) {
                                     dataLabel += chartData?.founders;
                                   } else {
-                                    dataLabel += value + " $";
+                                    dataLabel += value + " ";
                                   }
                                 }
 
