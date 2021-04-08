@@ -27,6 +27,7 @@ const Withdrawal: React.FC<Props> = ({
 
   const [depositType, setDepositType] = useState("BITCOIN");
   const [addressList, setAddressList] = useState([]);
+  const [addresError, setAddresError] = useState<any>("");
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [loader, setLoader] = useState(false);
@@ -132,6 +133,7 @@ const Withdrawal: React.FC<Props> = ({
     setAmount("");
     setDepositType("BITCOIN");
     setAddress("");
+    setAddresError("");
   };
 
   return (
@@ -284,6 +286,7 @@ const Withdrawal: React.FC<Props> = ({
             <div className="form-group row">
               <div className="col-lg-12">
                 <label className="col-form-label  colorBlack">Address</label>
+                <div style={{ color: "red" }}>{addresError && addresError}</div>
 
                 <select
                   name="details"
@@ -293,7 +296,7 @@ const Withdrawal: React.FC<Props> = ({
                   //   required=""
                   onChange={(e: any) => {
                     setServerError("");
-
+                    setAddresError("");
                     const selected: any = addressList.find(
                       (el: any) => el.address === e.target.value
                     );
@@ -321,7 +324,10 @@ const Withdrawal: React.FC<Props> = ({
               <button
                 onClick={(e) => {
                   // debugger;
-                  if (!address) return;
+                  if (!address) {
+                    setAddresError("select address");
+                    return;
+                  }
                   e.preventDefault();
                   withdraw();
                   // @ts-ignore: Unreachable code error
