@@ -232,12 +232,12 @@ const Dashboard = () => {
       .then((res) => {
         // debugger;
         console.log(res);
-        setProfitChartData([]);
+        setProfitChartData(res.data.logs);
         let sum = 0;
-        // res.data.logs.content.map((el: any) => {
-        //   sum += el.profit;
-        // });
-        // setProfitSum(Number(sum)?.toFixed(2));
+        res.data.logs.map((el: any) => {
+          sum += el.amount;
+        });
+        setProfitSum(Number(sum)?.toFixed(2));
         // debugger;
       })
       .catch((err) => {
@@ -577,21 +577,19 @@ const Dashboard = () => {
                       </div>
                       <Line
                         data={{
-                          labels: profitChartData
-                            .slice(0, 11)
-                            .map((el: any) => {
-                              const time = new Date(el.createdAt);
-                              // debugger;
+                          labels: profitChartData.map((el: any) => {
+                            // const time = new Date(el.createdAt);
+                            //  debugger;
 
-                              return `${time.getFullYear()}/${
-                                time.getMonth() + 1
-                              }/${time.getDate()}`;
-                            }),
+                            return `${el.date}`;
+                          }),
 
                           datasets: [
                             {
                               label: "profit",
-                              data: profitChartData.map((el: any) => el.profit),
+                              data: profitChartData.map((el: any) =>
+                                el.amount.toFixed(2)
+                              ),
                               backgroundColor: "transparent",
                               borderColor: "#3E932C",
                               color: "#fff",
