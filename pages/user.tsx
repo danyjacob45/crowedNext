@@ -576,14 +576,16 @@ const Dashboard = () => {
                       </div>
                       <Line
                         data={{
-                          labels: profitChartData.map((el: any) => {
-                            const time = new Date(el.createdAt);
-                            // debugger;
+                          labels: profitChartData
+                            .slice(0, 11)
+                            .map((el: any) => {
+                              const time = new Date(el.createdAt);
+                              // debugger;
 
-                            return `${time.getFullYear()}/${
-                              time.getMonth() + 1
-                            }/${time.getDate()}`;
-                          }),
+                              return `${time.getFullYear()}/${
+                                time.getMonth() + 1
+                              }/${time.getDate()}`;
+                            }),
 
                           datasets: [
                             {
@@ -894,11 +896,10 @@ const Dashboard = () => {
                           datasets: [
                             {
                               data: [
-                                chartData?.founderLimit / chartData?.founders >
-                                100
-                                  ? chartData?.founders * 10
-                                  : chartData?.founders,
-                                chartData?.founderLimit - chartData?.founders,
+                                chartData?.founderLimit / 61 > 100
+                                  ? 61 * 10
+                                  : 61,
+                                chartData?.founderLimit - 61,
                               ],
                               backgroundColor: ["#004627", "#258d25"],
                               borderColor: "transparent",
@@ -928,13 +929,13 @@ const Dashboard = () => {
                                   dataLabel = dataLabel.slice();
 
                                   if (tooltipItem.index === 0) {
-                                    dataLabel[0] += chartData?.founders;
+                                    dataLabel[0] += 61;
                                   } else {
                                     dataLabel[0] += value + " ";
                                   }
                                 } else {
                                   if (tooltipItem.index === 0) {
-                                    dataLabel += chartData?.founders;
+                                    dataLabel += 61;
                                   } else {
                                     dataLabel += value + " ";
                                   }
@@ -948,16 +949,14 @@ const Dashboard = () => {
                       />
                     </div>
                     <h4 className="chartText ">
-                      {chartData.founders} / {chartData.founderLimit} Founders
+                      {61} / {chartData.founderLimit} Founders
                     </h4>
                     <h4 className="chartText">
                       Founders Total Profit {chartData.founderShare} $
                     </h4>
 
                     <h4 className="chartText">
-                      Total Average{" "}
-                      {(chartData.founderShare / chartData.founders).toFixed(2)}{" "}
-                      $
+                      Total Average {(chartData.founderShare / 61).toFixed(2)} $
                     </h4>
                   </div>
                 </div>
