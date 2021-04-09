@@ -231,12 +231,13 @@ const Dashboard = () => {
     AuthService.profitsFiltered({ type: profitType, limit: 20, page: 0 })
       .then((res) => {
         // debugger;
-        setProfitChartData(res.data.logs.content);
+        console.log(res);
+        setProfitChartData([]);
         let sum = 0;
-        res.data.logs.content.map((el: any) => {
-          sum += el.profit;
-        });
-        setProfitSum(Number(sum)?.toFixed(2));
+        // res.data.logs.content.map((el: any) => {
+        //   sum += el.profit;
+        // });
+        // setProfitSum(Number(sum)?.toFixed(2));
         // debugger;
       })
       .catch((err) => {
