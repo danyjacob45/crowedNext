@@ -749,7 +749,7 @@ const Deposit: React.FC<Props> = ({
                   e.preventDefault();
                   // debugger;
                   if (!amount) {
-                    setAmountError("amount is require");
+                    setAmountError("Please insert amount");
 
                     return;
                   }
