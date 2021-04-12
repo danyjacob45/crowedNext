@@ -228,11 +228,26 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    AuthService.profitsFiltered({ type: profitType, limit: 20, page: 0 })
+    AuthService.profitsFiltered({
+      type: profitType,
+      limit: profitType === "YEAR" ? 6 : 12,
+      page: 0,
+    })
       .then((res) => {
         // debugger;
         console.log(res);
-        setProfitChartData(res.data.logs);
+        setProfitChartData(
+          res.data.logs.map((el: any) => {
+            if (profitType === "MONTHLY") {
+              return { ...el, date: el.date.split("-").slice(0, 2).join("-") };
+            } else if (profitType === "WEEKLY") {
+              return { ...el, date: el.date.split(" ").slice(0, 1).join("") };
+            } else if (profitType === "YEAR") {
+              return { ...el, date: el.date.split("-").slice(0, 1).join("-") };
+            }
+            return el;
+          })
+        );
         let sum = 0;
         res.data.logs.map((el: any) => {
           sum += el.amount;
