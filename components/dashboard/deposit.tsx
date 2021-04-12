@@ -374,7 +374,7 @@ const Deposit: React.FC<Props> = ({
           >
             <img
               style={{ height: "43px" }}
-              src="https://crowd-growing.com/asset/images/logo.png"
+              src="/assets/images/logo.png"
               alt="logo"
             />
           </h4>
