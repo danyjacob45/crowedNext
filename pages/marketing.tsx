@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { Card, Nav } from "react-bootstrap";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../components/common/forms/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {} from "@fortawesome/free-solid-svg-icons";
@@ -10,8 +10,49 @@ import FbIcon from "../svg/fb.svg";
 import Telegram from "../svg/teleggram.svg";
 // @ts-ignore: Unreachable code error
 import Youtube from "../svg/youtube.svg";
+import { AuthService } from "../services/user/user.http";
 
 const marketing = () => {
+  const [presentations, setPresentations] = useState<any>([]);
+
+  useEffect(() => {
+    AuthService.presentations().then((res) => {
+      setPresentations(
+        res.data.presentations
+          .filter((el) => el.type == "pdf")
+          .map((item) => {
+            const countryName = item.title.split(" ")[
+              item.title.split(" ").length - 1
+            ];
+            if (countryName == "TK") {
+              item.flag = "https://www.countryflags.io/tr/flat/64.png";
+            } else if (countryName == "GER") {
+              item.flag = "https://www.countryflags.io/de/flat/64.png";
+            } else if (countryName == "RUS") {
+              item.flag = "https://www.countryflags.io/ru/flat/64.png";
+            } else if (countryName == "VN") {
+              item.flag = "https://www.countryflags.io/vn/flat/64.png";
+            } else if (countryName == "ES") {
+              item.flag = "https://www.countryflags.io/es/flat/64.png";
+            } else if (countryName == "EN") {
+              item.flag = "https://www.crwflags.com/fotw/images/g/gb-eng.gif";
+            } else if (countryName == "CHN") {
+              item.flag = "https://www.countryflags.io/cn/flat/64.png";
+            } else if (countryName == "POL") {
+              item.flag = "https://www.countryflags.io/pl/flat/64.png";
+            } else if (countryName == "EST") {
+              item.flag = "https://www.countryflags.io/ee/flat/64.png";
+            } else if (countryName == "LVA") {
+              item.flag =
+                "https://cdn.britannica.com/49/6249-004-D8906A92/Flag-Latvia.jpg";
+            }
+            return item;
+          })
+      );
+      // debugger;
+    });
+  });
+
   return (
     <Layout title="marketing">
       <div className="main-content">
@@ -40,217 +81,28 @@ const marketing = () => {
                 <div className="card bg-white border-0">
                   <div className="card-body">
                     <ul className="pl-0 marketingList">
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_turkish.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/tr/flat/64.png"
-                            ></img>
-                            Business Presentation PDF TK
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_german.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/de/flat/64.png"
-                            ></img>
-                            Business Presentation PDF GER
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_russian.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/ru/flat/64.png"
-                            ></img>
-                            Business Presentation PDF RUS
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_vietnamese.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/vn/flat/64.png"
-                            ></img>
-                            Business Presentation PDF VN
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/es/flat/64.png"
-                            ></img>
-                            Business Presentation PDF ES
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.crwflags.com/fotw/images/g/gb-eng.gif"
-                            ></img>
-                            Business Presentation PDF EN
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_chinese.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/cn/flat/64.png"
-                            ></img>
-                            Business Presentation PDF CHN
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_polish.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/pl/flat/64.png"
-                            ></img>
-                            Business Presentation PDF POL
-                          </span>
-                        </a>
-                      </li>
-
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_estonian.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://www.countryflags.io/ee/flat/64.png"
-                            ></img>
-                            Business Presentation PDF EST
-                          </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_latvian.pdf"
-                        >
-                          <span
-                            style={{
-                              display: "inline-block",
-                              minWidth: "156px",
-                            }}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <img
-                              width="30"
-                              className="mr-2"
-                              src="https://cdn.britannica.com/49/6249-004-D8906A92/Flag-Latvia.jpg"
-                            ></img>
-                            Business Presentation PDF LVA
-                          </span>
-                        </a>
-                      </li>
+                      {presentations.map((el: any) => {
+                        return (
+                          <li>
+                            <a target="_blank" href={el.url}>
+                              <span
+                                style={{
+                                  display: "inline-block",
+                                  minWidth: "156px",
+                                }}
+                                className="d-flex align-items-center justify-content-center"
+                              >
+                                <img
+                                  width="30"
+                                  className="mr-2"
+                                  src={el.flag}
+                                ></img>
+                                {el.title}
+                              </span>
+                            </a>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>

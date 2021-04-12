@@ -24,6 +24,7 @@ export const storeBackEndRoutes = {
     profits: () => `${BASE_URL}/private/user/profits`,
 
     residualBonus: () => `${BASE_URL}/private/user/investments`,
+    presentations: () => `${BASE_URL}/open/presentations`,
 
     transactions: () => `${BASE_URL}/private/user/deposits`,
     transactionsAll: () => `${BASE_URL}/private/user/transactions`,

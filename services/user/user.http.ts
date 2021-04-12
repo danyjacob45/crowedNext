@@ -112,6 +112,12 @@ class _UserService {
     );
   };
 
+  presentations = () => {
+    return axios.post(storeBackEndRoutes.user.presentations(), {}, {});
+  };
+
+  // POST /api/v1/open/presentations
+
   transactionsAll = () => {
     return axios.post(
       storeBackEndRoutes.user.transactionsAll(),
