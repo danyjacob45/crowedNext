@@ -540,7 +540,10 @@ const Deposit: React.FC<Props> = ({
 
               <div className="text-center">
                 <img
-                  src={`https://chart.googleapis.com/chart?chs=105x105&amp;chld=L|2&amp;cht=qr&amp;chl=ethereum:${openETH.address}`}
+                  // src={`https://chart.googleapis.com/chart?chs=105x105&amp;chld=L|2&amp;cht=qr&amp;chl=ethereum:${openETH.address}`}
+                  src={`https://chart.googleapis.com/chart?chs=105x105&cht=qr&chl=${
+                    depositType === "ETH" ? "ethereum" : "usdt"
+                  }:${openETH.address}`}
                 />
               </div>
 
