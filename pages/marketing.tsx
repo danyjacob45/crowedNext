@@ -51,7 +51,7 @@ const marketing = () => {
       );
       // debugger;
     });
-  });
+  }, []);
 
   return (
     <Layout title="marketing">
