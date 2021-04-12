@@ -345,7 +345,7 @@ const Deposit: React.FC<Props> = ({
         setLoader(false);
 
         console.log(err);
-        alert("error");
+        alert("Server Error Try Again Later");
       });
   };
 
@@ -623,7 +623,7 @@ const Deposit: React.FC<Props> = ({
                     ></span>
                     <img width="40" src="./assets/svges/btc.svg" />
                   </span>
-                  {/* <span
+                  <span
                     onClick={() => {
                       setDepositType("ETH");
                     }}
@@ -636,8 +636,8 @@ const Deposit: React.FC<Props> = ({
                     ></span>
 
                     <img width="40" src="./assets/svges/eth.svg" />
-                  </span> */}
-                  {/* <span
+                  </span>
+                  <span
                     onClick={() => {
                       setDepositType("USDT");
                     }}
@@ -650,7 +650,7 @@ const Deposit: React.FC<Props> = ({
                     ></span>
 
                     <img width="40" src="./assets/svges/usdt.svg" />
-                  </span> */}
+                  </span>
                 </div>
               </div>
               {/* <div className="col-lg-12">
