@@ -261,7 +261,9 @@ const Withdrawal: React.FC<Props> = ({
                       setAmount(e.target.value);
                     }}
                     onKeyDown={(e) => {
-                      if (e.keyCode === 109) {
+                      // debugger;
+                      console.log(e.keyCode);
+                      if (e.keyCode === 109 || e.keyCode === 189) {
                         e.preventDefault();
                       }
                       // console.log(e.keyCode);
