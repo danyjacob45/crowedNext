@@ -703,6 +703,11 @@ const Deposit: React.FC<Props> = ({
                       setAmountError(null);
                       setAmount(e.target.value);
                     }}
+                    onKeyDown={(e) => {
+                      if (e.keyCode === 109) {
+                        e.preventDefault();
+                      }
+                    }}
                     // required=""
                   />
                 </div>
