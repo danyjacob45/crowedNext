@@ -251,28 +251,17 @@ const Withdrawal: React.FC<Props> = ({
                     <span className="input-group-text">$</span>
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     step="any"
                     name="amount"
                     min="50"
                     onChange={(e: any) => {
                       // debugger;
                       setServerError("");
-                      setAmount(e.target.value);
-                    }}
-                    onKeyDown={(e) => {
-                      // debugger;
-                      console.log(e.keyCode);
-                      if (e.keyCode === 109 || e.keyCode === 189) {
-                        e.preventDefault();
-                      }
-                      // console.log(e.keyCode);
-
-                      // debugger;
+                      setAmount(e.target.value.replace(/\D/g, ""));
                     }}
                     value={amount}
                     maxLength={10}
-                    // maxlength="10"
                     className="form-control"
                     // required=""
                   />

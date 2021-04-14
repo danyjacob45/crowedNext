@@ -30,7 +30,7 @@ const Deposit: React.FC<Props> = ({
   const [copyReferer, setCopyReferer] = useState(false);
   const [copyReferer2, setCopyReferer2] = useState(false);
   const [openETH, setOpenETH] = useState<any>(null);
-  const [amount, setAmount] = useState(false);
+  const [amount, setAmount] = useState("");
   const [amountError, setAmountError] = useState<any>("");
   const [loader, setLoader] = useState(false);
   const [transactionDone, setTransactionDone] = useState(false);
@@ -693,7 +693,7 @@ const Deposit: React.FC<Props> = ({
                     </span>
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     id="btcInput"
                     step="any"
                     name="amount"
@@ -701,14 +701,9 @@ const Deposit: React.FC<Props> = ({
                     className="form-control"
                     onChange={(e: any) => {
                       setAmountError(null);
-                      setAmount(e.target.value);
+                      setAmount(e.target.value.replace(/\D/g, ""));
                     }}
-                    onKeyDown={(e) => {
-                      if (e.keyCode === 109 || e.keyCode === 189) {
-                        e.preventDefault();
-                      }
-                    }}
-                    // required=""
+                    value={amount}
                   />
                 </div>
                 {amountError && (
