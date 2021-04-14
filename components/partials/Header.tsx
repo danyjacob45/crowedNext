@@ -24,16 +24,16 @@ const Header = ({ sideBarCollapse }: Props) => {
   const [notificationCount, setNotificationCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [activeNotification, setActiveNotification] = useState("");
-  // const [text, setText] = useState("");
+  const [text, setText] = useState("");
 
-  // const convertTZ = (date: any, tzString: any) => {
-  //   return new Date(
-  //     (typeof date === "string" ? new Date(date) : date).toLocaleString(
-  //       "en-US",
-  //       { timeZone: tzString }
-  //     )
-  //   );
-  // };
+  const convertTZ = (date: any, tzString: any) => {
+    return new Date(
+      (typeof date === "string" ? new Date(date) : date).toLocaleString(
+        "en-US",
+        { timeZone: tzString }
+      )
+    );
+  };
 
   const getNotifications = () => {
     AuthService.notifications().then((res) => {
@@ -45,41 +45,66 @@ const Header = ({ sideBarCollapse }: Props) => {
     });
   };
 
+  const nextFridayDate = () => {
+    let dayOfWeek = 5; //friday
+    let date = new Date();
+    let diff = date.getDay() - dayOfWeek;
+    if (diff > 0) {
+      date.setDate(date.getDate() + 6);
+    } else if (diff < 0) {
+      date.setDate(date.getDate() + -1 * diff);
+    }
+
+    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    // console.log(date.getDate());
+  };
+
   useEffect(() => {
     getNotifications();
     const closeMenu = () => setShowMenu(false);
 
-    // var x = setInterval(function () {
-    //   var event = new Date();
-    //   var londonTime = new Date("2021/3/12 24:00");
-    //   console.log(
-    //     event.toLocaleString("en-GB", { timeZone: "Europe/London" }),
-    //     "london",
-    //     convertTZ(event, "Europe/London")
-    //   );
-    //   var now = convertTZ(event, "Europe/London").getTime();
-    //   var countDownDate = convertTZ(londonTime, "Europe/London").getTime();
-    //   var distance = countDownDate - now;
-    //   // debugger;
-    //   // var distance = distance / 1000;
-    //   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    //   var hours = Math.floor(
-    //     (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    //   );
-    //   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let x = setInterval(function () {
+      let nextFriday = nextFridayDate();
+      let londonTime = new Date(nextFriday + " 19:00").toLocaleString("en-GB", {
+        timeZone: "Europe/London",
+      });
 
-    //   setText(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
-    //   // $("#Withdrawal").addClass("isDisabled")
-    //   // $("#paymentCountDown").removeClass("d-none")
+      let year = londonTime.split("/")[2];
+      let month = londonTime.split("/")[1];
+      let day = londonTime.split("/")[0];
+      let now = new Date().getTime();
+      let countDownDate = new Date(
+        `${year.split(",")[0]}.${month}.${day} : ${year.split(",")[1]} `
+      ).getTime();
+      // console.log(
+      //   countDownDate,
+      //   "countDownDatecountDownDate",
+      //   `${year.split(",")[0]}.${month}.${day} : ${year.split(",")[1]} `
+      // );
+      // debugger;
+      let distance = countDownDate - now;
 
-    //   if (distance < 0) {
-    //     clearInterval(x);
-    //     // $("#BalanceTimer").text("")
-    //     // $("#Withdrawal").removeClass("isDisabled")
-    //     // $("#paymentCountDown").addClass("d-none")
-    //   }
-    // }, 1000);
+      // debugger;
+      // debugger;
+      //let distance = distance / 1000;
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      setText(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+      // $("#Withdrawal").addClass("isDisabled")
+      // $("#paymentCountDown").removeClass("d-none")
+
+      if (distance < 0) {
+        clearInterval(x);
+        // $("#BalanceTimer").text("")
+        // $("#Withdrawal").removeClass("isDisabled")
+        // $("#paymentCountDown").addClass("d-none")
+      }
+    }, 1000);
 
     window.addEventListener("click", closeMenu);
     return () => {
@@ -126,13 +151,13 @@ const Header = ({ sideBarCollapse }: Props) => {
         }
       )}
     >
-      {/* <div
+      <div
         id="paymentCountDown"
         className="timerPay"
         style={{ left: "calc(50% )" }}
       >
         Next Payout in <strong id="BalanceTimer">{text} </strong>
-      </div> */}
+      </div>
       <div
         id="paymentCountDown"
         className="timerPay d-none"

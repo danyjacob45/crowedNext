@@ -355,7 +355,7 @@ const Deposit: React.FC<Props> = ({
     setTransactionDone(false);
     setOpenDepositModals(false);
     setOpenETH(false);
-    setAmount(false);
+    setAmount("");
   };
 
   const ethModal = () => {

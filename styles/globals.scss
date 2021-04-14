@@ -1115,7 +1115,8 @@ body {
       position: absolute;
       left: 50%;
       bottom: 1px;
-      background: #fff;
+      font-size: 12px !important;
+      // background: #fff;
       transform: translate(-50%, 100%);
       padding: 2px 15px 4px;
       font-size: 12px;
@@ -1126,7 +1127,7 @@ body {
     .timerPay:after {
       content: "";
       height: 60%;
-      background: white;
+      // background: white;
       width: 38px;
       position: absolute;
       transform: rotate(-55deg);
@@ -1137,7 +1138,7 @@ body {
     .timerPay:before {
       content: "";
       height: 60%;
-      background: white;
+      // background: white;
       width: 30px;
       position: absolute;
       left: 0;
@@ -1594,10 +1595,22 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+  .sideBarCollapse {
+    .timerPay {
+      font-size: 11px !important;
+      white-space: nowrap;
+      display: block;
+    }
+  }
+  .timerPay {
+    font-size: 11px !important;
+    white-space: nowrap;
+    display: none;
+  }
   .timerPay:after {
     content: "";
     height: 60%;
-    background: white;
+    // background: white;
     width: 38px;
     position: absolute;
     transform: rotate(-55deg);
@@ -1608,7 +1621,7 @@ body {
   .timerPay:before {
     content: "";
     height: 60%;
-    background: white;
+    // background: white;
     width: 30px;
     position: absolute;
     left: 0;
