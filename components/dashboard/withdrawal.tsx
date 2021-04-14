@@ -256,8 +256,18 @@ const Withdrawal: React.FC<Props> = ({
                     name="amount"
                     min="50"
                     onChange={(e: any) => {
+                      console.log(e.keyCode);
+                      // debugger;
                       setServerError("");
                       setAmount(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.keyCode === 109) {
+                        e.preventDefault();
+                      }
+                      // console.log(e.keyCode);
+
+                      // debugger;
                     }}
                     value={amount}
                     maxLength={10}
