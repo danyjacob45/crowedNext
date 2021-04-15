@@ -55,7 +55,29 @@ const Header = ({ sideBarCollapse }: Props) => {
       date.setDate(date.getDate() + -1 * diff);
     }
 
-    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    let now = new Date().getTime();
+    let londonTime = new Date(
+      `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` +
+        " 16:00"
+    ).toLocaleString("en-GB", {
+      timeZone: "Europe/London",
+    });
+    let year = londonTime.split("/")[2];
+    let month = londonTime.split("/")[1];
+    let day = londonTime.split("/")[0];
+
+    let countDownDate = new Date(
+      `${year.split(",")[0]}.${month}.${day} : ${year.split(",")[1]}`
+    ).getTime();
+
+    // debugger;
+    if (countDownDate - now > 0) {
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    } else {
+      date.setDate(date.getDate() + 7);
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    }
+
     // console.log(date.getDate());
   };
 
@@ -65,7 +87,7 @@ const Header = ({ sideBarCollapse }: Props) => {
 
     let x = setInterval(function () {
       let nextFriday = nextFridayDate();
-      let londonTime = new Date(nextFriday + " 19:00").toLocaleString("en-GB", {
+      let londonTime = new Date(nextFriday + " 16:00").toLocaleString("en-GB", {
         timeZone: "Europe/London",
       });
 
