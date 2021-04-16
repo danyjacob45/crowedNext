@@ -58,7 +58,7 @@ const Header = ({ sideBarCollapse }: Props) => {
     let now = new Date().getTime();
     let londonTime = new Date(
       `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` +
-        " 16:00"
+        " 18:00"
     ).toLocaleString("en-GB", {
       timeZone: "Europe/London",
     });
@@ -87,7 +87,7 @@ const Header = ({ sideBarCollapse }: Props) => {
 
     let x = setInterval(function () {
       let nextFriday = nextFridayDate();
-      let londonTime = new Date(nextFriday + " 16:00").toLocaleString("en-GB", {
+      let londonTime = new Date(nextFriday + " 18:00").toLocaleString("en-GB", {
         timeZone: "Europe/London",
       });
 
