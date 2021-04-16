@@ -496,7 +496,9 @@ body {
 
 .scroll-wrapper {
   overflow: auto !important;
-
+  > .scroll-content {
+    overflow: auto !important;
+  }
   /* width */
   &::-webkit-scrollbar {
     width: 3px;

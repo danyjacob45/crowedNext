@@ -67,10 +67,10 @@ const Header = ({ sideBarCollapse }: Props) => {
     let day = londonTime.split("/")[0];
 
     let countDownDate = new Date(
-      `${year.split(",")[0]}.${month}.${day} : ${year.split(",")[1]}`
+      `${month} ${day}  ${year.split(",")[0]}  ${year.split(",")[1]}`
     ).getTime();
 
-    // debugger;
+    debugger;
     if (countDownDate - now > 0) {
       return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
     } else {
@@ -82,6 +82,7 @@ const Header = ({ sideBarCollapse }: Props) => {
   };
 
   useEffect(() => {
+    console.log("daibidaaaa ::");
     getNotifications();
     const closeMenu = () => setShowMenu(false);
 
@@ -96,7 +97,7 @@ const Header = ({ sideBarCollapse }: Props) => {
       let day = londonTime.split("/")[0];
       let now = new Date().getTime();
       let countDownDate = new Date(
-        `${year.split(",")[0]}.${month}.${day} : ${year.split(",")[1]} `
+        `${month} ${day}  ${year.split(",")[0]}  ${year.split(",")[1]}`
       ).getTime();
       // console.log(
       //   countDownDate,
