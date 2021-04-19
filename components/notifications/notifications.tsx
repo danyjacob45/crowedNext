@@ -105,7 +105,16 @@ const notifications: React.FC<Props> = ({
                         className="d-flex align-items-start"
                       >
                         <span style={{ color: "#000" }} className=" ">
-                          {el.text}
+                          {el.text
+                            .split(" ")
+                            .map((el) => {
+                              let val = Number(el);
+                              if (val) {
+                                return val.toFixed(2);
+                              }
+                              return el;
+                            })
+                            .join(" ")}
                         </span>
                         <form>
                           <button

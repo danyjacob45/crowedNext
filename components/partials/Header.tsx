@@ -70,7 +70,6 @@ const Header = ({ sideBarCollapse }: Props) => {
       `${month} ${day}  ${year.split(",")[0]}  ${year.split(",")[1]}`
     ).getTime();
 
-    debugger;
     if (countDownDate - now > 0) {
       return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
     } else {

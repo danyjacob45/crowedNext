@@ -134,7 +134,7 @@ var terms = () => {
                   <div className="pointsList">
                     <i class="far fa-check-circle" />
 
-                    <div> 800 – 1000 days </div>
+                    <div> 900 – 1000 days </div>
                     <span>hosting time </span>
                   </div>
                 </div>
