@@ -1020,7 +1020,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       <a
-                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_turkish.pdf"
+                        href="https://admin.crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_turkish.pdf"
                         target="_blank"
                       >
                         Business Presentation PDF TK
@@ -1028,7 +1028,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       <a
-                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_german.pdf"
+                        href="https://admin.crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_german.pdf"
                         target="_blank"
                       >
                         Business Presentation PDF GER
@@ -1036,7 +1036,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       <a
-                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_russian.pdf"
+                        href="https://admin.crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_russian.pdf"
                         target="_blank"
                       >
                         Business Presentation PDF RUS
@@ -1044,7 +1044,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       <a
-                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_vietnamese.pdf"
+                        href="https://admin.crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_vietnamese.pdf"
                         target="_blank"
                       >
                         Business Presentation PDF VN
@@ -1052,7 +1052,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       <a
-                        href="https://crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf"
+                        href="https://admin.crowd-growing.com/mlm-landing/static/media/CrowdGrowing_BusinessPresentation_spanish.pdf"
                         target="_blank"
                       >
                         Business Presentation PDF ES
