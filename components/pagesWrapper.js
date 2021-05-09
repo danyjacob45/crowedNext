@@ -399,7 +399,10 @@ const home = ({ children }) => {
         )}
         {regAuthModal && (
           <div
-            onClick={() => setRegAuthModal(false)}
+            onClick={() => {
+              setRegAuthModal(false);
+              history.push("/");
+            }}
             className="container registerContainer"
           >
             <div onClick={(e) => e.stopPropagation()} className="row">

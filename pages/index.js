@@ -61,6 +61,10 @@ const home = () => {
       setRegAuthModal("register");
       setReferralValue(history.asPath.split("=")[1]);
     }
+    if (history.asPath.split("=")[0] === "/?resetPassword") {
+      setRegAuthModal("resetPassword");
+    }
+
     // debugger;
     if (history.asPath.split("=")[0] === "/?validation") {
       setValidation(true);
@@ -591,7 +595,10 @@ const home = () => {
         )}
         {regAuthModal && (
           <div
-            onClick={() => setRegAuthModal(false)}
+            onClick={() => {
+              setRegAuthModal(false);
+              history.push("/");
+            }}
             className="container registerContainer"
           >
             <div onClick={(e) => e.stopPropagation()} className="row">
@@ -700,7 +707,10 @@ const home = () => {
                                   <div className="text-center text-right">
                                     <a
                                       href="#"
-                                      onClick={() => {
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        history.push("/?resetPassword");
+
                                         setRegAuthModal("resetPassword");
                                       }}
                                       tabindex="5"

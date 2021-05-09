@@ -25,11 +25,14 @@ const ResetPassword = ({
 
   const onSubmitRegister = (data) => {
     setLoading(true);
+
     AuthService.recover(data)
       .then((res) => {
         //   window.location.href = "http://local.mlm/user/dashboard"
         console.log(data, res);
+
         setRegisterSuccessModal("resetPass");
+
         setRegAuthModal(null);
         setLoading(false);
       })
