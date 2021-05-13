@@ -49,7 +49,7 @@ const Dashboard = () => {
   };
 
   const renderEmptyLvs = () => {
-    let lng = 8 - team.length;
+    let lng = 10 - team.length;
     // debugger;
     let arr = new Array(lng).fill("2");
 
