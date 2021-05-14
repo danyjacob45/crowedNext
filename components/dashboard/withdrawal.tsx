@@ -333,7 +333,7 @@ const Withdrawal: React.FC<Props> = ({
                   }
 
                   if (Number(amount) < 50) {
-                    setAmountError("Minimum amount of withdrawal is 50$");
+                    setAmountError("Amount is below the minimum (50$)");
 
                     return;
                   }
