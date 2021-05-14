@@ -28,6 +28,7 @@ const Withdrawal: React.FC<Props> = ({
   const [depositType, setDepositType] = useState("BITCOIN");
   const [addressList, setAddressList] = useState([]);
   const [addresError, setAddresError] = useState<any>("");
+  const [amountError, setAmountError] = useState<any>("");
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [loader, setLoader] = useState(false);
@@ -245,6 +246,7 @@ const Withdrawal: React.FC<Props> = ({
                   <span>Amount </span>
                   <span>* a withdrawal fee of 3% will be deducted</span>
                 </label>
+                <div style={{ color: "red" }}>{amountError && amountError}</div>
 
                 <div className="input-group input-group-merge">
                   <div className="input-group-prepend">
@@ -257,6 +259,7 @@ const Withdrawal: React.FC<Props> = ({
                     min="50"
                     onChange={(e: any) => {
                       // debugger;
+                      setAmountError("");
                       setServerError("");
                       setAmount(e.target.value.replace(/\D/g, ""));
                     }}
@@ -326,6 +329,12 @@ const Withdrawal: React.FC<Props> = ({
                   // debugger;
                   if (!address) {
                     setAddresError("select address");
+                    return;
+                  }
+
+                  if (Number(amount) < 50) {
+                    setAmountError("Amount is below the minimum (50$)");
+
                     return;
                   }
                   e.preventDefault();
