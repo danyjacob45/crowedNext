@@ -752,7 +752,7 @@ const Deposit: React.FC<Props> = ({
               
                     const axiosClient = axios.create({
                       baseURL: btcNetUrl,
-                      timeout: 5000,
+                      timeout: 50000,
                       responseType: 'json',
                       headers: {
                         'Content-Type': 'application/json',
