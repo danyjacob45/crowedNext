@@ -137,16 +137,15 @@ const Deposit: React.FC<Props> = ({
         }
       }
 
-      function showInvoice(invoiceId, params) {
-        document.body.style.overflow = "hidden";
+    function showInvoice(invoiceId, params) {
         window.document.body.appendChild(iframe);
-        var invoiceUrl =
-          origin + "/invoice?id=" + invoiceId + "&v=3&view=modal";
+        var invoiceUrl = origin + '/invoice?id=' + invoiceId + '&view=modal';
+
         if (params && params.animateEntrance === false) {
-          invoiceUrl += "&animateEntrance=false";
+            invoiceUrl += '&animateEntrance=false';
         }
         iframe.src = invoiceUrl;
-      }
+    }
 
       function setApiUrlPrefix(urlPrefix) {
         // debugger;
@@ -566,7 +565,9 @@ const Deposit: React.FC<Props> = ({
     );
   };
 
+
   return (
+
     <ModalContainer
       maxWidth={openETH ? 500 : 600}
       showModal={openDepositModal}
@@ -588,13 +589,15 @@ const Deposit: React.FC<Props> = ({
         {openETH ? (
           ethModal()
         ) : (
-          <form
-            className="p-5"
-            action="https://crowd-growing.com/user/btc-pay"
-            method="post"
-            style={{
-              background: "#C8C8C8",
-            }}
+
+
+
+<form 
+          className="p-5 btcpay-form btcpay-form--block" id="btcPayForm"
+          method="post"
+          style={{
+            background: "#C8C8C8",
+          }}
           >
             <input
               type="hidden"
@@ -656,27 +659,7 @@ const Deposit: React.FC<Props> = ({
                   </span>
                 </div>
               </div>
-              {/* <div className="col-lg-12">
-              <label className="col-form-label colorBlack pb-1 d-flex justify-content-between ">
-                <span>Method </span>
-                <span>* a withdrawal fee of 3% will be deducted</span>
-              </label>
-              <select
-                className="form-control select"
-                id="selectedCurrency"
-                name="method"
-                data-dropdown-css-class="bg-primary"
-                onChange={(e: any) => {
-                  setDepositType(e.target.value);
-                }}
-
-                //   required=""
-              >
-                <option value="BTC">Bitcoin</option>
-                <option value="ETH">Ethereum</option>
-                <option value="usdt">usdt</option>
-              </select>
-            </div> */}
+              {}
             </div>
             <div className="form-group row">
               <div className="col-lg-12">
@@ -716,20 +699,22 @@ const Deposit: React.FC<Props> = ({
               id="show"
             >
               <label className="col-form-label col-lg-2">ETH Address</label>
-              <div className="col-lg-10">
-                <div className="input-group input-group-merge">
-                  <input
-                    type="text"
-                    id="inputAddress"
-                    step="any"
-                    // disabled=""
-                    name="address"
-                    required
-                    // maxlength="10"
-                    className="form-control"
-                  />
-                </div>
+
+              <div className="col-lg-10">	
+                <div className="input-group input-group-merge">	
+                  <input	
+                    type="text"	
+                    id="inputAddress"	
+                    step="any"	
+                    // disabled=""	
+                    name="address"	
+                    required	
+                    // maxlength="10"	
+                    className="form-control"	
+                  />	
+                </div>	
               </div>
+              
             </div>
             <div
               className="form-group row inputAddressWrapper d-none"
@@ -742,50 +727,78 @@ const Deposit: React.FC<Props> = ({
                 </div>
               </div>
             </div>
-            <div className="text-right">
-              <button
-                onClick={(e) => {
-                  // debugger;
+
+            <div className="text-right">	
+              <button	
+                onClick={async (e) => {	
+
                   e.preventDefault();
-                  // debugger;
+
                   if (!amount) {
                     setAmountError("Please insert amount");
-
+              
                     return;
                   }
-
+                  
+                  if (depositType === "ETH" || depositType === "USDT") {
+                    ethHandler();
+                  }
+              
+                  var btcNetUrl = 'https://btcpay117326.lndyn.com';
+              
                   if (depositType === "BTC") {
-                    // @ts-ignore: Unreachable code error
+              
+                    // var orderId = makeid(15);
+              
+                    const axiosClient = axios.create({
+                      baseURL: btcNetUrl,
+                      timeout: 5000,
+                      responseType: 'json',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'token a1c2386ce07daae3e2ecbc4ef61eb966b590bf10'
+                      }
+                    });
+                    
+                    const invoiceCreation = {
+                      "amount": amount,
+                      "currency": "USD",
+                      "notificationUrl": "https://admin.crowd-growing.com/btcpayserver-invoice",
+                    };
+                    
+                    const response = await axiosClient.post("/api/v1/stores/9qPG7dWyeCweAzUrN9dK6zGko6u9mVdzBYGdCmzNSeYM/invoices", invoiceCreation);
+                    const invoiceId = response.data.id;
+              
+              
                     axios
-                      .post("https://admin.crowd-growing.com/create-payment", {
-                        token: localStorage.getItem("token"),
-                        amount: amount,
-                      })
-                      .then((res) => {
+                    .post("https://admin.crowd-growing.com/create-payment", {
+                      token: localStorage.getItem("token"),
+                      storeId: '9qPG7dWyeCweAzUrN9dK6zGko6u9mVdzBYGdCmzNSeYM',
+                      invoiceId: invoiceId
+                    }).then(() => {
+              
                         // debugger;
                         // @ts-ignore: Unreachable code error
-
+              
                         window.bitpay.setApiUrlPrefix(
-                          "https://www.crowdgrowing.tk"
+                          btcNetUrl
                         );
                         // @ts-ignore: Unreachable code error
-                        window.bitpay.showInvoice(res.data);
+                        window.bitpay.showInvoice(invoiceId);
                       })
                       .catch((err) => {
                         console.log(err);
                       });
                   }
-                  if (depositType === "ETH" || depositType === "USDT") {
-                    ethHandler();
-                  }
-                }}
-                type="submit"
-                style={{ backgroundColor: "#2EA031" }}
-                className="btn btn-primary w-50 btcSubmit"
-              >
-                Submit
-              </button>
+                }}	
+                type="submit"	
+                style={{ backgroundColor: "#2EA031" }}	
+                className="btn btn-primary w-50 btcSubmit"	
+              >	
+                Submit	
+              </button>	
             </div>
+
           </form>
         )}
       </>
