@@ -58,5 +58,8 @@ export const storeBackEndRoutes = {
     withdrawList: () => `${BASE_URL}/private/user/withdraws`,
     deleteWithdraws: (id: any) =>
       `${BASE_URL}/private/user/withdraws/address/remove/${id}`,
+    
+    sendAmount: (receiverEmail: any, amount: any) =>
+    `${BASE_URL}/private/user/sendAmount/${receiverEmail}/${amount}`,
   },
 };
