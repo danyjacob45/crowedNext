@@ -189,6 +189,11 @@ const Dashboard = () => {
           amount: el.profit,
           nType: "Profit share",
         })),
+        ...res.data.transactions.userTransactions.content.map((el) => ({
+          ...el,
+          amount: el.amount,
+          nType: (el.type == 1) ? "P2P (SEND)" : "P2P (RECEIVED)",
+        })),
       ];
       // debugger;
       AuthService.withdrawList().then((withdrawRes) => {
@@ -290,6 +295,10 @@ const Dashboard = () => {
       <Withdrawal
         openWithdrawalModal={openWithdrawalModal}
         setOpenWithdrawalModals={(val: boolean) => setOpenWithdrawalModals(val)}
+      />
+      <SendAmount
+        openSendAmountModal={openSendAmountModal}
+        setOpenSendAmountModals={(val: boolean) => setOpenSendAmountModals(val)}
       />
       {/* //////////// */}
 
