@@ -283,6 +283,7 @@ const Dashboard = () => {
 
   const [openDepositModal, setOpenDepositModals] = useState(false);
   const [openWithdrawalModal, setOpenWithdrawalModals] = useState(false);
+  const [openSendAmountModal, setOpenSendAmountModals] = useState(false);
 
   // console.log(history, "historyhistoryhistory");
 
