@@ -169,6 +169,12 @@ class _UserService {
       ...axiosHeaderConfig(),
     });
   };
+  
+  sendAmount = (receiverEmail: any, amount: any) => {
+    return axios.post(storeBackEndRoutes.user.sendAmount(receiverEmail, amount), {}, {
+      ...axiosHeaderConfig(),
+    });
+  };
 
   notifications = () => {
     return axios.post(
