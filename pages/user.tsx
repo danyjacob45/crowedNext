@@ -5,6 +5,7 @@ import { Button } from "../components/common/forms/button";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import Deposit from "../components/dashboard/deposit";
 import Withdrawal from "../components/dashboard/withdrawal";
+import SendAmount from "../components/dashboard/sendAmount";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
