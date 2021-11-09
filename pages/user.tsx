@@ -450,37 +450,59 @@ const Dashboard = () => {
                 <span>Balance</span>
                 <div className="card bg-white border-0">
                   <div
-                    className="card-body dashboard-balance dashboard-balance-withBg"
+                    className="card-body dashboard-balance-withBg"
                     style={{ position: "relative" }}
                   >
                     {Number(user?.balance?.spendable)?.toFixed(2)} $
-                    <a
-                      data-toggle="modal"
-                      // onclick="openInvoice()"
-                      data-target="#modal-formx2"
-                      href=""
-                      id="Wi"
-                      className="btn btn-sm btn-neutral greenColor reallyGreenColor "
-                      onClick={(e: any) => {
-                        e.preventDefault();
-                        setOpenDepositModals(true);
-                      }}
-                    >
-                      <i className="fa fa-arrow-right"></i>Deposit
-                    </a>
-                    <a
-                      id="Withdrawal"
-                      href=""
-                      data-toggle="modal"
-                      data-target="#modal-formx"
-                      onClick={(e: any) => {
-                        e.preventDefault();
-                        setOpenWithdrawalModals(true);
-                      }}
-                      className="btn btn-sm btn-neutral greenColor reallyGreenColor right "
-                    >
-                      <i className="fa fa-arrow-right"></i> Withdrawal{" "}
-                    </a>
+                    
+                    <div className="row">
+                      <div className="col-lg-4">
+                        <a
+                          data-toggle="modal"
+                          // onclick="openInvoice()"
+                          data-target="#modal-formx2"
+                          href=""
+                          id="Wi"
+                          className="btn btn-sm btn-neutral greenColor reallyGreenColor fullwdt"
+                          onClick={(e: any) => {
+                            e.preventDefault();
+                            setOpenDepositModals(true);
+                          }}
+                        >
+                          <i className="fa fa-arrow-right"></i>Deposit
+                        </a>
+                      </div>
+                      <div className="col-lg-4">
+                        <a
+                          id="Withdrawal"
+                          href=""
+                          data-toggle="modal"
+                          data-target="#modal-formx"
+                          onClick={(e: any) => {
+                            e.preventDefault();
+                            setOpenWithdrawalModals(true);
+                          }}
+                          className="btn btn-sm btn-neutral greenColor reallyGreenColor fullwdt"
+                        >
+                          <i className="fa fa-arrow-right"></i> Withdrawal{" "}
+                        </a>
+                      </div>
+                      <div className="col-lg-4">
+                        <a
+                          id="SendAmount"
+                          href=""
+                          data-toggle="modal"
+                          data-target="#modal-formx"
+                          onClick={(e: any) => {
+                            e.preventDefault();
+                            setOpenSendAmountModals(true);
+                          }}
+                          className="btn btn-sm btn-neutral greenColor reallyGreenColor fullwdt"
+                        >
+                          <i className="fa fa-arrow-right"></i> Transfer
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
